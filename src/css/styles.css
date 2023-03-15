@@ -1,0 +1,301 @@
+body {
+    margin: 0;
+    background-color: var(--body-background);
+    color: var(--body-forecolor);
+}
+
+.centerer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.flex {
+    display: flex;
+}
+
+.centerer-wrapper.row {
+    flex-direction: row !important;
+}
+
+div.header {
+    position: sticky;
+    z-index: 9;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--accent-background);
+    color: var(--accent-forecolor);
+    min-height: 48px;
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+div.header div.logo-caption span {
+    font-weight: 100;
+    font-size: 18pt;
+    margin: 8px;
+}
+
+div.header div.logo-caption,
+div.header div.header-caption,
+div.header div.auth-block {
+    flex: 1;
+}
+
+/* div.header div.logo-caption span a {
+    padding-right: 48px;
+    background-image: url(./../img/play-logo.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+} */
+
+/* div.header div.logo-caption span a:hover {
+    background-image: url(./../img/play-logo-yellow.svg);
+} */
+
+div.header div.header-caption {
+    font-family: var(--default-font);
+    font-size: 24pt;
+    flex: 1;
+    text-align: center;
+    text-size-adjust: 110%;
+}
+
+div.header div.auth-block,
+div.header div.logo-caption,
+div.header div.menu-wrapper div.menu {
+    font-family: ProductSans;
+}
+
+div.header div.auth-block,
+div.header div.auth-block {
+    justify-content: flex-end;
+}
+
+div.header div.auth-block,
+div.header div.auth-block div.auth-buttons {
+    display: flex;
+}
+
+div.header div.auth-block span.profile {
+    font-size: 20px;
+    margin: 4px;
+    cursor: pointer;
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+div.header div.auth-block div.profile-icon {
+    content: url('./../img/profile-icon.svg');
+    padding-top: 2px;
+}
+
+div.header div.auth-block a,
+div.header div.menu-wrapper div.menu a {
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    padding: 4px;
+}
+
+div.header div.auth-block div.auth-buttons a {
+    margin: 4px;
+    color: var(--accent-background);
+    background-color: var(--accent-forecolor);
+    border-radius: 4px;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+div.header div.auth-block a.profile,
+div.header div.logo-caption a,
+div.header div.menu-wrapper div.menu a {
+    text-decoration: none;
+    color: var(--accent-forecolor);
+    text-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+div.header div.auth-block a.profile:hover,
+div.header div.logo-caption a:hover,
+div.header div.menu-wrapper div.menu a:hover,
+div.header div.menu-wrapper div.menu a.selected {
+    color: var(--accent-forecolor-hover);
+}
+
+div.header div.auth-block div.auth-buttons a:hover {
+    background-color: var(--auth-button-background-hover);
+}
+
+div.header div.auth-block div.auth-buttons a:active {
+    transform: translateX(1px) translateY(1px);
+    box-shadow: 0 0 2px 0 var(--shadow-color);
+}
+
+div.header div.menu-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+div.header div.menu-wrapper div.menu {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+    color: var(--accent-forecolor);
+}
+
+div.header div.menu-wrapper div.menu a {
+    font-size: 14pt;
+    font-weight: lighter;
+}
+
+div.header div.menu-wrapper div.menu a.selected {
+    font-weight: bold;
+}
+
+.flex-column {
+    flex-flow: column;
+}
+
+div.header input#burger-toggle,
+div.header label.burger-toggle {
+    display: none;
+}
+
+:root {
+    --default-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --default-transition: all 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+    div.header label.burger-toggle {
+        display: block;
+    }
+
+    div.header .burger-toggle span {
+        display: block;
+        border-radius: 10px;
+        border: var(--accent-forecolor) solid 1px;
+        background-color: var(--accent-forecolor);
+        width: 36px;
+        height: 3px;
+        margin: 6px;
+        transition: all 0.2s ease-out;
+    }
+
+    div.header label.burger-toggle span {
+        position: relative;
+        top: 0px;
+    }
+
+    div.header label.burger-toggle span:first-child {
+        margin-top: 10px;
+    }
+
+    div.header input#burger-toggle:checked~label.burger-toggle span:first-child {
+        top: 12px;
+        transform: rotate(45deg);
+    }
+
+    div.header input#burger-toggle:checked~label.burger-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    div.header input#burger-toggle:checked~label.burger-toggle span:nth-child(3) {
+        top: -10px;
+        transform: rotate(-45deg);
+    }
+
+    div.header input#burger-toggle:checked~div.menu-wrapper div.menu {
+        left: 0%;
+    }
+
+    div.header div.menu-wrapper {
+        flex: 1;
+    }
+
+    div.header div.menu-wrapper div.menu {
+        flex-direction: column;
+        position: absolute;
+        top: 48px;
+        left: -100%;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        transition: 0.3s all ease-out;
+    }
+
+    div.header div.menu-wrapper div.menu a {
+        padding: 8px;
+    }
+
+    div.header div.menu-wrapper div.menu a:nth-child(2n) {
+        background-color: var(--accent-background-burger-even);
+    }
+
+    div.header div.menu-wrapper div.menu a:nth-child(2n+1) {
+        background-color: var(--accent-background-burger-noteven);
+    }
+
+    div.header div.auth-block div.auth-buttons a {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 540px) {
+    div.header div.auth-block span.profile {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 460px) {
+    div.header div.auth-block span.profile {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 400px) {
+    div.header div.auth-block span.profile {
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 360px) {
+    div.header div.auth-block span.profile {
+        display: none;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    14.28% {
+        transform: translateX(12px);
+    }
+
+    28.57% {
+        transform: translateX(-12px);
+    }
+
+    42.85% {
+        transform: translateX(6px);
+    }
+
+    57.14% {
+        transform: translateX(-6px);
+    }
+
+    71.42% {
+        transform: translateX(3px);
+    }
+
+    85.71% {
+        transform: translateX(-3px);
+    }
+}

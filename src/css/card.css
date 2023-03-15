@@ -1,0 +1,204 @@
+div.card-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+div.card-wrapper.flex-wrap {
+    flex-wrap: wrap;
+}
+
+div.card-wrapper div.card {
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px 2px var(--shadow-color);
+    border-color: var(--accent-background);
+    margin: 16px;
+    overflow: hidden;
+    height: max-content;
+    max-width: 480px;
+    transition: var(--default-transition);
+    position: relative;
+}
+
+div.card-wrapper div.card.profile {
+    min-width: 300px;
+}
+
+div.card-wrapper div.card.video {
+    max-width: 416px;
+    width: 100%;
+}
+
+div.card-wrapper div.card.video .card-contents {
+    padding: 8px;
+}
+
+div.card-wrapper div.card.video:hover {
+    transform: scale(1.05);
+}
+
+div.card-wrapper div.card div.card-header {
+    font-family: ProductSans;
+    background-color: var(--accent-background);
+    color: var(--accent-forecolor);
+    border-bottom-color: var(--card-border-color);
+    border-bottom-style: double;
+    font-size: 20pt;
+    padding: 8px;
+    text-align: center;
+    cursor: default;
+    word-break: break-word;
+    position: relative;
+    user-select: none;
+}
+
+div.card-wrapper div.card .card-contents {
+    border-collapse: collapse;
+    font-family: var(--default-font);
+    cursor: default;
+    color: var(--body-forecolor);
+}
+
+div.card-wrapper div.card table.card-contents tr td {
+    padding: 8px;
+}
+
+div.card-wrapper div.card table.card-contents tr td a {
+    color: inherit;
+}
+
+div.card-wrapper div.card table.card-contents tr td a:hover {
+    color: var(--card-param-hover-link);
+}
+
+div.card-wrapper div.card table.card-contents tr td:first-child {
+    text-align: right;
+    border-right-color: var(--card-border-color);
+    border-right-width: 1px;
+    border-right-style: solid;
+    color: var(--card-param-color);
+    font-weight: bold;
+    white-space: nowrap;
+    user-select: none;
+}
+
+div.card-wrapper div.card table.card-contents tr td:nth-child(2) {
+    text-align: left;
+    word-break: break-word;
+}
+
+div.card-wrapper div.card img,
+div.card-wrapper div.card a.video-preview {
+    border-radius: 8px;
+}
+
+div.card-wrapper div.card button img {
+    border-radius: 0;
+}
+
+div.card-wrapper div.card a.video-preview {
+    padding: 0;
+    background-color: inherit;
+    color: inherit;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+
+div.card-wrapper div.card a.video-preview img {
+    display: flex;
+    transition: var(--default-transition);
+}
+
+div.card-wrapper div.card a.video-preview span {
+    font-size: 12pt;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--shadow-color);
+    padding: 4px 8px;
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+div.card-wrapper div.card a.video-preview:hover img {
+    filter: blur(2px) brightness(0.75);
+}
+
+div.card-wrapper div.card a.video-preview::after {
+    display: inline-block;
+    content: '';
+    opacity: 0.75;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: var(--default-transition);
+    background-image: url(./../img/play-logo.svg);
+    background-repeat: no-repeat;
+    background-size: 128px;
+    background-position: center center;
+}
+
+div.card-wrapper div.card a.video-preview:hover::after {
+    opacity: 1;
+}
+
+div.card-wrapper div.card img.video-preview {
+    background-color: black;
+    width: 100%;
+    max-width: 400px;
+    max-height: 240px;
+    object-fit: cover;
+}
+
+div.card-wrapper div.card div.card-contents div.video-summary {
+    text-align: left;
+}
+
+div.card-wrapper div.card div.card-contents div.video-summary div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+div.card-wrapper div.card div.card-contents div.video-summary div.user {
+    font-weight: 700;
+    font-size: 14pt;
+}
+
+div.card-wrapper div.card .card-footer {
+    border-top: 1px solid var(--card-border-color);
+    display: flex;
+}
+
+div.card-wrapper div.card .card-footer a {
+    text-decoration: none;
+    text-align: center;
+    transition: var(--default-transition);
+}
+
+div.card-wrapper div.card .card-footer a,
+div.card-wrapper div.card .card-footer input[type="button"] {
+    background-color: var(--accent-background);
+    color: var(--accent-forecolor);
+    font-family: ProductSans;
+    border: none;
+    font-size: 18pt;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 8px;
+    flex: 1;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+@media (max-width: 480px) {
+    div.card-wrapper div.card table.card-contents tr td:first-child {
+        white-space: normal;
+    }
+}

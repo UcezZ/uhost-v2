@@ -1,0 +1,266 @@
+div.page-video-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    /*repeat(3, 1fr);
+    grid-template-rows: repeat(3, minmax(200px, auto));*/
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.page-video-wrapper .content-wrapper {
+    margin: 16px;
+    box-shadow: 1px 1px 4px 2px var(--shadow-color);
+    border-radius: 8px;
+    border: 1px solid var(--card-border-color) !important;
+    max-width: initial !important;
+    overflow: hidden;
+    min-height: 200px;
+}
+
+div.player-wrapper {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+}
+
+div.player-wrapper div.video-wrapper {
+    padding: 16px;
+    border-bottom: 3px double var(--card-border-color);
+    background-color: var(--accent-background);
+}
+
+div.player-wrapper div.video-wrapper video {
+    width: 100%;
+    min-height: 360px;
+    max-height: 600px;
+    border-radius: 8px;
+    background-color: #000;
+    box-shadow: 0 0 4px 0 var(--shadow-color);
+}
+
+div.player-wrapper div.video-footer {
+    display: flex;
+    min-height: 144px;
+}
+
+div.player-wrapper div.video-footer div.video-summary {
+    margin: 8px 16px 16px 16px;
+    flex: 1;
+}
+
+div.player-wrapper div.video-footer div.video-summary a.user {
+    font-family: ProductSans;
+    font-size: 16pt;
+    font-weight: 700;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.player-wrapper div.video-footer div.video-summary a.user:hover {
+    text-decoration: underline;
+}
+
+div.player-wrapper div.video-footer div.video-summary div.name,
+div.player-wrapper div.video-footer div.video-summary div.info {
+    margin-top: 8px;
+    font-family: var(--default-font);
+    font-size: 12pt;
+    word-break: break-word;
+}
+
+div.player-wrapper div.video-footer div.video-summary div.info {
+    display: flex;
+    flex-direction: column;
+    font-size: 10pt;
+    opacity: 0.5;
+}
+
+div.player-wrapper div.video-footer div.video-actions {
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+}
+
+div.player-wrapper div.video-footer div.video-actions div.action-wrapper {
+    position: relative;
+    width: var(--floating-button-size);
+    height: var(--floating-button-size);
+}
+
+div.player-wrapper div.video-footer div.video-actions div.action-wrapper a,
+div.player-wrapper div.video-footer div.video-actions div.action-wrapper form {
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+div.player-wrapper div.video-footer div.video-actions div.action-wrapper a:active,
+div.player-wrapper div.video-footer div.video-actions div.action-wrapper button:active {
+    transform: scale(0.95);
+}
+
+div.player-wrapper div.video-footer div.video-actions a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14pt;
+    font-family: ProductSans;
+    height: 100%;
+    background-color: var(--accent-background);
+    border-radius: var(--floating-button-size);
+    width: var(--floating-button-size);
+    height: var(--floating-button-size);
+    color: var(--accent-forecolor);
+    overflow: hidden;
+    transition: var(--default-transition);
+    word-break: initial;
+    border: 1px solid transparent;
+    text-decoration: none;
+}
+
+div.player-wrapper div.video-footer div.video-actions a:hover {
+    width: 144px;
+    text-decoration: underline;
+}
+
+div.player-wrapper div.video-footer div.video-actions img {
+    width: calc(var(--floating-button-size) - 12px);
+    height: calc(var(--floating-button-size) - 12px);
+}
+
+div.player-wrapper div.video-footer div.video-actions a img {
+    margin: 6px;
+}
+
+div.player-wrapper div.video-footer div.video-actions a span {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+div.queue-wrapper {
+    grid-column: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+div.queue-wrapper>.card-contents {
+    overflow-y: auto;
+    max-height: 800px;
+    justify-content: initial;
+    scrollbar-width: thin;
+}
+
+div.queue-wrapper>.card-contents::after {
+    content: '\a0';
+    line-height: 8px;
+}
+
+div.queue-wrapper>.card-contents .card {
+    width: 300px !important;
+    overflow: initial;
+}
+
+div.queue-wrapper>.card-contents .card .card-header {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+div.queue-wrapper>.card-contents .card a {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+div.comment-wrapper {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2;
+    display: flex !important;
+    flex-direction: column;
+}
+
+div.comment-wrapper .card-contents {
+    flex: 1;
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+div.comment-wrapper .card-footer {
+    border-top: 3px double var(--card-border-color);
+}
+
+div.comment-wrapper .card-footer input[type="text"] {
+    flex: 1;
+    min-width: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--card-border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s ease-out;
+    padding: 2px 6px;
+    background-color: var(--input-background-color);
+    color: var(--body-forecolor);
+    margin: 12px 8px;
+    font-family: var(--default-font);
+    font-size: 10pt;
+}
+
+div.comment-wrapper .card-footer input[type="button"] {
+    font-size: 12pt !important;
+    flex: 0 !important;
+    min-width: unset !important;
+}
+
+:root {
+    --floating-button-size: 48px;
+}
+
+@media (max-width: 768px) {
+    div.player-wrapper div.video-footer {
+        flex-direction: column-reverse;
+    }
+
+    div.player-wrapper div.video-footer div.video-actions {
+        justify-content: end;
+    }
+
+    div.player-wrapper,
+    div.queue-wrapper,
+    div.comment-wrapper {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    div.player-wrapper {
+        grid-row: 1;
+    }
+
+    div.queue-wrapper {
+        grid-row: 2;
+    }
+
+    div.queue-wrapper .card-contents {
+        flex-direction: row !important;
+        overflow-x: auto;
+        overflow-y: initial;
+    }
+
+    div.queue-wrapper .card-contents .card a img {
+        height: 150px;
+        width: 240px;
+    }
+
+    div.comment-wrapper {
+        grid-row: 3;
+    }
+}

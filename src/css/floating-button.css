@@ -1,0 +1,53 @@
+button.floating-modal-caller {
+    width: var(--floating-button-size);
+    height: var(--floating-button-size);
+    border-radius: calc(var(--floating-button-size) / 2);
+    border: none;
+    background-color: var(--accent-background);
+    cursor: pointer;
+    position: absolute;
+    transition: var(--default-transition);
+    text-align: center;
+}
+
+button.floating-modal-caller.glow:hover {
+    box-shadow: 0 0 4px 0 var(--accent-forecolor-hover);
+}
+
+button.floating-modal-caller:active {
+    box-shadow: none;
+    transform: scale(0.975);
+}
+
+button.floating-modal-caller.user-editor {
+    --floating-button-size: 40px;
+    right: 0;
+}
+
+button.floating-modal-caller.close {
+    --floating-button-size: 48px;
+    border-radius: 0;
+    right: 0;
+    top: 0;
+}
+
+button.floating-modal-caller.close>span {
+    height: 3px;
+    width: calc(var(--floating-button-size) / 2);
+    background-color: var(--accent-forecolor);
+    transition: var(--default-transition);
+    border-radius: 3px;
+    position: absolute;
+}
+
+button.floating-modal-caller.close:hover>span {
+    background-color: var(--accent-forecolor-hover);
+}
+
+button.floating-modal-caller.close>span:first-child {
+    transform: translateX(calc(var(--floating-button-size) / -4)) rotate(-45deg);
+}
+
+button.floating-modal-caller.close>span:nth-child(2) {
+    transform: translateX(calc(var(--floating-button-size) / -4)) rotate(45deg);
+}

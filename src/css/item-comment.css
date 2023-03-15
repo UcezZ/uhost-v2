@@ -1,0 +1,94 @@
+.item-comment-wrapper {
+    border: 1px solid var(--card-border-color);
+    margin: 4px;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.item-comment-wrapper .comment-header-wrapper {
+    display: flex;
+}
+
+.item-comment-wrapper .comment-header-wrapper .username-wrapper {
+    flex: 1;
+    text-align: left;
+}
+
+.item-comment-wrapper .comment-header-wrapper .username-wrapper .username {
+    background-color: inherit;
+    color: var(--body-forecolor);
+    font-family: var(--default-font);
+    border: none;
+    font-size: 12pt;
+    border-radius: 0;
+    padding: 0 6px;
+    margin: 0;
+    flex: 0;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+    box-shadow: none;
+    text-align: center;
+    font-weight: 700;
+}
+
+.item-comment-wrapper .comment-header-wrapper .username-wrapper .username:hover {
+    color: inherit;
+    opacity: 0.75;
+    text-shadow: none;
+    text-decoration: underline;
+}
+
+.item-comment-wrapper .comment-header-wrapper .username-wrapper .datetime {
+    font-size: 10pt;
+    font-style: italic;
+    opacity: 0.5;
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    transition: var(--default-transition);
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper span {
+    border-radius: 4px;
+    display: block;
+    width: 16px;
+    height: 1px;
+    background-color: var(--body-forecolor);
+    position: absolute;
+    transition: var(--default-transition);
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper:hover span {
+    background-color: var(--accent-background);
+    box-shadow: 0 0 0 1px var(--accent-background);
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper:active {
+    transform: scale(0.9);
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper span:first-child {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.item-comment-wrapper .comment-header-wrapper .delete-wrapper span:nth-child(2) {
+    transform: translateY(8px) rotate(-45deg);
+}
+
+.item-comment-wrapper .comment-body {
+    padding: 4px;
+}
+
+.item-comment-wrapper .comment-body span {
+    overflow: hidden;
+    font-size: 10pt;
+    width: 100%;
+    display: block;
+    text-align: justify;
+    word-wrap: break-word;
+}

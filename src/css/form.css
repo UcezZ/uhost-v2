@@ -1,0 +1,223 @@
+div.card-wrapper div.card {
+    background-color: var(--body-background);
+}
+
+div.card-wrapper div.card form table.card-contents {
+    border-bottom-color: var(--card-border-color);
+    border-bottom-style: double;
+}
+
+div.card-wrapper div.card form.hscroll table.card-contents {
+    overflow-x: auto;
+}
+
+div.card-wrapper div.card form {
+    margin: 0;
+    padding: 0;
+}
+
+div.card-wrapper div.card form table.card-contents td:nth-child(2) {
+    display: flex;
+}
+
+div.search-wrapper form.search input[type=text],
+div.card-wrapper div.card form .card-contents input:not([type="button"]):not([type="submit"]),
+div.card-wrapper div.card form .card-contents select,
+div.card-wrapper div.card form .card-contents textarea,
+div.card-wrapper div.card form .card-footer input:not([type="button"]):not([type="submit"]),
+div.card-wrapper div.card form .card-footer select,
+div.card-wrapper div.card form .card-footer textarea {
+    flex: 1;
+    min-width: 240px;
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--card-border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s ease-out;
+    font-family: var(--default-font);
+}
+
+div.search-wrapper form.search input[type=text],
+div.card-wrapper div.card form .card-contents input {
+    padding: 2px 6px;
+    background-color: var(--input-background-color);
+    color: var(--body-forecolor);
+}
+
+div.card-wrapper div.card form .card-contents select {
+    cursor: pointer;
+    appearance: none;
+    padding: 2px;
+    width: 100%;
+}
+
+div.card-wrapper div.card form .card-contents .select-wrapper::after {
+    position: absolute;
+    content: 'v';
+    transform: scaleX(1.1) scaleY(0.6) translateX(-16px) translateY(4px);
+    color: var(--input-border-color-active);
+}
+
+div.card-wrapper div.card form .card-contents textarea {
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: var(--card-border-color);
+    resize: vertical;
+    min-height: 120px;
+    padding: 2px 6px;
+    width: unset;
+}
+
+div.card-wrapper div.card form .card-contents textarea:focus {
+    border-bottom-width: 1.5px;
+    border-bottom-color: var(--input-border-color-active);
+    border-top-width: 1.5px;
+    border-top-color: var(--input-border-color-active);
+}
+
+div.card-wrapper div.card form .card-contents input[type="number"] {
+    appearance: textfield;
+}
+
+div.search-wrapper form.search input[type=text]:focus,
+div.card-wrapper div.card form .card-contents input:focus,
+div.card-wrapper div.card form .card-contents select:focus,
+div.card-wrapper div.card form .card-contents textarea:focus,
+div.card-wrapper div.card form .card-footer input:focus,
+div.card-wrapper div.card form .card-footer select:focus,
+div.card-wrapper div.card form .card-footer textarea:focus {
+    border-bottom-width: 1.5px;
+    border-bottom-color: var(--input-border-color-active);
+}
+
+div.card-wrapper div.card form div.submit-wrapper {
+    display: flex;
+}
+
+div.card-wrapper div.card div.card-contents {
+    display: flex;
+    flex-direction: column;
+}
+
+div.search-wrapper div.navi-wrapper a,
+div.search-wrapper form.search input[type="submit"],
+div.card-wrapper div.card .card-footer a,
+div.card-wrapper div.card .card-footer button,
+div.card-wrapper div.card .card-footer input[type="button"],
+div.card-wrapper div.card form div.submit-wrapper button,
+div.card-wrapper div.card div.card-contents a {
+    background-color: var(--accent-background);
+    color: var(--accent-forecolor);
+    font-family: ProductSans;
+    border: none;
+    font-size: 18pt;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 8px;
+    flex: 1;
+    transition: 0.3s ease-out;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+    text-align: center;
+}
+
+div.card-wrapper div.card div.card-contents a,
+div.search-wrapper div.navi-wrapper a {
+    text-decoration: none;
+}
+
+div.search-wrapper div.navi-wrapper a:hover,
+div.search-wrapper form.search input[type="submit"]:hover,
+div.card-wrapper div.card .card-footer a:hover,
+div.card-wrapper div.card .card-footer button:hover,
+div.card-wrapper div.card .card-footer input[type="button"]:hover,
+div.card-wrapper div.card form div.submit-wrapper button:hover,
+div.card-wrapper div.card div.card-contents a:hover {
+    text-shadow: 1px 1px 2px var(--shadow-color);
+    color: var(--accent-forecolor-hover);
+}
+
+div.search-wrapper div.navi-wrapper a:active,
+div.search-wrapper form.search input[type="submit"]:active,
+div.card-wrapper div.card .card-footer a:active,
+div.card-wrapper div.card .card-footer button:active,
+div.card-wrapper div.card .card-footer input[type="button"]:active,
+div.card-wrapper div.card form div.submit-wrapper button:active,
+div.card-wrapper div.card div.card-contents a:active {
+    transform: translateX(1px) translateY(1px);
+    text-shadow: 0 0 2px 0 var(--shadow-color);
+    transform: translateX(1px) translateY(1px);
+    box-shadow: 0 0 2px 0 var(--shadow-color);
+}
+
+form.editor select:user-invalid,
+div.search-wrapper form.search input[type="text"]:user-invalid,
+div.card-wrapper div.card form .card-contents input:user-invalid,
+div.card-wrapper div.card form .card-contents select:user-invalid,
+div.card-wrapper div.card form .card-contents textarea:user-invalid,
+div.card-wrapper div.card form .card-footer input:user-invalid,
+div.card-wrapper div.card form .card-footer select:user-invalid,
+div.card-wrapper div.card form .card-footer textarea:user-invalid {
+    border-bottom-style: solid !important;
+    border-bottom-width: 2px !important;
+    border-bottom-color: var(--input-border-color-invalid) !important;
+    box-shadow: none;
+    animation: shake 0.33s ease-out;
+}
+
+div.card-wrapper div.card form .card-contents textarea:user-invalid {
+    border-top-style: solid !important;
+    border-top-width: 2px !important;
+    border-top-color: var(--input-border-color-invalid) !important;
+    animation: shake 0.33s ease-out;
+}
+
+div.form-editor-wrapper form.editor table.editor tr td:first-child {
+    font-family: var(--default-font);
+    font-weight: 700;
+    cursor: default;
+    word-wrap: break-word;
+    width: min-content;
+    word-break: initial;
+}
+
+div.card-wrapper div.card form table.card-contents tr td input,
+div.card-wrapper div.card form table.card-contents tr td textarea,
+div.card-wrapper div.card form table.card-contents tr td select {
+    font-family: var(--default-font);
+    padding: 2px 6px;
+    background-color: var(--input-background-color);
+    color: var(--body-forecolor);
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--card-border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s ease-out;
+    width: 100%;
+}
+
+div.card-wrapper div.card form table.card-contents tr td input,
+div.card-wrapper div.card form table.card-contents tr td textarea {
+    width: calc(100% - 12px);
+}
+
+div.card-wrapper div.card form table.card-contents tr td textarea {
+    font-size: 10pt;
+    height: 112px;
+    resize: none;
+}
+
+@media (max-width: 480px) {
+
+    div.card-wrapper div.card form table.card-contents input,
+    div.card-wrapper div.card form table.card-contents select,
+    div.card-wrapper div.card form table.card-contents textarea {
+        min-width: 144px;
+    }
+}
