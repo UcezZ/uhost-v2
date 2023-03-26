@@ -1,3 +1,6 @@
+import './fonts/productsans.css';
+import './css/styles.css';
+
 import MainPage from './components/pages/MainPage';
 import LoginPage from './components/pages/LoginPage';
 import StateContext from './context/StateContext';
@@ -12,54 +15,47 @@ import Cookies from 'universal-cookie';
 import ApiService from './services/ApiService';
 import ThemeService from './services/ThemeService';
 import User from './entities/User';
+import Common from './Common';
+import Redirect from './components/Redirect';
 
 export default function App() {
     const cookies = new Cookies();
-    const [token, setToken] = useState(cookies.get('token') ?? null);
-    const [user, setUser] = useState(new User());
-    const [locale, setLocale] = useState(new LocaleService());
-    const [theme, setTheme] = useState(new ThemeService());
+    const [token, setToken] = useState(cookies.get(Common.getTokenCookieKey()) ?? null);
+    const [user, setUser] = useState();
+    const [locale, setLocale] = useState(new LocaleService(user));
+    const [theme, setTheme] = useState(new ThemeService(user));
 
-    // кука по токену
+    function onAuthSuccess(e) {
+        setUser(new User(e));
+        cookies.set(Common.getTokenCookieKey(), token);
+    }
+
+    function onAuthFail(e) {
+        cookies.remove(Common.getTokenCookieKey());
+        setUser();
+    }
+
+    // всё по токену
     useEffect(
         () => {
-            console.log(token);
             if (token) {
-                cookies.set('token', token, {
-                    expires: new Date(Date.now().valueOf() + 3600000)
-                });
+                ApiService.authenticate(token, onAuthSuccess, onAuthFail);
             } else {
-                cookies.remove('token');
-                setUser(null);
+                onAuthFail();
             }
         },
         [token]);
 
-    // пользователь по токену
-    useEffect(() => ApiService.authenticate(token, setUser, e => {
-        cookies.remove('token');
-        setUser(null);
-    }), [token]);
-
-    // локаль по пользователю
+    //всё по юзеру
     useEffect(() => {
         setLocale(new LocaleService(user));
-    }, [user]);
-
-    // тема по пользователю
-    useEffect(() => {
         setTheme(new ThemeService(user));
     }, [user]);
 
-    // применение темы
-    useEffect(() => {
-        theme.importStyleSheet();
-    }, [theme]);
-
     return (
         <StateContext.Provider value={{
-            user: user, setUser: setUser,
             token: token, setToken: setToken,
+            user: user, setUser: setUser,
             locale: locale, setLocale: setLocale,
             theme: theme, setTheme: setTheme
         }}>
@@ -67,10 +63,10 @@ export default function App() {
                 <Header />
                 <Routes>
                     <Route path='' element={<MainPage />} />
-                    <Route path='login' element={<LoginPage />} />
-                    <Route path='register' element={<RegisterPage />} />
-                    <Route path='video' element={<VideoPage />} />
-                    <Route path='profile' element={<ProfilePage />} />
+                    <Route path='login' element={token ? <Redirect /> : <LoginPage />} />
+                    <Route path='register' element={token ? <Redirect /> : <RegisterPage />} />
+                    <Route path='video' element={token ? <VideoPage /> : <Redirect />} />
+                    <Route path='profile' element={token ? <ProfilePage /> : <Redirect />} />
                 </Routes>
             </BrowserRouter>
         </StateContext.Provider>

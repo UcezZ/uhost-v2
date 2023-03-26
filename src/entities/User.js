@@ -9,6 +9,9 @@ export default class User {
     theme;
 
     constructor(data = {}) {
+        if (typeof (data) === 'string') {
+            data = JSON.parse(data);
+        }
         this.id = data.id ?? 0;
         this.roleId = data.roleId ?? 0;
         this.role = data.role ?? 'N/A';
@@ -18,67 +21,52 @@ export default class User {
         this.locale = data.locale ?? 'en';
         this.theme = data.theme ?? 'dark';
     }
-
+    //#region Getters
     /**
      * Id
      * @returns {Number}
      */
-    getId() {
-        return this.id;
-    }
+    getId() { return this.id; }
 
     /**
      * Login
      * @returns {string}
      */
-    getLogin() {
-        return this.login;
-    }
+    getLogin() { return this.login; }
 
     /**
      * Name
      * @returns {string}
      */
-    getName() {
-        return this.name;
-    }
+    getName() { return this.name; }
 
     /**
      * Info
      * @returns {string}
      */
-    getInfo() {
-        return this.info;
-    }
+    getInfo() { return this.info; }
 
     /**
      * Locale
      * @returns {string}
      */
-    getLocale() {
-        return this.locale;
-    }
+    getLocale() { return this.locale; }
 
     /**
      * Theme
      * @returns {string}
      */
-    getTheme() {
-        return this.theme;
-    }
+    getTheme() { return this.theme; }
 
     /**
      * Role name
      * @returns {string}
      */
-    getRole() {
-        return this.role;
-    }
+    getRole() { return this.role; }
     /**
      * Is admin
      * @returns {boolean}
      */
-    isAdmin() {
-        return this.roleId == 1;
-    }
+    isAdmin() { return this.roleId === 1; }
+    //#endregion
 }

@@ -1,8 +1,12 @@
 import User from './../entities/User';
+import Enumerable from 'linq';
+import './../css/theme.css';
 
+const themeToken = '__theme_';
 const data = [
     'dark',
-    'light'
+    'light',
+    'PH'
 ];
 
 /**
@@ -10,25 +14,34 @@ const data = [
  */
 export default class ThemeService {
     theme;
+
     /**
      * Creates theme service based on user settings
      * @param {User} user 
      */
     constructor(user) {
+        Enumerable
+            .from(document.getElementsByTagName('html')[0].classList)
+            .where(e => e.startsWith(themeToken))
+            .toArray()
+            .forEach(e => document.getElementsByTagName('html')[0].classList.remove(e));
         this.theme = user && user.getTheme() && data.includes(user.getTheme()) ? user.getTheme() : data[0];
+        document.getElementsByTagName('html')[0].classList.add(`${themeToken}${this.theme}`);
     }
+
     /**
-     * Theme name
+     * Returns current theme
      * @returns {string}
      */
-    gatherThemeName() {
+    getTheme() {
         return this.theme;
     }
 
     /**
-     * Imports stylesheet
+     * Returns list of supported themes
+     * @returns {[string]}
      */
-    importStyleSheet() {
-        import(`./../css/theme/${this.gatherThemeName()}.css`);
+    static getSupportedThemes() {
+        return data;
     }
 }

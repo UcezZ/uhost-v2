@@ -1,11 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Common from '../../Common';
 import StateContext from '../../context/StateContext';
+import User from '../../entities/User';
+import ApiService from '../../services/ApiService';
 
 export default function Header() {
-    const { user, locale, setToken } = useContext(StateContext);
+    const { isLoggedIn, locale, token, setToken, user } = useContext(StateContext);
     const location = useLocation();
+
     useEffect(() => { }, [user, location]);
+
+    function logout(e) {
+        ApiService.logout(token);
+        setToken(null);
+    }
 
     function headerBurgerToggle() {
         if (user) {
@@ -28,14 +37,6 @@ export default function Header() {
     }
 
     function isPageNavigated(name) {
-        // if (Array.isArray(name)) {
-        //     for (let index in name) {
-        //         if (window.location.pathname.toLowerCase().endsWith(name[index].toLowerCase())) {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
         return window.location.pathname.toLowerCase().endsWith(name.toLowerCase());
     }
 
@@ -54,6 +55,7 @@ export default function Header() {
                         <Link to='/profile' className={headerNavSelected('profile')}> {locale.getValue('page.profile')}</Link>
                         <Link to='/video' className={headerNavSelected('video')} >{locale.getValue('page.video')}</Link>
                         <Link to='/playlist' className={headerNavSelected('playlist')} >{locale.getValue('page.playlists')}</Link>
+                        {user && user.isAdmin() ? <Link to='/admin' className={headerNavSelected('admin')} >{locale.getValue('page.admin')}</Link> : null}
                     </div>
                 </div>
             )
@@ -89,8 +91,9 @@ export default function Header() {
         if (user) {
             buttons.push(
                 <div className="centerer-wrapper">
-                    <Link to='/' onClick={e => setToken(null)}>{locale.getValue('page.logout')}</Link>
-                </div>);
+                    <Link to='/' onClick={logout}>{locale.getValue('page.logout')}</Link>
+                </div>
+            );
         } else {
             if (!isPageNavigated('login')) {
                 buttons.push(headerAuthButton('/login', locale.getValue('page.login')));
@@ -103,7 +106,8 @@ export default function Header() {
         return (
             <div className="auth-buttons">
                 {buttons}
-            </div>);
+            </div>
+        );
     }
 
     return (

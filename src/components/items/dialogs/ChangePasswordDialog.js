@@ -2,39 +2,45 @@ import { useState, useContext } from 'react';
 import StateContext from '../../../context/StateContext';
 import editIcon from './../../../img/edit.svg';
 import ReactModal from 'react-modal';
-import Common from '../../../Common';
+import CommonMethods from '../../../CommonMethods';
 import LocaleService from '../../../services/LocaleService';
 import ThemeService from '../../../services/ThemeService';
-import ApiService from '../../../services/ApiService';
-import Enumerable from 'linq';
 import User from '../../../entities/User';
 
-export default function UserEditorDialog({ entity, refresh }) {
-    const { token, locale, user, setUser } = useContext(StateContext);
+export default function ChangePasswordDialog({ entity }) {
+    const { locale } = useContext(StateContext);
     const [modalVisible, setModalVisible] = useState(false);
 
-    function edit(e) {
-        ApiService.editUser(token, e.target, responseHandler, responseHandler);
+    function localeOptions() {
+        let options = [];
+        let locales = LocaleService.getSupportedLocales();
+
+        for (let key in locales) {
+            let option = <option value={key} selected={entity.getLocale() === key}>{locales[key]}</option>;
+            options.push(option);
+        }
+
+        return options;
     }
 
-    function responseHandler(e) {
-        if (e.success && e.success === true) {
-            setModalVisible(false);
-            let edited = new User(e.result);
-            if (edited.id === user.id) {
-                setUser(edited);
-            }
-        } else {
-            console.log(JSON.stringify(e.success !== undefined && e.success === false ? e.result : e));
+    function themeOptions() {
+        let options = [];
+        let locales = ThemeService.getSupportedThemes();
+
+        for (let key in locales) {
+            let option = <option value={key} selected={entity.getTheme() === key}>{locales[key]}</option>;
+            options.push(option);
         }
+
+        return options;
     }
 
     return (
         <div className="modal-wrapper">
             <button onClick={e => setModalVisible(true)} className="floating-modal-caller user-editor glow">
-                <img src={editIcon} alt='Edit' />
+                <img src={editIcon} />
             </button>
-            <ReactModal className="card-wrapper" isOpen={modalVisible} style={Common.getModalInlineStyles()} ariaHideApp={false}>
+            <ReactModal className="card-wrapper" isOpen={modalVisible} style={CommonMethods.getModalInlineStyles()} ariaHideApp={false}>
                 <div className="card">
                     <div className="card-header">{locale.getValue('user.edit')}
                         <button onClick={e => setModalVisible(false)} className="floating-modal-caller close">
@@ -42,45 +48,37 @@ export default function UserEditorDialog({ entity, refresh }) {
                             <span></span>
                         </button>
                     </div>
-                    <form className="hscroll" onSubmit={edit} action="javascript:void(0);">
+                    <form className="hscroll" onSubmit={User.edit} action="javascript:void(0);">
                         <input type="hidden" name="id" value={entity.getId()} />
-                        <input style={{ display: 'none' }} type="checkbox" required />
+                        <input style={{ display: 'none' }} type="checkbox" changeConfirmator required />
                         <table className="card-contents">
                             <tbody>
                                 <tr>
                                     <td>{locale.getValue('user.locale')}</td>
                                     <td>
-                                        <select onChange={Common.formChangeTrigger} name="locale" defaultValue={entity.getLocale()}>
-                                            {
-                                                Enumerable
-                                                    .from(LocaleService.getSupportedLocales())
-                                                    .select(e => <option value={e.key}>{e.value}</option>)
-                                            }
+                                        <select onChange={CommonMethods.formChangeTrigger} name="locale">
+                                            {localeOptions()}
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{locale.getValue('user.theme')}</td>
                                     <td>
-                                        <select onChange={Common.formChangeTrigger} name="theme" defaultValue={entity.getTheme()}>
-                                            {
-                                                Enumerable
-                                                    .from(ThemeService.getSupportedThemes())
-                                                    .select(e => <option value={e}>{locale.getValue(`theme.${e}`)}</option>)
-                                            }
+                                        <select onChange={CommonMethods.formChangeTrigger} name="theme">
+                                            {themeOptions()}
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{locale.getValue('user.name')}</td>
                                     <td>
-                                        <input type="text" name="name" onChange={Common.formChangeTrigger} defaultValue={entity.getName()} />
+                                        <input type="text" name="name" onChange={CommonMethods.formChangeTrigger} value={entity.getName()} />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>{locale.getValue('user.info')}</td>
                                     <td>
-                                        <textarea name="info" onChange={Common.formChangeTrigger} defaultValue={entity.getInfo()} />
+                                        <textarea name="info" onChange={CommonMethods.formChangeTrigger}>{entity.getInfo()}</textarea>
                                     </td>
                                 </tr>
                             </tbody>

@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-color: var(--body-background);
     color: var(--body-forecolor);
+    min-width: 320px;
 }
 
 .centerer-wrapper {

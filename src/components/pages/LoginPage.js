@@ -1,31 +1,33 @@
-import './../../fonts/productsans.css';
-import './../../css/styles.css';
 import './../../css/card.css';
 import './../../css/form.css';
 import './../../css/card-state.css';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StateContext from './../../context/StateContext';
 import ApiService from './../../services/ApiService';
-import CommonMethods from '../../CommonMethods';
+import Common from '../../Common';
+import ErrorDialog from '../items/dialogs/ErrorDialog';
 
 export default function LoginPage() {
     const { locale, setToken } = useContext(StateContext);
+    const [error, setError] = useState();
     const navigate = useNavigate();
 
     function success(e) {
-        setToken(e);
+        setToken(e.token);
+        localStorage.setItem(Common.getUserLocalStorageKey(), JSON.stringify(e.user));
         navigate('/');
     }
 
     function login(eventData) {
         ApiService.login(eventData.target,
             success,
-            CommonMethods.errorHandler);
+            setError);
     }
 
     return (
         <div>
+            {error && <ErrorDialog error={error} onSubmit={e => setError()} />}
             <div className="card-wrapper">
                 <div className="card">
                     <div className="card-header">{locale.getValue('login.title')}</div>

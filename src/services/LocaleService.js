@@ -152,6 +152,8 @@ const data = {
             "common.caption": "Название",
             "common.create": "Создать",
             "common.download": "Скачать",
+            "common.close": "Закрыть",
+            "common.error": "Ошибка",
             "common.error.edit": "Ошибка редактирования",
             "common.error.notfound": "Не найдено",
             "common.error.other.message": "Другая ошибка: ",
@@ -416,13 +418,13 @@ export default class LocaleService {
     }
 
     static gatherBrowserLocale() {
-        return 'ru';
+        return navigator.languages && navigator.languages.length ? navigator.languages[0].split('-')[0].toLowerCase() : (navigator.language.split('-')[0].toLowerCase() ?? 'en');
     }
 
     getValue(alias, locale = null) {
         alias = alias.toLowerCase();
         return data[this.gatherLocale(locale)]['data'][alias] ??
-            this.getData()['en']['data'][alias] ??
+            data['en']['data'][alias] ??
             alias;
     }
 
@@ -431,6 +433,7 @@ export default class LocaleService {
         for (let lc in data) {
             locales[lc] = data[lc]['caption'];
         }
+
         return locales;
     }
 }

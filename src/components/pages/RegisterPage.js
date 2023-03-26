@@ -1,5 +1,3 @@
-import './../../fonts/productsans.css';
-import './../../css/styles.css';
 import './../../css/card.css';
 import './../../css/form.css';
 import './../../css/card-state.css';

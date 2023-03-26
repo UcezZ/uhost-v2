@@ -43,12 +43,16 @@ div.card-wrapper div.card div.card-header {
     border-bottom-color: var(--card-border-color);
     border-bottom-style: double;
     font-size: 20pt;
-    padding: 8px;
+    padding: 8px 48px;
     text-align: center;
     cursor: default;
     word-break: break-word;
     position: relative;
     user-select: none;
+}
+
+div.card-wrapper div.card.video div.card-header {
+    padding: 8px;
 }
 
 div.card-wrapper div.card .card-contents {

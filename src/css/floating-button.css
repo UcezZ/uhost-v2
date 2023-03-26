@@ -26,7 +26,7 @@ button.floating-modal-caller.user-editor {
 
 button.floating-modal-caller.close {
     --floating-button-size: 48px;
-    border-radius: 0;
+    background-color: transparent;
     right: 0;
     top: 0;
 }
