@@ -2,6 +2,8 @@ import axios from "axios";
 import Enumerable from "linq";
 import Common from "../Common";
 import User from "../entities/User";
+import Video from "../entities/Video";
+import Comment from "../entities/Comment";
 
 const ApiPrefix = 'http://ucezz.sytes.net/Projects/mirea/uhost/api/v1/';
 const ApiSuffix = '.php';
@@ -177,16 +179,115 @@ export default class ApiService {
 
     /**
      * Random videos
+     * @param {string} token Authentication token
      * @param {function(*)} callback Callback function on success
      * @param {function(*)} error Callback function on error
      */
-    static getRandomVideos(callback, error) {
+    static getRandomVideos(token, callback, error) {
         commonGet('video/index',
-            {},
+            token ? { Authorization: `UcezZ ${token}` } : {},
             {},
             e => {
                 if (e.success && e.success === true) {
                     callback(e.result);
+                } else {
+                    error(e);
+                }
+            },
+            error
+        );
+    }
+
+    /**
+     * User videos paged
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getUserVideos(token, id, page, callback, error) {
+        commonGet('video/index',
+            { Authorization: `UcezZ ${token}` },
+            {
+                u: id,
+                page: page
+            },
+            e => {
+                if (e.success && e.success === true) {
+                    callback(e.result);
+                } else {
+                    error(e);
+                }
+            },
+            error
+        );
+    }
+
+    /**
+     * Video by alias
+     * @param {string} token Authentication token
+     * @param {string} alias Video alias
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getVideoByAlias(token, alias, callback, error) {
+        commonGet('video/index',
+            token ? { Authorization: `UcezZ ${token}` } : {},
+            { v: alias },
+            e => {
+                if (e.success && e.success === true) {
+                    callback(new Video(e.result));
+                } else {
+                    error(e);
+                }
+            },
+            error
+        );
+    }
+
+    /**
+     * Comments by alias
+     * @param {string} alias Video alias
+     * @param {function(Comment[])} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getCommentsByVideoAlias(token, alias, callback, error) {
+        commonGet('comment/index',
+            token ? { Authorization: `UcezZ ${token}` } : {},
+            { v: alias },
+            e => {
+                if (e.success && e.success === true) {
+                    callback(
+                        Enumerable
+                            .from(e.result)
+                            .select(c => new Comment(c)));
+                } else {
+                    error(e);
+                }
+            },
+            error
+        );
+    }
+
+    /**
+     * 
+     * @param {string} token Authorization token
+     * @param {string} alias Video alias
+     * @param {Number} playlist Playlist ID
+     * @param {function (Number, Video[]) } callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getQueue(token, alias, playlist, callback, error) {
+        commonGet('queue/index',
+            token ? { Authorization: `UcezZ ${token}` } : {},
+            {
+                v: alias,
+                p: playlist
+            },
+            e => {
+                if (e.success && e.success === true) {
+                    callback(e.result.playlist,
+                        Enumerable
+                            .from(e.result.queue)
+                            .select(v => new Video(v)));
                 } else {
                     error(e);
                 }

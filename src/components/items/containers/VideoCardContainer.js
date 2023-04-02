@@ -2,7 +2,7 @@ import Enumerable from "linq";
 import Video from "../../../entities/Video";
 import VideoCard from "../cards/VideoCard";
 
-export default function VideoContainer({ collection }) {
+export default function VideoCardContainer({ collection }) {
     if (collection) {
         return (
             <div className="card-wrapper flex-wrap">

@@ -12,6 +12,7 @@
 .item-comment-wrapper .comment-header-wrapper .username-wrapper {
     flex: 1;
     text-align: left;
+    user-select: none;
 }
 
 .item-comment-wrapper .comment-header-wrapper .username-wrapper .username {

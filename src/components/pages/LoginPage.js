@@ -15,12 +15,13 @@ export default function LoginPage() {
 
     function success(e) {
         setToken(e.token);
-        localStorage.setItem(Common.getUserLocalStorageKey(), JSON.stringify(e.user));
         navigate('/');
     }
 
-    function login(eventData) {
-        ApiService.login(eventData.target,
+    function login(e) {
+        e.preventDefault && e.preventDefault();
+
+        ApiService.login(e.target,
             success,
             setError);
     }
@@ -31,7 +32,7 @@ export default function LoginPage() {
             <div className="card-wrapper">
                 <div className="card">
                     <div className="card-header">{locale.getValue('login.title')}</div>
-                    <form className="hscroll" onSubmit={login} action="javascript:void(0);" >
+                    <form className="hscroll" onSubmit={login}>
                         <table className="card-contents">
                             <tbody>
                                 <tr>

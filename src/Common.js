@@ -8,7 +8,6 @@ const modalInlineStyles = {
     }
 }
 
-const userLocalStorageKey = 'user';
 const tokenCookieKey = 'token';
 const tokenLifetime = 3600000;
 const serverRoot = 'https://ucezz.sytes.net';
@@ -62,8 +61,6 @@ export default class Common {
     }
 
     static getModalInlineStyles() { return modalInlineStyles; }
-
-    static getUserLocalStorageKey() { return userLocalStorageKey; }
 
     static getTokenCookieKey() { return tokenCookieKey; }
 

@@ -7,6 +7,8 @@ export default class User {
     info;
     locale;
     theme;
+    videos;
+    playlists;
 
     constructor(data = {}) {
         if (typeof (data) === 'string') {
@@ -20,6 +22,8 @@ export default class User {
         this.info = data.info ?? '';
         this.locale = data.locale ?? 'en';
         this.theme = data.theme ?? 'dark';
+        this.videos = data.videos ?? 0;
+        this.playlists = data.playlists ?? 0;
     }
     //#region Getters
     /**
@@ -68,5 +72,17 @@ export default class User {
      * @returns {boolean}
      */
     isAdmin() { return this.roleId === 1; }
+
+    /**
+     * User's video count
+     * @returns {Number}
+     */
+    getVideoCount() { return this.videos; }
+
+    /**
+     * User's playlist count
+     * @returns {Number}
+     */
+    getPlaylistCount() { return this.playlists; }
     //#endregion
 }

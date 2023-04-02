@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import StateContext from '../../context/StateContext';
 
-function SearchBlock() {
+export default function SearchBlock() {
+    const { locale } = useContext(StateContext);
+
+    function search(e) {
+        e.preventDefault && e.preventDefault();
+        console.log(e);
+    }
+
     return (
         <div className="search-wrapper">
-            <form className="search" method="GET" action="./search.php">
+            <form className="search" onSubmit={search} >
                 <div className="search-main">
-                    <input type="text" minlength="3" maxlength="30" name="q" placeholder="<?= Locale::getValue('search.placeholder') ?>" value="<?= $_GET['q'] ?? '' ?>" required />
-                    <input type="submit" value="<?= Locale::getValue('page.search') ?>" />
+                    <input type="text" minLength="3" maxLength="30" name="q" placeholder={locale.getValue('search.placeholder')} defaultValue="<?= $_GET['q'] ?? '' ?>" required />
+                    <input type="submit" value={locale.getValue('page.search')} />
                 </div>
             </form>
         </div>
     );
 }
-
-export default SearchBlock;

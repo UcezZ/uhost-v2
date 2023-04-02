@@ -147,6 +147,12 @@ div.queue-wrapper {
     grid-column: 3;
     grid-row-start: 1;
     grid-row-end: 3;
+    --video-previewheight: 192px;
+    --video-preview-width: 292px;
+}
+
+div.queue-wrapper>.card-header {
+    padding: 8px !important;
 }
 
 div.queue-wrapper>.card-contents {
@@ -162,8 +168,8 @@ div.queue-wrapper>.card-contents::after {
 }
 
 div.queue-wrapper>.card-contents .card {
-    width: 300px !important;
-    overflow: initial;
+    overflow: clip;
+    scrollbar-width: 0;
 }
 
 div.queue-wrapper>.card-contents .card .card-header {
@@ -174,6 +180,15 @@ div.queue-wrapper>.card-contents .card .card-header {
 div.queue-wrapper>.card-contents .card a {
     margin: 0 !important;
     padding: 0 !important;
+}
+
+div.queue-wrapper div.card.video {
+    width: calc(var(--video-preview-width) + 16px);
+}
+
+div.queue-wrapper div.card.video img.video-preview {
+    width: var(--video-preview-width);
+    height: var(--video-previewheight);
 }
 
 div.comment-wrapper {
@@ -189,6 +204,8 @@ div.comment-wrapper .card-contents {
     max-height: 400px;
     overflow: hidden;
     overflow-y: auto;
+    padding: 8px;
+    text-align: center;
 }
 
 div.comment-wrapper .card-footer {

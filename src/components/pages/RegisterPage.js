@@ -3,7 +3,6 @@ import './../../css/form.css';
 import './../../css/card-state.css';
 import React, { useContext } from 'react';
 import StateContext from '../../context/StateContext';
-import Header from '../items/Header';
 
 export default function RegisterPage() {
     const { locale, setLocale } = useContext(StateContext);
@@ -17,11 +16,11 @@ export default function RegisterPage() {
                         <table className="card-contents">
                             <tr>
                                 <td>{locale.getValue('user.name')}</td>
-                                <td><input name="name" minlength="2" maxlength="64" value="<?= $_POST['name'] ?? ''}" required /></td>
+                                <td><input name="name" minLength="2" maxLength="64" defaultValue="<?= $_POST['name'] ?? ''}" required /></td>
                             </tr>
                             <tr>
                                 <td>{locale.getValue('auth.login')}</td>
-                                <td><input name="login" minlength="5" maxlength="64" value="<?= $_POST['login'] ?? ''}" required /></td>
+                                <td><input name="login" minLength="5" maxLength="64" defaultValue="<?= $_POST['login'] ?? ''}" required /></td>
                             </tr>
                             <tr>
                                 <td>{locale.getValue('auth.password')}</td>

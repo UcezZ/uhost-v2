@@ -3,6 +3,7 @@ import User from './User';
 
 export default class Video {
     id;
+    userid;
     user;
     duration;
     name;
@@ -10,7 +11,6 @@ export default class Video {
     isPublic;
     time;
     humantime;
-    user;
     humanduration;
     thumbUrl;
     videoUrl;
@@ -18,6 +18,7 @@ export default class Video {
 
     constructor(data) {
         this.id = data.id ?? 'N/A';
+        this.userid = data.userid ?? 0;
         this.user = data.user ? new User(data.user) : null;
         this.duration = data.duration ?? 'N/A';
         this.name = data.name ?? 'N/A';
@@ -40,10 +41,10 @@ export default class Video {
     getId() { return this.id; }
 
     /**
-     * User
-     * @returns {User}
+     * User ID
+     * @returns {Number}
      */
-    getUser() { return this.user; }
+    getUserId() { return this.userid; }
 
     /**
      * Duration in seconds
@@ -76,15 +77,42 @@ export default class Video {
     getIsPublic() { return this.isPublic; }
 
     /**
-     * 
+     * Upload time object
      * @returns {Date}
      */
     getTime() { return this.time; }
 
+    /**
+     * Human-readable upload time
+     * @returns {string}
+     */
     getHumanTime() { return this.humantime; }
+
+    /**
+     * Video author
+     * @returns {User}
+     */
     getUser() { return this.user; }
-    getThumbUrl() { return this.thumbUrl; }
-    getVideoUrl() { return this.videoUrl; }
-    getDownloadUrl() { return this.downloadUrl; }
+
+    /**
+     * Thumbnail URL
+     * @param {string} token Authorization token
+     * @returns 
+     */
+    getThumbUrl(token) { return this.thumbUrl + (token ? `&tk=${token}` : ''); }
+
+    /**
+     * Video stream URL
+     * @param {string} token Authorization token
+     * @returns 
+     */
+    getVideoUrl(token) { return this.videoUrl + (token ? `&tk=${token}` : ''); }
+
+    /**
+     * Video download URL
+     * @param {string} token Authorization token
+     * @returns 
+     */
+    getDownloadUrl(token) { return this.downloadUrl + (token ? `&tk=${token}` : ''); }
     //#endregion
 }

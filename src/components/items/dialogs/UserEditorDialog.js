@@ -9,11 +9,12 @@ import ApiService from '../../../services/ApiService';
 import Enumerable from 'linq';
 import User from '../../../entities/User';
 
-export default function UserEditorDialog({ entity, refresh }) {
+export default function UserEditorDialog({ entity, setEntity }) {
     const { token, locale, user, setUser } = useContext(StateContext);
     const [modalVisible, setModalVisible] = useState(false);
 
     function edit(e) {
+        e.preventDefault && e.preventDefault();
         ApiService.editUser(token, e.target, responseHandler, responseHandler);
     }
 
@@ -24,6 +25,7 @@ export default function UserEditorDialog({ entity, refresh }) {
             if (edited.id === user.id) {
                 setUser(edited);
             }
+            setEntity(edited);
         } else {
             console.log(JSON.stringify(e.success !== undefined && e.success === false ? e.result : e));
         }
@@ -42,7 +44,7 @@ export default function UserEditorDialog({ entity, refresh }) {
                             <span></span>
                         </button>
                     </div>
-                    <form className="hscroll" onSubmit={edit} action="javascript:void(0);">
+                    <form className="hscroll" onSubmit={edit}>
                         <input type="hidden" name="id" value={entity.getId()} />
                         <input style={{ display: 'none' }} type="checkbox" required />
                         <table className="card-contents">

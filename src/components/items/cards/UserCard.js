@@ -1,73 +1,70 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import StateContext from '../../../context/StateContext';
 import UserEditorDialog from './../dialogs/UserEditorDialog';
 import LocaleService from '../../../services/LocaleService';
-import User from '../../../entities/User';
-import Common from '../../../Common';
+import { Link } from 'react-router-dom';
+import ChangePasswordDialog from '../dialogs/ChangePasswordDialog';
 
 export default function CardUser({ entity }) {
+    const [shownUser, setShownUser] = useState(entity);
     const { locale, user } = useContext(StateContext);
 
     function changePasswordButton() {
         if (user.getId() === entity.getId()) {
-            return (
-                <div className="card-footer">
-                    <button>{locale.getValue('user.changepassword')}</button>
-                </div>
-            );
+            return <ChangePasswordDialog entity={entity} />;
         }
     }
 
     function editProfileButton() {
         if (entity.isAdmin() || entity.getId() === user.getId() || user.isAdmin()) {
             return (
-                <UserEditorDialog entity={entity} />
+                <UserEditorDialog entity={shownUser} setEntity={setShownUser} />
             );
         }
     }
 
-    if (entity && user) {
+    if (shownUser && user) {
         return (
             <div className="card profile">
-                <div className="card-header">{entity.getName()}</div>
+                <div className="card-header">{shownUser.getName()}</div>
                 {editProfileButton()}
                 <table className="card-contents">
                     <tbody>
                         <tr>
                             <td>{locale.getValue('common.id.full')}</td>
-                            <td>{entity.getId()}</td>
+                            <td>{shownUser.getId()}</td>
                         </tr>
                         <tr>
                             <td>{locale.getValue('auth.login')}</td>
-                            <td>{entity.getLogin()}</td>
+                            <td>{shownUser.getLogin()}</td>
                         </tr>
                         <tr>
                             <td>{locale.getValue('user.role')}</td>
-                            <td>{entity.getRole()}</td>
+                            <td>{shownUser.getRole()}</td>
                         </tr>
                         <tr>
                             <td>{locale.getValue('user.info')}</td>
-                            <td>{entity.getInfo() && entity.getInfo().length ? entity.getInfo() : locale.getValue('user.info.empty')}</td>
+                            <td>{shownUser.getInfo() && shownUser.getInfo().length ? shownUser.getInfo() : <i>{locale.getValue('user.info.empty')}</i>}</td>
                         </tr>
                         <tr>
                             <td>{locale.getValue('user.locale')}</td>
-                            <td>{LocaleService.getSupportedLocales()[locale.gatherLocale(entity.getLocale())] ?? entity.getLocale()}</td>
+                            <td>{LocaleService.getSupportedLocales()[locale.gatherLocale(shownUser.getLocale())] ?? shownUser.getLocale()}</td>
                         </tr>
                         <tr>
                             <td>{locale.getValue('user.theme')}</td>
-                            <td>{locale.getValue(`theme.${entity.getTheme()}`)}</td>
+                            <td>{locale.getValue(`theme.${shownUser.getTheme()}`)}</td>
                         </tr>
                         <tr>
                             <td>
-                                {/* <a href="./video.php{user.getId() == $currentuser->getId() ? '' : '?u=' . user.getId()}"> {locale.getValue(entity.getId() == $currentuser -> getId() ? 'link.myvideos' : 'link.uservideos')} </a> */}
+                                <Link to={`/video${shownUser.getId() === user.getId() ? '' : '?u=' + shownUser.getId()}`}> {locale.getValue(shownUser.getId() === user.getId() ? 'link.myvideos' : 'link.uservideos')} </Link>
                             </td>
-                            {/* <td>{Video::count($user)}</td> */}
+                            <td>{shownUser.getVideoCount()}</td>
                         </tr>
                         <tr>
                             <td>
-                                {/* <a href="./playlist.php{user.getId() == $currentuser->getId() ? '' : '?u=' . user.getId()}">{locale.getValue(entity.getId() == $currentuser -> getId() ? 'link.myplaylists' : 'link.userplaylists')}</a> */}
+                                <Link to={`/playlist${shownUser.getId() === user.getId() ? '' : '?u=' + shownUser.getId()}`}>{locale.getValue(shownUser.getId() === user.getId() ? 'link.myplaylists' : 'link.userplaylists')}</Link>
                             </td>
-                            {/* <td>{Playlist::count($user)}</td> */}
+                            <td>{shownUser.getPlaylistCount()}</td>
                         </tr></tbody>
                 </table>
                 {changePasswordButton()}

@@ -1,22 +1,23 @@
-div.card-wrapper.error div.card {
+div.card-wrapper div.card.error {
     border-color: var(--card-border-error);
 }
 
-div.card-wrapper.error div.card div.card-header {
+div.card-wrapper div.card.error div.card-header {
     background-color: var(--card-header-error);
     border-bottom-color: var(--card-border-error);
 }
 
-div.card-wrapper.success div.card {
+div.card-wrapper div.card.success {
     border-color: var(--card-border-success);
 }
 
-div.card-wrapper.success div.card div.card-header {
+div.card-wrapper div.card.success div.card-header {
     background-color: var(--card-header-success);
     border-bottom-color: var(--card-border-success);
 }
 
-div.card-wrapper div.card-contents {
+div.card-wrapper div.card.success div.card-contents,
+div.card-wrapper div.card.error div.card-contents {
     padding: 8px;
     text-align: center;
 }

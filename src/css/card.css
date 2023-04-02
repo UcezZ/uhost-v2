@@ -14,13 +14,13 @@ div.card-wrapper div.card {
     margin: 16px;
     overflow: hidden;
     height: max-content;
-    max-width: 480px;
+    max-width: 540px;
     transition: var(--default-transition);
     position: relative;
 }
 
 div.card-wrapper div.card.profile {
-    min-width: 300px;
+    min-width: 320px;
 }
 
 div.card-wrapper div.card.video {
@@ -153,20 +153,22 @@ div.card-wrapper div.card a.video-preview:hover::after {
 div.card-wrapper div.card img.video-preview {
     background-color: black;
     width: 100%;
-    max-width: 400px;
-    max-height: 240px;
+    width: 400px;
+    height: 240px;
     object-fit: cover;
 }
 
 div.card-wrapper div.card div.card-contents div.video-summary {
     text-align: left;
+    width: inherit;
 }
 
 div.card-wrapper div.card div.card-contents div.video-summary div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 400px;
+    /* max-width: 400px; */
+    width: inherit;
 }
 
 div.card-wrapper div.card div.card-contents div.video-summary div.user {
@@ -199,6 +201,18 @@ div.card-wrapper div.card .card-footer input[type="button"] {
     transition: 0.3s ease-out;
     cursor: pointer;
     box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+@media (max-width: 768px) {
+    div.card-wrapper div.card.video {
+        max-width: fit-content;
+        width: calc(80vw + 16px);
+    }
+
+    div.card-wrapper div.card img.video-preview {
+        width: 80vw;
+        height: 48vw;
+    }
 }
 
 @media (max-width: 480px) {

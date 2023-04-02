@@ -16,13 +16,13 @@ import ApiService from './services/ApiService';
 import ThemeService from './services/ThemeService';
 import User from './entities/User';
 import Common from './Common';
-import Redirect from './components/Redirect';
+import PlaylistPage from './components/pages/PlaylistPage';
 
 export default function App() {
     const cookies = new Cookies();
-    const [token, setToken] = useState(cookies.get(Common.getTokenCookieKey()) ?? null);
+    const [token, setToken] = useState(cookies.get(Common.getTokenCookieKey()));
     const [user, setUser] = useState();
-    const [locale, setLocale] = useState(new LocaleService(user));
+    const [locale, setLocale] = useState(new LocaleService());
     const [theme, setTheme] = useState(new ThemeService(user));
 
     function onAuthSuccess(e) {
@@ -35,11 +35,16 @@ export default function App() {
         setUser();
     }
 
+    let userLoaded = false;
+
     // всё по токену
     useEffect(
         () => {
             if (token) {
-                ApiService.authenticate(token, onAuthSuccess, onAuthFail);
+                if (!userLoaded) {
+                    userLoaded = true;
+                    ApiService.authenticate(token, onAuthSuccess, onAuthFail);
+                }
             } else {
                 onAuthFail();
             }
@@ -52,23 +57,26 @@ export default function App() {
         setTheme(new ThemeService(user));
     }, [user]);
 
-    return (
-        <StateContext.Provider value={{
-            token: token, setToken: setToken,
-            user: user, setUser: setUser,
-            locale: locale, setLocale: setLocale,
-            theme: theme, setTheme: setTheme
-        }}>
-            <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route path='' element={<MainPage />} />
-                    <Route path='login' element={token ? <Redirect /> : <LoginPage />} />
-                    <Route path='register' element={token ? <Redirect /> : <RegisterPage />} />
-                    <Route path='video' element={token ? <VideoPage /> : <Redirect />} />
-                    <Route path='profile' element={token ? <ProfilePage /> : <Redirect />} />
-                </Routes>
-            </BrowserRouter>
-        </StateContext.Provider>
-    );
+    if (locale && theme) {
+        return (
+            <StateContext.Provider value={{
+                token: token, setToken: setToken,
+                user: user, setUser: setUser,
+                locale: locale, setLocale: setLocale,
+                theme: theme, setTheme: setTheme
+            }}>
+                <BrowserRouter>
+                    <Header />
+                    <Routes>
+                        <Route path='' element={<MainPage />} />
+                        <Route path='login' element={<LoginPage />} />
+                        <Route path='register' element={<RegisterPage />} />
+                        <Route path='video' element={<VideoPage />} />
+                        <Route path='profile' element={<ProfilePage />} />
+                        <Route path='playlist' element={<PlaylistPage />} />
+                    </Routes>
+                </BrowserRouter>
+            </StateContext.Provider>
+        );
+    }
 }
