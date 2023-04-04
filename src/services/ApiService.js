@@ -178,6 +178,25 @@ export default class ApiService {
     }
 
     /**
+     * Change password
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form User password change form
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static changePassword(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'user/change-password',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                callback,
+                error
+            )
+        }
+    }
+
+    /**
      * Random videos
      * @param {string} token Authentication token
      * @param {function(*)} callback Callback function on success
@@ -268,8 +287,8 @@ export default class ApiService {
     }
 
     /**
-     * 
-     * @param {string} token Authorization token
+     * Get playback queue
+     * @param {string} token Authentication token
      * @param {string} alias Video alias
      * @param {Number} playlist Playlist ID
      * @param {function (Number, Video[]) } callback Callback function on success

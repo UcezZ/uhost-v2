@@ -163,7 +163,6 @@ div.queue-wrapper>.card-contents {
 }
 
 div.queue-wrapper>.card-contents::after {
-    content: '\a0';
     line-height: 8px;
 }
 

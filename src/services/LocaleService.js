@@ -244,15 +244,6 @@ const data = {
             "user.info.empty": "Информация не указана",
             "user.locale": "Язык",
             "user.name": "Имя пользователя",
-            "user.password.error": "Ошибка смены пароля",
-            "user.password.error.message0": "Старый пароль не указан!",
-            "user.password.error.message1": "Новый пароль не указан!",
-            "user.password.error.message2": "Повторите ввод нового пароля!",
-            "user.password.error.message3": "Введённые пароли не совпадают!",
-            "user.password.error.message4": "Старый и новый пароли не должны совпадать!",
-            "user.password.error.message5": "Старый пароль указан неверно!",
-            "user.password.success": "Пароль успешно изменён",
-            "user.password.success.message": "Вы успешно изменили пароль.<br>Теперь при входе используйте новый пароль.",
             "user.role": "Роль",
             "user.theme": "Тема оформления",
             "video.add": "Загрузить видео",
@@ -274,7 +265,6 @@ const data = {
 }
 
 export default class LocaleService {
-
     user;
 
     constructor(user) {
@@ -298,9 +288,17 @@ export default class LocaleService {
 
     getValue(alias, locale = null) {
         alias = alias.toLowerCase();
-        return data[this.gatherLocale(locale)]['data'][alias] ??
-            data['en']['data'][alias] ??
-            alias;
+        let gatheredString = data[this.gatherLocale(locale)]['data'][alias];
+        if (gatheredString) {
+            return gatheredString;
+        }
+
+        let defaultString = data['en']['data'][alias];
+        if (defaultString) {
+            return defaultString;
+        }
+
+        return alias;
     }
 
     static getSupportedLocales() {

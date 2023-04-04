@@ -28,10 +28,23 @@ export default function ErrorCard({ error, message, caption, onSubmit, submitCap
         message = error.message;
     }
 
+    if (!message && error) {
+        try {
+            message = JSON.stringify();
+        }
+        catch {
+            message = locale.getValue('common.error');
+        }
+    }
+
+    if (!caption) {
+        caption = locale.getValue('common.error');
+    }
+
     return (
         <div className="card error">
-            <div className="card-header">{caption ?? locale.getValue('common.error')}</div>
-            <div className="card-contents">{message ?? locale.getValue('common.error')}</div>
+            <div className="card-header">{caption}</div>
+            <div className="card-contents">{message}</div>
             {
                 onSubmit && submitCaption &&
                 (

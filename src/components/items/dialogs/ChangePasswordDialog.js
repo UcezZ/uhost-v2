@@ -2,16 +2,36 @@ import { useState, useContext } from 'react';
 import StateContext from '../../../context/StateContext';
 import ReactModal from 'react-modal';
 import Common from '../../../Common';
-import User from '../../../entities/User';
+import ApiService from '../../../services/ApiService';
+import ErrorDialog from './ErrorDialog';
+import SuccessDialog from './SuccessDialog';
 
 export default function ChangePasswordDialog({ entity }) {
-    const { locale } = useContext(StateContext);
+    const { token, locale } = useContext(StateContext);
     const [modalVisible, setModalVisible] = useState(false);
+    const [overlayDialog, setOverlayDialog] = useState();
+
+    function close(e) {
+        setOverlayDialog();
+        setModalVisible(false);
+    }
+
+    function onSuccess(e) {
+        setOverlayDialog(
+            <SuccessDialog caption={e.result.caption} message={e.result.message} onSubmit={close} />
+        );
+    }
+
+    function onError(e) {
+        setOverlayDialog(
+            <ErrorDialog error={e} onSubmit={e => setOverlayDialog()} />
+        )
+    }
 
     function changePassword(e) {
         e.preventDefault && e.preventDefault();
 
-        console.log(e);
+        ApiService.changePassword(token, e.target, onSuccess, onError);
     }
 
     return (
@@ -51,6 +71,7 @@ export default function ChangePasswordDialog({ entity }) {
                         </div>
                     </form>
                 </div>
+                {overlayDialog}
             </ReactModal>
         </div>
     );

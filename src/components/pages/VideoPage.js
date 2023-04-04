@@ -43,7 +43,6 @@ export default function VideoPage() {
         let userId = search.has('u') && Number(search.get('u')) ? Number(search.get('u')) : user.id;
 
         function renderVideos(res) {
-            console.log(res);
             setView(
                 <div className="main">
                     <BigRedButt to={''} caption={locale.getValue('video.add')} subStyle={'add-video-icon'} />
