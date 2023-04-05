@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
-
-export default function BigRedButt({ to, caption, subStyle }) {
-    to ??= '';
-    caption ??= '';
-    subStyle ??= '';
+export default function BigRedButt({ caption, subStyle, onClick }) {
+    if (!caption) {
+        caption = '';
+    }
+    if (!subStyle) {
+        subStyle = '';
+    }
 
     return (
         <div className="centerer-wrapper row">
             <div className="centerer-wrapper">
-                <Link className={`big-red-button ${subStyle}`} to={to}><span>{caption}</span></Link>
+                <div className={`big-red-button ${subStyle}`} onClick={onClick}><span>{caption}</span></div>
             </div>
         </div>
     );

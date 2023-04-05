@@ -4,6 +4,7 @@ import Common from "../Common";
 import User from "../entities/User";
 import Video from "../entities/Video";
 import Comment from "../entities/Comment";
+import { AxiosProgressEvent } from "axios";
 
 const ApiPrefix = 'http://ucezz.sytes.net/Projects/mirea/uhost/api/v1/';
 const ApiSuffix = '.php';
@@ -48,15 +49,21 @@ function commonGet(apiMethod, headers, params, callback, error) {
  * @param {Array} headers Request headers
  * @param {function(*)} callback Callback function on success
  * @param {function(*)} error Callback function on error
+ * @param {function(AxiosProgressEvent)} onProgress Progress change event
  */
-function commonPost(apiMethod, body, headers, callback, error) {
+function commonPost(apiMethod, body, headers, callback, error, onProgress) {
     if (navigator.languages) {
         headers['Accept-Language'] = navigator.languages.join(',');
     } else if (navigator.language) {
         headers['Accept-Language'] = navigator.language;
     }
     axios
-        .post(ApiPrefix + apiMethod + ApiSuffix, body, { headers: headers })
+        .post(ApiPrefix + apiMethod + ApiSuffix, body,
+            {
+                headers: headers,
+                onUploadProgress: onProgress,
+                onDownloadProgress: onProgress
+            })
         .then(res => {
             if (res.data) {
                 if (callback) {
@@ -313,5 +320,32 @@ export default class ApiService {
             },
             error
         );
+    }
+
+    /**
+     * Upload video with progress show
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(Video)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     * @param {function(*)} onProgress Progress event
+     */
+    static uploadVideo(token, form, callback, error, onProgress) {
+        if (token && form) {
+            commonPost(
+                'video/index',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(new Video(e.result));
+                    } else {
+                        error(e);
+                    }
+                },
+                error,
+                onProgress
+            );
+        }
     }
 }

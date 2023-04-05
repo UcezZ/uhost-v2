@@ -1,4 +1,4 @@
-a.big-red-button {
+div.big-red-button {
     background-color: var(--accent-background);
     color: var(--accent-forecolor);
     font-family: ProductSans;
@@ -18,32 +18,33 @@ a.big-red-button {
     background-position: center center;
     background-repeat: no-repeat;
     overflow: hidden;
+    user-select: none;
 }
 
-a.big-red-button:hover {
+div.big-red-button:hover {
     border-radius: 8px;
     transform: scale(1.05);
 }
 
-a.big-red-button:active {
+div.big-red-button:active {
     transform: translateX(1px) translateY(1px);
     box-shadow: 0 0 4px 2px var(--shadow-color);
 }
 
-a.big-red-button:hover span {
+div.big-red-button:hover span {
     transform: translateY(-8px);
 }
 
-a.big-red-button span {
+div.big-red-button span {
     font-size: 18px;
     transform: translateY(24px);
     transition: inherit;
 }
 
-a.big-red-button.add-video-icon {
+div.big-red-button.add-video-icon {
     background-image: url('./../img/video-add.svg');
 }
 
-a.big-red-button.add-playlist-icon {
+div.big-red-button.add-playlist-icon {
     background-image: url('./../img/playlist.svg');
 }

@@ -24,7 +24,7 @@ div.card-wrapper div.card.profile {
 }
 
 div.card-wrapper div.card.video {
-    max-width: 416px;
+    max-width: 432px;
     width: 100%;
 }
 
@@ -91,7 +91,8 @@ div.card-wrapper div.card table.card-contents tr td:nth-child(2) {
 }
 
 div.card-wrapper div.card img,
-div.card-wrapper div.card a.video-preview {
+div.card-wrapper div.card a.video-preview,
+div.card-wrapper div.card div.video-preview {
     border-radius: 8px;
 }
 
@@ -99,7 +100,8 @@ div.card-wrapper div.card button img {
     border-radius: 0;
 }
 
-div.card-wrapper div.card a.video-preview {
+div.card-wrapper div.card a.video-preview,
+div.card-wrapper div.card div.video-preview {
     padding: 0;
     background-color: inherit;
     color: inherit;
@@ -108,12 +110,14 @@ div.card-wrapper div.card a.video-preview {
     width: 100%;
 }
 
-div.card-wrapper div.card a.video-preview img {
+div.card-wrapper div.card a.video-preview img,
+div.card-wrapper div.card div.video-preview img {
     display: flex;
     transition: var(--default-transition);
 }
 
-div.card-wrapper div.card a.video-preview span {
+div.card-wrapper div.card a.video-preview span,
+div.card-wrapper div.card div.video-preview span {
     font-size: 12pt;
     position: absolute;
     bottom: 0;
@@ -153,8 +157,8 @@ div.card-wrapper div.card a.video-preview:hover::after {
 div.card-wrapper div.card img.video-preview {
     background-color: black;
     width: 100%;
-    width: 400px;
-    height: 240px;
+    width: 416px;
+    height: 256px;
     object-fit: cover;
 }
 

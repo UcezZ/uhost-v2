@@ -22,7 +22,7 @@ export default function App() {
     const cookies = new Cookies();
     const [token, setToken] = useState(cookies.get(Common.getTokenCookieKey()));
     const [user, setUser] = useState();
-    const [locale, setLocale] = useState(new LocaleService());
+    const [locale, setLocale] = useState(new LocaleService(user));
     const [theme, setTheme] = useState(new ThemeService(user));
 
     function onAuthSuccess(e) {

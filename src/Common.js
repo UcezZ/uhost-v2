@@ -19,12 +19,19 @@ export default class Common {
      * @returns {FormData}
      */
     static convertHTMLFormToFormData(form) {
-        let formData = new FormData();
-
+        let formData = new FormData(form);
+        /*
         Enumerable
             .from(form.elements)
             .where(e => e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement || e instanceof HTMLSelectElement)
+            .where(e => e.type !== 'checkbox')
             .forEach(e => formData.append(e.name, e.value));
+
+        Enumerable
+            .from(form.elements)
+            .where(e => e instanceof HTMLInputElement && e.type === 'checkbox')
+            .forEach(e => formData.append(e.name, e.checked));
+        */
 
         return formData;
     }

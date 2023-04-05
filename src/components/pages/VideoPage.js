@@ -18,15 +18,19 @@ import BigRedButt from '../items/BigRedButt';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import VideoBlock from '../items/blocks/VideoBlock';
 import ErrorCard from '../items/cards/ErrorCard';
+import VideoUploadCard from '../items/cards/VideoUploadCard';
+import ReactModal from 'react-modal';
+import Common from '../../Common';
 
 export default function VideoPage() {
     const { token, user, locale } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
     const [search, setSearch] = useSearchParams();
     const [needsRender, setNeedsRender] = useState(false);
+    const [uploadVisible, setUploadVisible] = useState(false);
     const location = useLocation();
 
-    useEffect(() => { setNeedsRender(true) }, [location]);
+    useEffect(() => { setNeedsRender(true) }, [location, user, locale, uploadVisible]);
 
     let alias = search.has('v') && search.get('v').length > 0 && search.get('v').length < 9 ? search.get('v') : null;
 
@@ -36,17 +40,24 @@ export default function VideoPage() {
             token,
             alias,
             e => setView(<VideoBlock video={e} />),
-            e => setView(<ErrorCard error={e} />)
+            e => setView(<div className="card-wrapper"><ErrorCard error={e} /></div>)
         );
     }
     else if (user) {
         let userId = search.has('u') && Number(search.get('u')) ? Number(search.get('u')) : user.id;
 
+        function closeVideoUpload(e) {
+            setUploadVisible(false);
+        }
+
         function renderVideos(res) {
             setView(
                 <div className="main">
-                    <BigRedButt to={''} caption={locale.getValue('video.add')} subStyle={'add-video-icon'} />
+                    <BigRedButt caption={locale.getValue('video.add')} subStyle={'add-video-icon'} onClick={e => setUploadVisible(true)} />
                     <VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />
+                    <ReactModal className="card-wrapper" isOpen={uploadVisible} style={Common.getModalInlineStyles()} ariaHideApp={false}>
+                        <VideoUploadCard onClose={closeVideoUpload} />
+                    </ReactModal>
                 </div>
             );
         }
