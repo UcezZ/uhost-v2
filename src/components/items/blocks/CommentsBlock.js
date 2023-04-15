@@ -1,21 +1,24 @@
 import Enumerable from 'linq';
-import { useContext, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import StateContext from '../../../context/StateContext';
 import ApiService from '../../../services/ApiService';
 import LoadingContainer from '../containers/LoadingContainer';
-import ItemComment from '../ItemComment';
+import ErrorDialog from '../dialogs/ErrorDialog';
+import CommentItem from '../CommentItem';
 
-export default function CommentsBlock() {
+export default function CommentsBlock({ video }) {
     const { token, user, locale } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
     const [needsRender, setNeedsRender] = useState(false);
-    const [search, setSearch] = useSearchParams();
+    const [error, setError] = useState();
+    const [ts, setTs] = useState();
     const location = useLocation();
 
-    useState(() => { setNeedsRender(true) }, [location, user]);
-
-    let alias = search.has('v') && search.get('v').length > 0 && search.get('v').length < 9 ? search.get('v') : null;
+    useEffect(() => {
+        setNeedsRender(true);
+        //setTimeout(() => setTs(new Date().getTime()), 5000);
+    }, [location, ts]);
 
     function noComments(e) {
         setView(
@@ -31,27 +34,55 @@ export default function CommentsBlock() {
         setView(
             Enumerable
                 .from(e)
-                .select(c => <ItemComment comment={c} />)
+                .select(c => <CommentItem key={c.getId()} comment={c} />)
         );
     }
 
-    if (needsRender && alias) {
+    /**
+     * 
+     * @param {HTMLFormElement} form 
+     */
+    function commentPosted(form) {
+        setNeedsRender(true);
+        Enumerable
+            .from(form.elements)
+            .where(e => e instanceof HTMLInputElement)
+            .where(e => e.name == 'text')
+            .forEach(e => e.value = '');
+    }
+
+    function postComment(e) {
+        e.preventDefault && e.preventDefault();
+
+        ApiService.postComment(
+            token,
+            e.target,
+            () => commentPosted(e.target),
+            e => setError(
+                <ErrorDialog error={e} onSubmit={() => setError()} />
+            )
+        );
+    }
+
+    if (needsRender && video) {
         setNeedsRender(false);
-        ApiService.getCommentsByVideoAlias(token, alias, showComments, noComments);
+        ApiService.getCommentsByVideoAlias(token, video.getAlias(), showComments, noComments);
     }
 
     return (
         <div className="comment-wrapper content-wrapper card">
             <div className="card-header">{locale.getValue('video.comments')}</div>
             <div className="card-contents">{view}</div>
-            {/* <?php
-        if (isset($currentuser)) {
-            print '<div className="card-footer">
-            <input id="comment-input" type="text" maxlength="255">
-            <input id="comment-submit" type="button" value="' . locale.getValue('comment.send') . '">
-        </div>';
-        }
-        } */}
+            {
+                user ? (
+                    <form onSubmit={postComment} className="card-footer">
+                        <input type="hidden" name="alias" value={video.getAlias()} />
+                        <input type="text" name="text" maxLength="255" required />
+                        <button type="submit">{locale.getValue('comment.send')}</button>
+                    </form>
+                ) : null
+            }
+            {error}
         </div>
     );
 }

@@ -161,7 +161,13 @@ div.card-wrapper div.card form .card-contents select:user-invalid,
 div.card-wrapper div.card form .card-contents textarea:user-invalid,
 div.card-wrapper div.card form .card-footer input:user-invalid,
 div.card-wrapper div.card form .card-footer select:user-invalid,
-div.card-wrapper div.card form .card-footer textarea:user-invalid {
+div.card-wrapper div.card form .card-footer textarea:user-invalid
+
+/*,
+div.card-wrapper div.card form.card-footer input:user-invalid,
+div.card-wrapper div.card form.card-footer select:user-invalid,
+div.card-wrapper div.card form.card-footer textarea:user-invalid*/
+    {
     border-bottom-style: solid !important;
     border-bottom-width: 2px !important;
     border-bottom-color: var(--input-border-color-invalid) !important;

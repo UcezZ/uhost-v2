@@ -17,6 +17,12 @@ export default class Video {
     downloadUrl;
 
     constructor(data) {
+        if (!data) {
+            data = {};
+        }
+        if (typeof (data) === 'string') {
+            data = JSON.parse(data);
+        }
         this.id = data.id ?? 'N/A';
         this.userid = data.userid ?? 0;
         this.user = data.user ? new User(data.user) : null;
@@ -31,6 +37,29 @@ export default class Video {
         this.thumbUrl = Common.getServerRoot() + data.thumbUrl ?? 'N/A';
         this.videoUrl = Common.getServerRoot() + data.videoUrl ?? 'N/A';
         this.downloadUrl = Common.getServerRoot() + data.downloadUrl ?? 'N/A';
+    }
+
+    /**
+     * Fill this entity from other entity
+     * @param {Video} entity 
+     */
+    fillFrom(entity) {
+        if (entity && entity instanceof Video) {
+            this.id = entity.id;
+            this.userid = entity.userid;
+            this.user = entity.user;
+            this.duration = entity.duration;
+            this.name = entity.name;
+            this.alias = entity.alias;
+            this.isPublic = entity.isPublic;
+            this.time = entity.time;
+            this.humantime = entity.humantime;
+            this.user = entity.user;
+            this.humanduration = entity.humanduration;
+            this.thumbUrl = entity.thumbUrl;
+            this.videoUrl = entity.videoUrl;
+            this.downloadUrl = entity.downloadUrl;
+        }
     }
 
     //#region Getters

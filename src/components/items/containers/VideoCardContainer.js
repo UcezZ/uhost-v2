@@ -8,7 +8,7 @@ export default function VideoCardContainer({ collection }) {
             <div className="card-wrapper flex-wrap">
                 {Enumerable
                     .from(collection)
-                    .select(e => <VideoCard video={e} />)
+                    .select(e => <VideoCard key={e.getAlias()} video={e} />)
                 }
             </div>
         );

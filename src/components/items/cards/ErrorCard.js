@@ -32,7 +32,7 @@ export default function ErrorCard({ error, message, caption, onSubmit, submitCap
         try {
             message = JSON.stringify();
         }
-        catch {
+        catch (e) {
             message = locale.getValue('common.error');
         }
     }

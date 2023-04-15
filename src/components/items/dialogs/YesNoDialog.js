@@ -9,12 +9,13 @@ import ErrorCard from '../cards/ErrorCard';
  * Error dialog
  * @param {{string, string, function(*)}} 
  */
-export default function YesNoDialog({ caption, message, onSubmit, onReject }) {
+export default function YesNoDialog({ caption, message, onSubmit, onReject, onClose }) {
     const [modalVisible, setModalVisible] = useState(true);
     const { locale } = useContext(StateContext);
 
     function close(e) {
         setModalVisible(false);
+        onClose && onClose(e);
     }
 
     function submit(e) {
@@ -27,17 +28,25 @@ export default function YesNoDialog({ caption, message, onSubmit, onReject }) {
         onReject && onReject(e);
     }
 
+    if (!caption) {
+        caption = '';
+    }
+
+    if (!message) {
+        message = '';
+    }
+
     return (
         <ReactModal className="card-wrapper" isOpen={modalVisible} style={Common.getModalInlineStyles()} ariaHideApp={false}>
             <div className="card">
                 <div className="card-header">
-                    {caption ?? ''}
-                    <button onClick={e => setModalVisible(false)} className="floating-modal-caller close">
+                    {caption}
+                    <button onClick={close} className="floating-modal-caller close">
                         <span></span>
                         <span></span>
                     </button>
                 </div>
-                <div className="card-contents">{message ?? ''}</div>
+                <div className="card-contents">{message}</div>
                 <div className="card-footer">
                     <button onClick={submit}>{locale.getValue('common.yes')}</button>
                     <button onClick={reject}>{locale.getValue('common.no')}</button>

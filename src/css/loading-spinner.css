@@ -4,6 +4,7 @@ div.loading-wrapper {
     width: var(--loading-size);
     height: var(--loading-size);
     position: relative;
+    text-align: initial;
 }
 
 div.loading-wrapper>span:nth-child(1) {

@@ -10,7 +10,10 @@ export default class User {
     videos;
     playlists;
 
-    constructor(data = {}) {
+    constructor(data) {
+        if (!data) {
+            data = {};
+        }
         if (typeof (data) === 'string') {
             data = JSON.parse(data);
         }
@@ -24,6 +27,25 @@ export default class User {
         this.theme = data.theme ?? 'dark';
         this.videos = data.videos ?? 0;
         this.playlists = data.playlists ?? 0;
+    }
+
+    /**
+     * Fill this entity from other entity
+     * @param {User} user 
+     */
+    fillFrom(user) {
+        if (user instanceof User) {
+            this.id = user.id;
+            this.roleId = user.roleId;
+            this.role = user.role;
+            this.login = user.login;
+            this.name = user.name;
+            this.info = user.info;
+            this.locale = user.locale;
+            this.theme = user.theme;
+            this.videos = user.videos;
+            this.playlists = user.playlists;
+        }
     }
     //#region Getters
     /**

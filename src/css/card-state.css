@@ -17,7 +17,8 @@ div.card-wrapper div.card.success div.card-header {
 }
 
 div.card-wrapper div.card.success div.card-contents,
-div.card-wrapper div.card.error div.card-contents {
+div.card-wrapper div.card.error div.card-contents,
+div.card-wrapper div.card div.card-contents {
     padding: 8px;
     text-align: center;
 }

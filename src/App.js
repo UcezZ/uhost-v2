@@ -11,28 +11,33 @@ import RegisterPage from './components/pages/RegisterPage';
 import VideoPage from './components/pages/VideoPage';
 import Header from './components/items/Header';
 import ProfilePage from './components/pages/ProfilePage';
-import Cookies from 'universal-cookie';
 import ApiService from './services/ApiService';
 import ThemeService from './services/ThemeService';
 import User from './entities/User';
 import Common from './Common';
 import PlaylistPage from './components/pages/PlaylistPage';
+import Redirect from './components/Redirect';
 
 export default function App() {
-    const cookies = new Cookies();
-    const [token, setToken] = useState(cookies.get(Common.getTokenCookieKey()));
+    const [token, setToken] = useState(localStorage.getItem(Common.getTokenKey()));
     const [user, setUser] = useState();
     const [locale, setLocale] = useState(new LocaleService(user));
     const [theme, setTheme] = useState(new ThemeService(user));
+    const [appLoaded, setAppLoaded] = useState(false);
 
     function onAuthSuccess(e) {
         setUser(new User(e));
-        cookies.set(Common.getTokenCookieKey(), token);
+        localStorage.setItem(Common.getTokenKey(), token);
+        console.log(`valid token ${token}`);
+        setAppLoaded(true);
     }
 
     function onAuthFail(e) {
-        cookies.remove(Common.getTokenCookieKey());
+        //cookies.remove(Common.getTokenKey());
+        localStorage.removeItem(Common.getTokenKey());
         setUser();
+        console.log(`invalid token ${token}`);
+        setAppLoaded(true);
     }
 
     let userLoaded = false;
@@ -57,24 +62,37 @@ export default function App() {
         setTheme(new ThemeService(user));
     }, [user]);
 
-    if (locale && theme) {
+    if (appLoaded) {
         return (
             <StateContext.Provider value={{
                 token: token, setToken: setToken,
                 user: user, setUser: setUser,
                 locale: locale, setLocale: setLocale,
-                theme: theme, setTheme: setTheme
+                theme: theme, setTheme: setTheme,
+                appLoaded: appLoaded, setAppLoaded: setAppLoaded
             }}>
                 <BrowserRouter>
                     <Header />
-                    <Routes>
-                        <Route path='' element={<MainPage />} />
-                        <Route path='login' element={<LoginPage />} />
-                        <Route path='register' element={<RegisterPage />} />
-                        <Route path='video' element={<VideoPage />} />
-                        <Route path='profile' element={<ProfilePage />} />
-                        <Route path='playlist' element={<PlaylistPage />} />
-                    </Routes>
+                    {
+                        user ?
+                            (
+                                <Routes>
+                                    <Route path='' element={<MainPage />} />
+                                    <Route path='video' element={<VideoPage />} />
+                                    <Route path='profile' element={<ProfilePage />} />
+                                    <Route path='playlist' element={<PlaylistPage />} />
+                                    <Route path='*' element={<Redirect />} />
+                                </Routes>
+                            ) : (
+                                <Routes>
+                                    <Route path='' element={<MainPage />} />
+                                    <Route path='login' element={<LoginPage />} />
+                                    <Route path='register' element={<RegisterPage />} />
+                                    <Route path='video' element={<VideoPage />} />
+                                    <Route path='*' element={<Redirect />} />
+                                </Routes>
+                            )
+                    }
                 </BrowserRouter>
             </StateContext.Provider>
         );

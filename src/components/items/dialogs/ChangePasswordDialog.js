@@ -49,22 +49,24 @@ export default function ChangePasswordDialog({ entity }) {
                     </div>
                     <form onSubmit={changePassword}>
                         <table className="card-contents">
-                            <tr>
-                                <td>{locale.getValue('auth.login')}</td>
-                                <td>{entity.getLogin()}</td>
-                            </tr>
-                            <tr>
-                                <td>{locale.getValue('auth.oldpassword')}</td>
-                                <td><input type="password" name="oldpassword" required /></td>
-                            </tr>
-                            <tr>
-                                <td>{locale.getValue('auth.newpassword')}</td>
-                                <td><input type="password" name="password" required /></td>
-                            </tr>
-                            <tr>
-                                <td>{locale.getValue('auth.confirmnewpassword')}</td>
-                                <td><input type="password" name="passwordConfirm" required /></td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <td>{locale.getValue('auth.login')}</td>
+                                    <td>{entity.getLogin()}</td>
+                                </tr>
+                                <tr>
+                                    <td>{locale.getValue('auth.oldpassword')}</td>
+                                    <td><input type="password" name="oldpassword" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>{locale.getValue('auth.newpassword')}</td>
+                                    <td><input type="password" name="password" required /></td>
+                                </tr>
+                                <tr>
+                                    <td>{locale.getValue('auth.confirmnewpassword')}</td>
+                                    <td><input type="password" name="passwordConfirm" required /></td>
+                                </tr>
+                            </tbody>
                         </table>
                         <div className="submit-wrapper">
                             <button type="submit">{locale.getValue('user.changepassword')}</button>

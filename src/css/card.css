@@ -62,6 +62,10 @@ div.card-wrapper div.card .card-contents {
     color: var(--body-forecolor);
 }
 
+div.card-wrapper div.card table.card-contents {
+    width: 100%;
+}
+
 div.card-wrapper div.card table.card-contents tr td {
     padding: 8px;
 }

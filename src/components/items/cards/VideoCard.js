@@ -21,7 +21,7 @@ export default function VideoCard({ video, playlistId }) {
                         <div className="name">{video.getName()}</div>
                     </div>
                 </div>
-            </div >
+            </div>
         );
     }
 }

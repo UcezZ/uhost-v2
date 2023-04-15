@@ -1,15 +1,19 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Common from '../../Common';
 import StateContext from '../../context/StateContext';
-import User from '../../entities/User';
 import ApiService from '../../services/ApiService';
+import Enumerable from 'linq';
 
 export default function Header() {
     const { locale, token, user, setToken } = useContext(StateContext);
     const location = useLocation();
+    const burger = useRef();
 
     useEffect(() => { }, [user, location]);
+
+    function closeMenu(e) {
+        burger.current.checked = false;
+    }
 
     function logout(e) {
         ApiService.logout(token);
@@ -76,7 +80,7 @@ export default function Header() {
 
     return (
         <div className="header">
-            {user ? <input id="burger-toggle" type="checkbox" /> : null}
+            {user ? <input id="burger-toggle" type="checkbox" ref={burger} /> : null}
             {user ?
                 <label htmlFor="burger-toggle" className="burger-toggle">
                     <span></span>
@@ -92,11 +96,28 @@ export default function Header() {
             {user ?
                 <div className="menu-wrapper">
                     <div className="menu">
-                        <Link to='/' className={headerNavSelected('/')}>{locale.getValue('page.main')} </Link>
+                        {
+                            Enumerable
+                                .from(
+                                    [
+                                        { link: '/', caption: 'page.main' },
+                                        { link: '/profile', caption: 'page.profile' },
+                                        { link: '/video', caption: 'page.video' },
+                                        { link: '/playlist', caption: 'page.playlists' },
+                                        user && user.isAdmin() ? { link: '/admin', caption: 'page.admin' } : null
+                                    ]
+                                )
+                                .where(e => e)
+                                .select(
+                                    e => <Link onMouseUp={closeMenu} onTouchEnd={closeMenu} to={e.link} className={headerNavSelected(e.link)}>{locale.getValue(e.caption)}</Link>
+                                )
+                        }
+
+                        {/* <Link to='/' className={headerNavSelected('/')}>{locale.getValue('page.main')} </Link>
                         <Link to='/profile' className={headerNavSelected('profile')}> {locale.getValue('page.profile')}</Link>
                         <Link to='/video' className={headerNavSelected('video')} >{locale.getValue('page.video')}</Link>
                         <Link to='/playlist' className={headerNavSelected('playlist')} >{locale.getValue('page.playlists')}</Link>
-                        {user && user.isAdmin() ? <Link to='/admin' className={headerNavSelected('admin')} >{locale.getValue('page.admin')}</Link> : null}
+                        {user && user.isAdmin() ? <Link to='/admin' className={headerNavSelected('admin')} >{locale.getValue('page.admin')}</Link> : null} */}
                     </div>
                 </div>
                 : null}

@@ -1,3 +1,10 @@
+import './../../css/bigredbutton.css';
+
+/**
+ * Big red button
+ * @param {{string, string, function(*)}} param0 
+ * @returns 
+ */
 export default function BigRedButt({ caption, subStyle, onClick }) {
     if (!caption) {
         caption = '';

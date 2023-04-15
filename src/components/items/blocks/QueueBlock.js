@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import StateContext from '../../../context/StateContext';
 import ApiService from '../../../services/ApiService';
@@ -7,25 +7,20 @@ import Video from '../../../entities/Video';
 import Enumerable from 'linq';
 import VideoCard from '../cards/VideoCard';
 
-export default function QueueBlock() {
-    const { token, user, locale } = useContext(StateContext);
+export default function QueueBlock({ video }) {
+    const { token, locale } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
     const [needsRender, setNeedsRender] = useState(false);
     const [search, setSearch] = useSearchParams();
     const location = useLocation();
 
-    useState(() => { setNeedsRender(true) }, [location, user]);
+    useEffect(() => setNeedsRender(true), [location]);
 
-    /**
-     * 
-     * @param {Number} playlist 
-     * @param {Video[]} queue 
-     */
     function showQueue(playlist, queue) {
         setView(
             Enumerable
                 .from(queue)
-                .select(e => <VideoCard video={e} playlistId={playlist} />)
+                .select(e => <VideoCard key={e.getAlias()} video={e} playlistId={playlist} />)
         );
     }
 
@@ -34,7 +29,7 @@ export default function QueueBlock() {
     }
 
     let playlist = search.has('p') && Number(search.get('p')) ? Number(search.get('p')) : 0;
-    let alias = search.has('v') ? search.get('v') : null;
+    let alias = video?.getAlias();
 
     if (needsRender && alias) {
         setNeedsRender(false);

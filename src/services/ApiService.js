@@ -4,6 +4,7 @@ import Common from "../Common";
 import User from "../entities/User";
 import Video from "../entities/Video";
 import Comment from "../entities/Comment";
+import Playlist from "../entities/Playlist";
 import { AxiosProgressEvent } from "axios";
 
 const ApiPrefix = 'http://ucezz.sytes.net/Projects/mirea/uhost/api/v1/';
@@ -345,6 +346,212 @@ export default class ApiService {
                 },
                 error,
                 onProgress
+            );
+        }
+    }
+
+    /**
+     * Post a comment
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static postComment(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'comment/index',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Remove a comment
+     * @param {string} token Authentication token
+     * @param {Number} id Comment ID
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static removeComment(token, id, callback, error) {
+        if (token && id) {
+            commonPost(
+                'comment/remove',
+                Common.convertArrayToFormData({ id: id }),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+
+    /**
+     * Get playlists
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(Playlist[])} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getPlaylists(token, userId, callback, error) {
+        if (token) {
+            commonGet(
+                'playlist/index',
+                { Authorization: `UcezZ ${token}` },
+                userId ? { u: userId } : {},
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(
+                            Enumerable
+                                .from(e.result)
+                                .select(p => new Playlist(p))
+                        );
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Edit video
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static editVideo(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'video/edit',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(new Video(e.result));
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Delete video
+     * @param {string} token Authentication token
+     * @param {string} alias Video ID
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static deleteVideo(token, alias, callback, error) {
+        if (token && alias && alias.length) {
+            commonPost(
+                'video/remove',
+                Common.convertArrayToFormData({ v: alias }),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Add playlist
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static addPlaylist(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'playlist/index',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Add video to playlist
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Form element
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static addVideoToPlaylist(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'playlist/add-video',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
+     * Remove video from playlist
+     * @param {string} token Authentication token
+     * @param {Number} playlistId Playlist ID
+     * @param {Number} videoId Video ID
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static removeVideoFromPlaylist(token, playlistId, videoId, callback, error) {
+        if (token && playlistId && videoId) {
+            commonPost(
+                'playlist/remove-video',
+                Common.convertArrayToFormData({ p: playlistId, v: videoId }),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
             );
         }
     }

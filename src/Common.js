@@ -69,7 +69,7 @@ export default class Common {
 
     static getModalInlineStyles() { return modalInlineStyles; }
 
-    static getTokenCookieKey() { return tokenCookieKey; }
+    static getTokenKey() { return tokenCookieKey; }
 
     static getTokenLifetime() { return tokenLifetime; }
 

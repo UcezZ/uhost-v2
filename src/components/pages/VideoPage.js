@@ -1,7 +1,6 @@
 import './../../css/card.css'
 import './../../css/form.css'
 import './../../css/card-state.css'
-import './../../css/bigredbutton.css'
 import './../../css/toggle.css'
 import './../../css/form-editor.css'
 import './../../css/item-comment.css'
@@ -16,11 +15,14 @@ import VideoCardContainer from "../items/containers/VideoCardContainer";
 import Video from "../../entities/Video";
 import BigRedButt from '../items/BigRedButt';
 import { useSearchParams, useLocation } from 'react-router-dom';
-import VideoBlock from '../items/blocks/VideoBlock';
 import ErrorCard from '../items/cards/ErrorCard';
 import VideoUploadCard from '../items/cards/VideoUploadCard';
 import ReactModal from 'react-modal';
 import Common from '../../Common';
+import VideoBlock from '../items/blocks/VideoBlock';
+import QueueBlock from '../items/blocks/QueueBlock';
+import CommentsBlock from '../items/blocks/CommentsBlock';
+import Redirect from '../Redirect'
 
 export default function VideoPage() {
     const { token, user, locale } = useContext(StateContext);
@@ -30,7 +32,7 @@ export default function VideoPage() {
     const [uploadVisible, setUploadVisible] = useState(false);
     const location = useLocation();
 
-    useEffect(() => { setNeedsRender(true) }, [location, user, locale, uploadVisible]);
+    useEffect(() => setNeedsRender(true), [location, uploadVisible]);
 
     let alias = search.has('v') && search.get('v').length > 0 && search.get('v').length < 9 ? search.get('v') : null;
 
@@ -39,7 +41,13 @@ export default function VideoPage() {
         ApiService.getVideoByAlias(
             token,
             alias,
-            e => setView(<VideoBlock video={e} />),
+            e => setView(
+                <div className="page-video-wrapper card-wrapper">
+                    <VideoBlock video={e} />
+                    <QueueBlock video={e} />
+                    <CommentsBlock video={e} />
+                </div>
+            ),
             e => setView(<div className="card-wrapper"><ErrorCard error={e} /></div>)
         );
     }
@@ -66,6 +74,8 @@ export default function VideoPage() {
             setNeedsRender(false);
             ApiService.getUserVideos(token, userId, 1, renderVideos);
         }
+    } else if (!user && !alias) {
+        return <Redirect />;
     }
 
     return <div className="main">{view}</div>;
