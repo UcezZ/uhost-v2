@@ -8,6 +8,7 @@ div.card-wrapper.flex-wrap {
 }
 
 div.card-wrapper div.card {
+    background-color: var(--card-background);
     border-radius: 8px;
     box-shadow: 1px 1px 4px 2px var(--shadow-color);
     border-color: var(--accent-background);
@@ -19,8 +20,23 @@ div.card-wrapper div.card {
     position: relative;
 }
 
+div.card-wrapper div.card.hscroll div.card-header,
+div.card-wrapper div.card.hscroll div.card-footer,
+div.card-wrapper div.card.hscroll>div:nth-child(3) {
+    position: sticky;
+    left: 0;
+}
+
+div.card-wrapper div.card.hscroll {
+    overflow-x: auto;
+}
+
 div.card-wrapper div.card.profile {
     min-width: 320px;
+}
+
+div.card-wrapper div.card.profile .card-body a {
+    text-decoration: underline;
 }
 
 div.card-wrapper div.card.video {
@@ -28,7 +44,7 @@ div.card-wrapper div.card.video {
     width: 100%;
 }
 
-div.card-wrapper div.card.video .card-contents {
+div.card-wrapper div.card.video .card-body {
     padding: 8px;
 }
 
@@ -55,30 +71,31 @@ div.card-wrapper div.card.video div.card-header {
     padding: 8px;
 }
 
-div.card-wrapper div.card .card-contents {
+div.card-wrapper div.card .card-body {
     border-collapse: collapse;
     font-family: var(--default-font);
     cursor: default;
     color: var(--body-forecolor);
 }
 
-div.card-wrapper div.card table.card-contents {
+div.card-wrapper div.card table.card-body {
     width: 100%;
 }
 
-div.card-wrapper div.card table.card-contents tr td {
+div.card-wrapper div.card table.card-body thead td,
+div.card-wrapper div.card table.card-body tr td {
     padding: 8px;
 }
 
-div.card-wrapper div.card table.card-contents tr td a {
+div.card-wrapper div.card table.card-body tr td a {
     color: inherit;
 }
 
-div.card-wrapper div.card table.card-contents tr td a:hover {
+div.card-wrapper div.card table.card-body tr td a:hover {
     color: var(--card-param-hover-link);
 }
 
-div.card-wrapper div.card table.card-contents tr td:first-child {
+div.card-wrapper div.card table.card-body tr td:first-child {
     text-align: right;
     border-right-color: var(--card-border-color);
     border-right-width: 1px;
@@ -89,7 +106,7 @@ div.card-wrapper div.card table.card-contents tr td:first-child {
     user-select: none;
 }
 
-div.card-wrapper div.card table.card-contents tr td:nth-child(2) {
+div.card-wrapper div.card table.card-body tr td:nth-child(2) {
     text-align: left;
     word-break: break-word;
 }
@@ -166,12 +183,12 @@ div.card-wrapper div.card img.video-preview {
     object-fit: cover;
 }
 
-div.card-wrapper div.card div.card-contents div.video-summary {
+div.card-wrapper div.card div.card-body div.video-summary {
     text-align: left;
     width: inherit;
 }
 
-div.card-wrapper div.card div.card-contents div.video-summary div {
+div.card-wrapper div.card div.card-body div.video-summary div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -179,7 +196,7 @@ div.card-wrapper div.card div.card-contents div.video-summary div {
     width: inherit;
 }
 
-div.card-wrapper div.card div.card-contents div.video-summary div.user {
+div.card-wrapper div.card div.card-body div.video-summary div.user {
     font-weight: 700;
     font-size: 14pt;
 }
@@ -211,6 +228,57 @@ div.card-wrapper div.card .card-footer input[type="button"] {
     box-shadow: 1px 1px 2px 0 var(--shadow-color);
 }
 
+div.card.big,
+div.card.wide {
+    max-width: initial !important;
+}
+
+div.card.big {
+    flex: 1;
+}
+
+div.card.big>div.card-header {
+    border-bottom-style: solid !important;
+    border-bottom-width: 1.5px;
+    text-align: left !important;
+    padding-left: 16px !important;
+}
+
+div.card.big>div.card-body {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+div.card-wrapper div.card.table table.card-body thead td {
+    border-bottom-color: var(--card-border-color);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+div.card-wrapper div.card.table table.card-body thead td {
+    font-weight: bold;
+    color: var(--card-param-color);
+}
+
+div.card-wrapper div.card.table table.card-body thead td,
+div.card-wrapper div.card.table table.card-body tbody tr td {
+    border-right-color: var(--card-border-color);
+    border-right-width: 1px;
+    border-right-style: solid;
+    white-space: nowrap;
+    user-select: none;
+}
+
+div.card-wrapper div.card.table table.card-body thead td:last-child,
+div.card-wrapper div.card.table table.card-body tbody tr td:last-child {
+    border-right: none;
+}
+
+div.card-wrapper div.card.table.session table.card-body tbody tr td:nth-child(2) {
+    font-family: Consolas, Consola, 'Courier New', Courier, monospace;
+}
+
 @media (max-width: 768px) {
     div.card-wrapper div.card.video {
         max-width: fit-content;
@@ -224,7 +292,7 @@ div.card-wrapper div.card .card-footer input[type="button"] {
 }
 
 @media (max-width: 480px) {
-    div.card-wrapper div.card table.card-contents tr td:first-child {
+    div.card-wrapper div.card table.card-body tr td:first-child {
         white-space: normal;
     }
 }

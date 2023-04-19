@@ -11,28 +11,53 @@ import VideoCardContainer from '../items/containers/VideoCardContainer';
 import Enumerable from 'linq';
 import Video from '../../entities/Video';
 import StateContext from '../../context/StateContext';
+import ErrorCard from '../items/cards/ErrorCard';
+import PagedResultNavigator from '../items/PagedResultNavigator';
 
 export default function MainPage() {
-    const [videoContainer, setVideoContainer] = useState(<LoadingContainer />);
+    const [view, setView] = useState(<LoadingContainer />);
     const { token } = useContext(StateContext);
+    const [query, setQuery] = useState();
+    const [navi, setNavi] = useState();
+    const [page, setPage] = useState(1);
 
     function renderVideos(res) {
-        setVideoContainer(<VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />);
+        setNavi(pagedNavigator(res));
+        setView(
+            <VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />
+        );
+    }
+
+    function renderError(e) {
+        setNavi();
+        setView(
+            <div className="card-wrapper">
+                <ErrorCard error={e} />
+            </div>
+        );
+    }
+
+    function pagedNavigator(e) {
+        if (e.totalpages > 1) {
+            return <PagedResultNavigator page={page} setPage={setPage} total={e.totalpages} />
+        }
     }
 
     useEffect(() => {
-        ApiService.getRandomVideos(token, renderVideos);
-    }, [token]);
-
-    if (videoContainer.type.name === 'LoadingContainer') {
-        ApiService.getRandomVideos(token, renderVideos);
-    }
+        if (query) {
+            ApiService.searchVideos(token, query, page, renderVideos, renderError);
+        } else {
+            ApiService.getRandomVideos(token, renderVideos, renderError);
+        }
+    }, [token, query, page]);
 
     return (
         <div>
-            <SearchBlock />
+            <SearchBlock query={query} setQuery={setQuery} />
             <div className="main">
-                {videoContainer}
+                {navi}
+                {view}
+                {navi}
             </div>
         </div>
     );

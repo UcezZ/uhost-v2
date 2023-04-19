@@ -5,7 +5,6 @@ import User from "../entities/User";
 import Video from "../entities/Video";
 import Comment from "../entities/Comment";
 import Playlist from "../entities/Playlist";
-import { AxiosProgressEvent } from "axios";
 
 const ApiPrefix = 'http://ucezz.sytes.net/Projects/mirea/uhost/api/v1/';
 const ApiSuffix = '.php';
@@ -23,6 +22,7 @@ function commonGet(apiMethod, headers, params, callback, error) {
     } else if (navigator.language) {
         headers['Accept-Language'] = navigator.language;
     }
+
     axios
         .get(ApiPrefix + apiMethod + ApiSuffix, { headers: headers, params: params })
         .then(res => {
@@ -50,7 +50,7 @@ function commonGet(apiMethod, headers, params, callback, error) {
  * @param {Array} headers Request headers
  * @param {function(*)} callback Callback function on success
  * @param {function(*)} error Callback function on error
- * @param {function(AxiosProgressEvent)} onProgress Progress change event
+ * @param {function(*)} onProgress Progress change event
  */
 function commonPost(apiMethod, body, headers, callback, error, onProgress) {
     if (navigator.languages) {
@@ -58,6 +58,7 @@ function commonPost(apiMethod, body, headers, callback, error, onProgress) {
     } else if (navigator.language) {
         headers['Accept-Language'] = navigator.language;
     }
+
     axios
         .post(ApiPrefix + apiMethod + ApiSuffix, body,
             {
@@ -214,6 +215,30 @@ export default class ApiService {
         commonGet('video/index',
             token ? { Authorization: `UcezZ ${token}` } : {},
             {},
+            e => {
+                if (e.success && e.success === true) {
+                    callback(e.result);
+                } else {
+                    error(e);
+                }
+            },
+            error
+        );
+    }
+
+    /**
+     * Search videos
+     * @param {string} token Authentication token
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static searchVideos(token, query, page, callback, error) {
+        commonGet('video/index',
+            token ? { Authorization: `UcezZ ${token}` } : {},
+            {
+                q: query,
+                page: page
+            },
             e => {
                 if (e.success && e.success === true) {
                     callback(e.result);
@@ -553,6 +578,58 @@ export default class ApiService {
                 },
                 error
             );
+        }
+    }
+
+    /**
+     * Admin common data
+     * @param {string} token Authentication token
+     * @param {string} query Which data should be queried
+     * @param {Number} page Page
+     * @param {Number} perpage Per page count
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static getAdminData(token, query, page, perpage, callback, error) {
+        if (token && query) {
+            commonGet(
+                'admin/index',
+                { Authorization: `UcezZ ${token}` },
+                { q: query, page: page, perpage: perpage },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            )
+        }
+    }
+
+    /**
+     * Terminate session
+     * @param {string} token Authentication token
+     * @param {Number} id Target token id
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static terminateSession(token, id, callback, error) {
+        if (token) {
+            commonPost(
+                'admin/terminate-session',
+                Common.convertArrayToFormData({ id: id }),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            )
         }
     }
 }

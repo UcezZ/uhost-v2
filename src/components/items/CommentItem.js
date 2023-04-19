@@ -26,7 +26,7 @@ export default function CommentItem({ comment }) {
     }
 
     const [view, setView] = useState(
-        <div className="item-comment-wrapper">
+        <div className="item-comment-wrapper" id={`comment_${comment.getId()}`}>
             <div className="comment-header-wrapper">
                 <div className="username-wrapper">
                     <Link className="username" to={`/profile?id=${comment.getUser().getId()}`}>{comment.getUser().getName()}</Link>

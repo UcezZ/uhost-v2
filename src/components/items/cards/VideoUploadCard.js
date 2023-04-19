@@ -18,7 +18,7 @@ export default function VideoUploadCard({ onClose }) {
             </div>
             <form onSubmit={onSubmit} encType="multipart/form-data">
                 <input type="hidden" name="max_file_size" value="2147483647" />
-                <table className="card-contents">
+                <table className="card-body">
                     <tr>
                         <td>{locale.getValue('common.file')}</td>
                         <td><input name="file" type="file" accept="video/mp4" defaultValue="" required onChange={setFileName} /></td>

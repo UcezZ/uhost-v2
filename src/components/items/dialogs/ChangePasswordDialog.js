@@ -48,7 +48,7 @@ export default function ChangePasswordDialog({ entity }) {
                         </button>
                     </div>
                     <form onSubmit={changePassword}>
-                        <table className="card-contents">
+                        <table className="card-body">
                             <tbody>
                                 <tr>
                                     <td>{locale.getValue('auth.login')}</td>

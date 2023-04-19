@@ -44,7 +44,7 @@ export default function ErrorCard({ error, message, caption, onSubmit, submitCap
     return (
         <div className="card error">
             <div className="card-header">{caption}</div>
-            <div className="card-contents">{message}</div>
+            <div className="card-body">{message}</div>
             {
                 onSubmit && submitCaption &&
                 (

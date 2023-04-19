@@ -25,15 +25,7 @@ div.search-wrapper form.search div.search-main {
     display: flex;
 }
 
-div.search-wrapper div.navi-wrapper,
-div.search-wrapper div.navi-wrapper div.navi-back,
-div.search-wrapper div.navi-wrapper div.navi-forward {
-    flex: 1;
-    display: flex;
-}
-
-div.search-wrapper form.search,
-div.search-wrapper div.navi-wrapper {
+div.search-wrapper form.search {
     max-width: 1024px;
 }
 
@@ -43,18 +35,10 @@ div.search-wrapper form.search input[type="text"] {
     flex: 1;
 }
 
-div.search-wrapper form.search input[type="submit"],
-div.search-wrapper div.navi-wrapper a {
+div.search-wrapper form.search input[type="button"],
+div.search-wrapper form.search input[type="submit"] {
     flex: initial;
     font-size: 14pt;
-}
-
-div.search-wrapper div.navi-wrapper div.navi-back {
-    justify-content: start;
-}
-
-div.search-wrapper div.navi-wrapper div.navi-forward {
-    justify-content: end;
 }
 
 @media (max-width:768px) {

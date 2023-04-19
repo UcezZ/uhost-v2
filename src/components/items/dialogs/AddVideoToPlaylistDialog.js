@@ -62,7 +62,7 @@ export default function AddVideoToPlaylistDialog({ onClose, video }) {
                     </div>
                     <form onSubmit={submit}>
                         <input type="hidden" name="v" value={video.getAlias()} />
-                        <table className="card-contents">
+                        <table className="card-body">
                             <tbody>
                                 <tr>
                                     <td>{locale.getValue('playlist.playlist')}</td>

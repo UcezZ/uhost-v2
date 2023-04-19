@@ -17,39 +17,30 @@ import User from './entities/User';
 import Common from './Common';
 import PlaylistPage from './components/pages/PlaylistPage';
 import Redirect from './components/Redirect';
+import AdminPage from './components/pages/AdminPage';
 
 export default function App() {
     const [token, setToken] = useState(localStorage.getItem(Common.getTokenKey()));
     const [user, setUser] = useState();
-    const [locale, setLocale] = useState(new LocaleService(user));
-    const [theme, setTheme] = useState(new ThemeService(user));
+    const [locale, setLocale] = useState();
+    const [theme, setTheme] = useState();
     const [appLoaded, setAppLoaded] = useState(false);
 
     function onAuthSuccess(e) {
         setUser(new User(e));
         localStorage.setItem(Common.getTokenKey(), token);
-        console.log(`valid token ${token}`);
-        setAppLoaded(true);
     }
 
     function onAuthFail(e) {
-        //cookies.remove(Common.getTokenKey());
         localStorage.removeItem(Common.getTokenKey());
         setUser();
-        console.log(`invalid token ${token}`);
-        setAppLoaded(true);
     }
-
-    let userLoaded = false;
 
     // всё по токену
     useEffect(
         () => {
-            if (token) {
-                if (!userLoaded) {
-                    userLoaded = true;
-                    ApiService.authenticate(token, onAuthSuccess, onAuthFail);
-                }
+            if (token && !user) {
+                ApiService.authenticate(token, onAuthSuccess, onAuthFail);
             } else {
                 onAuthFail();
             }
@@ -60,6 +51,7 @@ export default function App() {
     useEffect(() => {
         setLocale(new LocaleService(user));
         setTheme(new ThemeService(user));
+        setAppLoaded(true);
     }, [user]);
 
     if (appLoaded) {
@@ -77,19 +69,18 @@ export default function App() {
                         user ?
                             (
                                 <Routes>
-                                    <Route path='' element={<MainPage />} />
+                                    <Route path='*' element={<MainPage />} />
                                     <Route path='video' element={<VideoPage />} />
                                     <Route path='profile' element={<ProfilePage />} />
                                     <Route path='playlist' element={<PlaylistPage />} />
-                                    <Route path='*' element={<Redirect />} />
+                                    <Route path='admin' element={user.isAdmin() ? <AdminPage /> : <Redirect />} />
                                 </Routes>
                             ) : (
                                 <Routes>
-                                    <Route path='' element={<MainPage />} />
+                                    <Route path='*' element={<MainPage />} />
                                     <Route path='login' element={<LoginPage />} />
                                     <Route path='register' element={<RegisterPage />} />
                                     <Route path='video' element={<VideoPage />} />
-                                    <Route path='*' element={<Redirect />} />
                                 </Routes>
                             )
                     }

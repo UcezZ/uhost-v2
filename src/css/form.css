@@ -1,14 +1,6 @@
-div.card-wrapper div.card {
-    background-color: var(--body-background);
-}
-
-div.card-wrapper div.card form table.card-contents {
+div.card-wrapper div.card form table.card-body {
     border-bottom-color: var(--card-border-color);
     border-bottom-style: double;
-}
-
-div.card-wrapper div.card form.hscroll table.card-contents {
-    overflow-x: auto;
 }
 
 div.card-wrapper div.card form {
@@ -16,14 +8,14 @@ div.card-wrapper div.card form {
     padding: 0;
 }
 
-div.card-wrapper div.card form table.card-contents td:nth-child(2) {
+div.card-wrapper div.card form table.card-body td:nth-child(2) {
     display: flex;
 }
 
 div.search-wrapper form.search input[type=text],
-div.card-wrapper div.card form .card-contents input:not([type="button"]):not([type="submit"]),
-div.card-wrapper div.card form .card-contents select,
-div.card-wrapper div.card form .card-contents textarea,
+div.card-wrapper div.card form .card-body input:not([type="button"]):not([type="submit"]),
+div.card-wrapper div.card form .card-body select,
+div.card-wrapper div.card form .card-body textarea,
 div.card-wrapper div.card form .card-footer input:not([type="button"]):not([type="submit"]),
 div.card-wrapper div.card form .card-footer select,
 div.card-wrapper div.card form .card-footer textarea {
@@ -42,27 +34,27 @@ div.card-wrapper div.card form .card-footer textarea {
 }
 
 div.search-wrapper form.search input[type=text],
-div.card-wrapper div.card form .card-contents input {
+div.card-wrapper div.card form .card-body input {
     padding: 2px 6px;
     background-color: var(--input-background-color);
     color: var(--body-forecolor);
 }
 
-div.card-wrapper div.card form .card-contents select {
+div.card-wrapper div.card form .card-body select {
     cursor: pointer;
     appearance: none;
     padding: 2px;
     width: 100%;
 }
 
-div.card-wrapper div.card form .card-contents .select-wrapper::after {
+div.card-wrapper div.card form .card-body .select-wrapper::after {
     position: absolute;
     content: 'v';
     transform: scaleX(1.1) scaleY(0.6) translateX(-16px) translateY(4px);
     color: var(--input-border-color-active);
 }
 
-div.card-wrapper div.card form .card-contents textarea {
+div.card-wrapper div.card form .card-body textarea {
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: var(--card-border-color);
@@ -72,21 +64,21 @@ div.card-wrapper div.card form .card-contents textarea {
     width: unset;
 }
 
-div.card-wrapper div.card form .card-contents textarea:focus {
+div.card-wrapper div.card form .card-body textarea:focus {
     border-bottom-width: 1.5px;
     border-bottom-color: var(--input-border-color-active);
     border-top-width: 1.5px;
     border-top-color: var(--input-border-color-active);
 }
 
-div.card-wrapper div.card form .card-contents input[type="number"] {
+div.card-wrapper div.card form .card-body input[type="number"] {
     appearance: textfield;
 }
 
 div.search-wrapper form.search input[type=text]:focus,
-div.card-wrapper div.card form .card-contents input:focus,
-div.card-wrapper div.card form .card-contents select:focus,
-div.card-wrapper div.card form .card-contents textarea:focus,
+div.card-wrapper div.card form .card-body input:focus,
+div.card-wrapper div.card form .card-body select:focus,
+div.card-wrapper div.card form .card-body textarea:focus,
 div.card-wrapper div.card form .card-footer input:focus,
 div.card-wrapper div.card form .card-footer select:focus,
 div.card-wrapper div.card form .card-footer textarea:focus {
@@ -98,18 +90,25 @@ div.card-wrapper div.card form div.submit-wrapper {
     display: flex;
 }
 
-div.card-wrapper div.card div.card-contents {
+div.card-wrapper div.card div.card-body {
     display: flex;
     flex-direction: column;
 }
 
-div.search-wrapper div.navi-wrapper a,
+div.card-wrapper div.card.table table tbody tr td button {
+    margin: 0 !important;
+    font-size: 12pt !important;
+    padding: 4px !important;
+}
+
+div.navi-wrapper button,
 div.search-wrapper form.search input[type="submit"],
+div.search-wrapper form.search input[type="button"],
 div.card-wrapper div.card .card-footer a,
 div.card-wrapper div.card .card-footer button,
 div.card-wrapper div.card .card-footer input[type="button"],
 div.card-wrapper div.card form div.submit-wrapper button,
-div.card-wrapper div.card div.card-contents a {
+div.card-wrapper div.card table tbody tr td button {
     background-color: var(--accent-background);
     color: var(--accent-forecolor);
     font-family: ProductSans;
@@ -125,29 +124,33 @@ div.card-wrapper div.card div.card-contents a {
     text-align: center;
 }
 
-div.card-wrapper div.card div.card-contents a,
-div.search-wrapper div.navi-wrapper a {
+div.card-wrapper div.card div.card-body a,
+div.navi-wrapper button {
     text-decoration: none;
 }
 
-div.search-wrapper div.navi-wrapper a:hover,
+div.navi-wrapper button:hover,
 div.search-wrapper form.search input[type="submit"]:hover,
+div.search-wrapper form.search input[type="button"]:hover,
 div.card-wrapper div.card .card-footer a:hover,
 div.card-wrapper div.card .card-footer button:hover,
 div.card-wrapper div.card .card-footer input[type="button"]:hover,
 div.card-wrapper div.card form div.submit-wrapper button:hover,
-div.card-wrapper div.card div.card-contents a:hover {
+div.card-wrapper div.card div.card-body a:hover,
+div.card-wrapper div.card table tbody tr td button:hover {
     text-shadow: 1px 1px 2px var(--shadow-color);
     color: var(--accent-forecolor-hover);
 }
 
-div.search-wrapper div.navi-wrapper a:active,
+div.navi-wrapper button:active,
 div.search-wrapper form.search input[type="submit"]:active,
+div.search-wrapper form.search input[type="button"]:active,
 div.card-wrapper div.card .card-footer a:active,
 div.card-wrapper div.card .card-footer button:active,
 div.card-wrapper div.card .card-footer input[type="button"]:active,
 div.card-wrapper div.card form div.submit-wrapper button:active,
-div.card-wrapper div.card div.card-contents a:active {
+div.card-wrapper div.card div.card-body a:active,
+div.card-wrapper div.card table tbody tr td button:active {
     transform: translateX(1px) translateY(1px);
     text-shadow: 0 0 2px 0 var(--shadow-color);
     transform: translateX(1px) translateY(1px);
@@ -156,9 +159,9 @@ div.card-wrapper div.card div.card-contents a:active {
 
 form.editor select:user-invalid,
 div.search-wrapper form.search input[type="text"]:user-invalid,
-div.card-wrapper div.card form .card-contents input:user-invalid,
-div.card-wrapper div.card form .card-contents select:user-invalid,
-div.card-wrapper div.card form .card-contents textarea:user-invalid,
+div.card-wrapper div.card form .card-body input:user-invalid,
+div.card-wrapper div.card form .card-body select:user-invalid,
+div.card-wrapper div.card form .card-body textarea:user-invalid,
 div.card-wrapper div.card form .card-footer input:user-invalid,
 div.card-wrapper div.card form .card-footer select:user-invalid,
 div.card-wrapper div.card form .card-footer textarea:user-invalid
@@ -175,7 +178,7 @@ div.card-wrapper div.card form.card-footer textarea:user-invalid*/
     animation: shake 0.33s ease-out;
 }
 
-div.card-wrapper div.card form .card-contents textarea:user-invalid {
+div.card-wrapper div.card form .card-body textarea:user-invalid {
     border-top-style: solid !important;
     border-top-width: 2px !important;
     border-top-color: var(--input-border-color-invalid) !important;
@@ -191,9 +194,9 @@ div.form-editor-wrapper form.editor table.editor tr td:first-child {
     word-break: initial;
 }
 
-div.card-wrapper div.card form table.card-contents tr td input,
-div.card-wrapper div.card form table.card-contents tr td textarea,
-div.card-wrapper div.card form table.card-contents tr td select {
+div.card-wrapper div.card form table.card-body tr td input,
+div.card-wrapper div.card form table.card-body tr td textarea,
+div.card-wrapper div.card form table.card-body tr td select {
     font-family: var(--default-font);
     padding: 2px 6px;
     background-color: var(--input-background-color);
@@ -208,12 +211,12 @@ div.card-wrapper div.card form table.card-contents tr td select {
     width: 100%;
 }
 
-div.card-wrapper div.card form table.card-contents tr td input,
-div.card-wrapper div.card form table.card-contents tr td textarea {
+div.card-wrapper div.card form table.card-body tr td input,
+div.card-wrapper div.card form table.card-body tr td textarea {
     width: calc(100% - 12px);
 }
 
-div.card-wrapper div.card form table.card-contents tr td textarea {
+div.card-wrapper div.card form table.card-body tr td textarea {
     font-size: 10pt;
     height: 112px;
     resize: none;
@@ -221,9 +224,9 @@ div.card-wrapper div.card form table.card-contents tr td textarea {
 
 @media (max-width: 480px) {
 
-    div.card-wrapper div.card form table.card-contents input,
-    div.card-wrapper div.card form table.card-contents select,
-    div.card-wrapper div.card form table.card-contents textarea {
+    div.card-wrapper div.card form table.card-body input,
+    div.card-wrapper div.card form table.card-body select,
+    div.card-wrapper div.card form table.card-body textarea {
         min-width: 144px;
     }
 }

@@ -179,29 +179,29 @@ div.queue-wrapper>.card-header {
     padding: 8px !important;
 }
 
-div.queue-wrapper>.card-contents {
+div.queue-wrapper>.card-body {
     overflow-y: auto;
     max-height: 800px;
     justify-content: unset;
     scrollbar-width: thin;
 }
 
-div.queue-wrapper>.card-contents .card {
+div.queue-wrapper>.card-body .card {
     overflow: unset;
     overflow: clip;
     scrollbar-width: 0;
 }
 
-div.queue-wrapper>.card-contents div.video-summary div {
+div.queue-wrapper>.card-body div.video-summary div {
     max-width: var(--video-preview-width);
 }
 
-div.queue-wrapper>.card-contents .card .card-header {
+div.queue-wrapper>.card-body .card .card-header {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
-div.queue-wrapper>.card-contents .card a {
+div.queue-wrapper>.card-body .card a {
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -215,6 +215,11 @@ div.queue-wrapper div.card.video img.video-preview {
     height: var(--video-preview-height);
 }
 
+div.queue-wrapper div.card-body.card-wrapper::after {
+    content: '\a0';
+    line-height: 0;
+}
+
 div.comment-wrapper {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -223,7 +228,7 @@ div.comment-wrapper {
     flex-direction: column;
 }
 
-div.comment-wrapper .card-contents {
+div.comment-wrapper .card-body {
     flex: 1;
     max-height: 400px;
     overflow: hidden;
@@ -287,13 +292,13 @@ div.comment-wrapper .card-footer button {
         grid-row: 2;
     }
 
-    div.queue-wrapper .card-contents {
+    div.queue-wrapper .card-body {
         flex-direction: row !important;
         overflow-x: scroll;
         overflow-y: initial;
     }
 
-    div.queue-wrapper .card-contents .card a img {
+    div.queue-wrapper .card-body .card a img {
         height: 150px;
         width: 240px;
     }

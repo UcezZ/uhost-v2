@@ -109,15 +109,9 @@ export default function Header() {
                                 )
                                 .where(e => e)
                                 .select(
-                                    e => <Link onMouseUp={closeMenu} onTouchEnd={closeMenu} to={e.link} className={headerNavSelected(e.link)}>{locale.getValue(e.caption)}</Link>
+                                    e => <Link key={e.link} onMouseUp={closeMenu} onTouchEnd={closeMenu} to={e.link} className={headerNavSelected(e.link)}>{locale.getValue(e.caption)}</Link>
                                 )
                         }
-
-                        {/* <Link to='/' className={headerNavSelected('/')}>{locale.getValue('page.main')} </Link>
-                        <Link to='/profile' className={headerNavSelected('profile')}> {locale.getValue('page.profile')}</Link>
-                        <Link to='/video' className={headerNavSelected('video')} >{locale.getValue('page.video')}</Link>
-                        <Link to='/playlist' className={headerNavSelected('playlist')} >{locale.getValue('page.playlists')}</Link>
-                        {user && user.isAdmin() ? <Link to='/admin' className={headerNavSelected('admin')} >{locale.getValue('page.admin')}</Link> : null} */}
                     </div>
                 </div>
                 : null}

@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import StateContext from '../../context/StateContext';
 
 export default function RegisterPage() {
-    const { locale, setLocale } = useContext(StateContext);
+    const { locale } = useContext(StateContext);
 
     return (
         <div>
@@ -13,7 +13,7 @@ export default function RegisterPage() {
                 <div className="card">
                     <div className="card-header">{locale.getValue('page.register')}</div>
                     <form className="hscroll" method="POST" enctype="utf8">
-                        <table className="card-contents">
+                        <table className="card-body">
                             <tr>
                                 <td>{locale.getValue('user.name')}</td>
                                 <td><input name="name" minLength="2" maxLength="64" defaultValue="<?= $_POST['name'] ?? ''}" required /></td>

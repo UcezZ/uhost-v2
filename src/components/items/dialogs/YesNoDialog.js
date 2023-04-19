@@ -3,7 +3,6 @@ import Common from '../../../Common';
 import { useContext, useState } from 'react';
 import './../../../css/card-state.css';
 import StateContext from '../../../context/StateContext';
-import ErrorCard from '../cards/ErrorCard';
 
 /**
  * Error dialog
@@ -46,7 +45,7 @@ export default function YesNoDialog({ caption, message, onSubmit, onReject, onCl
                         <span></span>
                     </button>
                 </div>
-                <div className="card-contents">{message}</div>
+                <div className="card-body">{message}</div>
                 <div className="card-footer">
                     <button onClick={submit}>{locale.getValue('common.yes')}</button>
                     <button onClick={reject}>{locale.getValue('common.no')}</button>

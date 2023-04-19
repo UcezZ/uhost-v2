@@ -1,3 +1,7 @@
+:root {
+    --floating-button-size: 48px;
+}
+
 div.playlist-wrapper {
     flex-direction: column;
     max-width: 1024px;
@@ -8,18 +12,23 @@ div.playlist-wrapper div.playlist-item {
     max-width: initial;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents {
+div.playlist-wrapper div.playlist-item div.card-header {
     flex-direction: row;
     gap: 8px;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.preview {
+div.playlist-wrapper div.playlist-item div.card-body {
+    flex-direction: row;
+    gap: 8px;
+}
+
+div.playlist-wrapper div.playlist-item div.card-body div.preview {
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.preview img {
+div.playlist-wrapper div.playlist-item div.card-body div.preview img {
     width: 240px;
     max-height: 300px;
     object-fit: cover;
@@ -27,26 +36,26 @@ div.playlist-wrapper div.playlist-item div.card-contents div.preview img {
     border: 4px solid var(--accent-background);
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.preview img.empty {
+div.playlist-wrapper div.playlist-item div.card-body div.preview img.empty {
     object-fit: contain;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents {
+div.playlist-wrapper div.playlist-item div.card-body div.contents {
     border-left: 1px dotted var(--card-border-color);
     flex: 1;
     text-align: left;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry {
     display: flex;
     margin: 4px;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry div {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry div {
     padding: 4px;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry div.icon img {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry div.icon img {
     width: 64px;
     height: 64px;
     object-fit: cover;
@@ -55,14 +64,14 @@ div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playli
     cursor: zoom-in;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry div.icon img:hover {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry div.icon img:hover {
     transform: scale(3);
     border-radius: 2.66px;
     border: 1px solid var(--accent-forecolor);
     box-shadow: 1px 1px 4px 2px var(--shadow-color);
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry a.name {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry a.name {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -77,15 +86,15 @@ div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playli
     font-family: inherit;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry a.name:hover {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry a.name:hover {
     opacity: 0.66;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry a.name:hover span:nth-child(2) {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry a.name:hover span:nth-child(2) {
     text-decoration: underline;
 }
 
-div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry span:first-child {
+div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry span:first-child {
     font-family: ProductSans;
     font-size: 14pt;
     font-weight: 700;
@@ -95,24 +104,89 @@ div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playli
     max-width: 100%;
 }
 
+div.playlist-wrapper div.button-wrapper {
+    position: relative;
+    gap: 8px;
+    width: var(--floating-button-size);
+}
+
+div.playlist-wrapper div.button-wrapper button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14pt;
+    font-family: ProductSans;
+    height: 100%;
+    background-color: var(--accent-background);
+    border-radius: var(--floating-button-size);
+    width: var(--floating-button-size);
+    height: var(--floating-button-size);
+    color: var(--accent-forecolor);
+    overflow: hidden;
+    transition: var(--default-transition);
+    word-break: initial;
+    border: none;
+    text-decoration: none;
+    box-shadow: 1px 1px 2px 0 var(--shadow-color);
+}
+
+div.playlist-wrapper div.button-wrapper button img {
+    margin: auto calc(var(--floating-button-size) / 8);
+    width: calc(var(--floating-button-size) - 12px);
+    height: calc(var(--floating-button-size) - 12px);
+}
+
+div.playlist-wrapper div.button-wrapper button span {
+    margin: auto;
+}
+
+div.playlist-wrapper div.button-wrapper button:hover {
+    width: 144px;
+    text-decoration: underline;
+}
+
+div.playlist-wrapper div.button-wrapper button:active {
+    transform: scale(0.95);
+}
+
+div.playlist-wrapper div.playlist-item div.card-header div.buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+}
+
+div.playlist-wrapper div.playlist-item div.card-header div.button-wrapper button {
+    box-shadow: none;
+    border: 1px solid transparent;
+}
+
+div.playlist-wrapper div.playlist-item div.card-header div.button-wrapper button:hover {
+    border: 1px solid var(--accent-forecolor);
+}
+
 @media (max-width: 600px) {
 
     div.playlist-wrapper div.playlist-item div.card-footer,
-    div.playlist-wrapper div.playlist-item div.card-contents {
+    div.playlist-wrapper div.playlist-item div.card-body {
         flex-direction: column;
     }
 
-    div.playlist-wrapper div.playlist-item div.card-contents div.preview img {
+    div.playlist-wrapper div.playlist-item div.card-body div.preview img {
         width: initial;
     }
 
-    div.playlist-wrapper div.playlist-item div.card-contents div.contents {
+    div.playlist-wrapper div.playlist-item div.card-body div.contents {
         border-left: none;
         border-top: 1px dotted var(--card-border-color);
         text-align: left;
     }
 
-    div.playlist-wrapper div.playlist-item div.card-contents div.contents div.playlist-entry div.icon img:hover {
+    div.playlist-wrapper div.playlist-item div.card-body div.contents div.playlist-entry div.icon img:hover {
         transform: scale(3) translateX(24px);
     }
 }

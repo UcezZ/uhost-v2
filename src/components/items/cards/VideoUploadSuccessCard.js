@@ -9,7 +9,7 @@ export default function VideoUploadSuccessCard({ video, onClose }) {
         <div className="card-wrapper">
             <div className="card success">
                 <div className="card-header">{locale.getValue('upload.success')}</div>
-                <div className="card-contents">
+                <div className="card-body">
                     <div className="video-preview">
                         <img className="video-preview" src={video.getThumbUrl(token)} />
                         <span>{video.getHumanDuration()}</span>

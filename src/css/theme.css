@@ -4,6 +4,7 @@
     --shadow-color: #0008;
     --accent-forecolor-hover: #FF8;
     --body-background: #444;
+    --card-background: var(--body-background);
     --body-forecolor: #EEE;
     --accent-forecolor: var(--body-forecolor);
     --accent-background-burger-even: #914d3cf0;
@@ -35,6 +36,7 @@
     --shadow-color: #0008;
     --accent-forecolor-hover: #FF8;
     --body-background: #FFF;
+    --card-background: var(--body-background);
     --body-forecolor: #000;
     --accent-forecolor: #EEE;
     --accent-background-burger-even: #914d3cf0;
@@ -56,4 +58,36 @@
     --card-border-error: #A60;
     --card-header-success: #2A0;
     --card-border-success: #070;
+}
+
+.__theme_PH {
+    --accent-background: #F90;
+    --auth-button-background-hover: #F8E8E8;
+    --shadow-color: #0008;
+    --accent-forecolor-hover: #FF8;
+    --body-background: #0E0E0E;
+    --card-background: #141414;
+    --body-forecolor: #EEE;
+    --accent-forecolor: var(--body-forecolor);
+    --accent-background-burger-even: #ddaa5ef0;
+    --accent-background-burger-noteven: #e0a957f0;
+
+    --toggle-inactive-color: #888;
+    --toggle-active-color: var(--accent-background);
+
+    --input-border-color-active: #888;
+    --input-border-color-invalid: #F22;
+    --input-border-color-valid: #4A4;
+    --input-background-color: #666;
+
+    --card-border-color: #666;
+    --card-param-color: #CCC;
+    --card-param-hover-link: var(--accent-background);
+
+    --card-header-error: #D80;
+    --card-border-error: #A60;
+    --card-header-success: #2A0;
+    --card-border-success: #070;
+
+    --search-background: #D888;
 }

@@ -21,7 +21,7 @@ export default function SuccessCard({ message, caption, onSubmit, submitCaption 
     return (
         <div className="card success">
             <div className="card-header">{caption}</div>
-            <div className="card-contents">{message}</div>
+            <div className="card-body">{message}</div>
             {
                 onSubmit && submitCaption &&
                 (

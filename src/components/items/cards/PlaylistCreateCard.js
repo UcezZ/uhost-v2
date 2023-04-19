@@ -9,15 +9,15 @@ export default function VideoCard({ onClose }) {
     }
 
     return (
-        <div class="card">
-            <div class="card-header">{locale.getValue('page.createpls')}
+        <div className="card">
+            <div className="card-header">{locale.getValue('page.createpls')}
                 <button onClick={onClose} className="floating-modal-caller close">
                     <span></span>
                     <span></span>
                 </button>
             </div>
             <form onSubmit={submit}>
-                <table class="card-contents">
+                <table className="card-body">
                     <tbody>
                         <tr>
                             <td>{locale.getValue('common.caption')}</td>
@@ -25,7 +25,7 @@ export default function VideoCard({ onClose }) {
                         </tr>
                     </tbody>
                 </table>
-                <div class="submit-wrapper">
+                <div className="submit-wrapper">
                     <button type="submit">{locale.getValue('common.create')}</button>
                 </div>
             </form>

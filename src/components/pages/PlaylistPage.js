@@ -3,22 +3,43 @@ import './../../css/card.css';
 import './../../css/form.css';
 import './../../css/card-state.css';
 import './../../css/toggle.css';
-import './../../css/form-delete.css';
 import './../../css/playlist.css';
 
 import { useContext, useState } from "react";
 import LoadingContainer from "../items/containers/LoadingContainer";
 import StateContext from '../../context/StateContext';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ApiService from '../../services/ApiService';
+import Enumerable from 'linq';
+import PlaylistCard from '../items/cards/PlaylistCard';
+import ErrorCard from '../items/cards/ErrorCard';
 
 export default function PlaylistPage() {
-    const { user, appLoaded } = useContext(StateContext);
+    const { token, user } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
+    const [ready, setReady] = useState(false);
     const navigate = useNavigate();
 
-    if (appLoaded && !user) {
-        console.log([appLoaded, user, appLoaded && !user]);
+    if (!user) {
         navigate('/');
+    }
+
+    if (!ready) {
+        setReady(true);
+        ApiService.getPlaylists(
+            token,
+            user.getId(),
+            e => setView(
+                <div className="card-wrapper playlist-wrapper">
+                    {
+                        Enumerable
+                            .from(e)
+                            .select(p => <PlaylistCard playlist={p} />)
+                    }
+                </div>
+            ),
+            e => setView(<ErrorCard error={e} />)
+        );
     }
 
     return <div className="main">{view}</div>;

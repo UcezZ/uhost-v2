@@ -72,7 +72,7 @@ export default function CommentsBlock({ video }) {
     return (
         <div className="comment-wrapper content-wrapper card">
             <div className="card-header">{locale.getValue('video.comments')}</div>
-            <div className="card-contents">{view}</div>
+            <div className="card-body">{view}</div>
             {
                 user ? (
                     <form onSubmit={postComment} className="card-footer">

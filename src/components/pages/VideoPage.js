@@ -1,10 +1,9 @@
-import './../../css/card.css'
-import './../../css/form.css'
-import './../../css/card-state.css'
-import './../../css/toggle.css'
-import './../../css/form-editor.css'
-import './../../css/item-comment.css'
-import './../../css/page-video.css'
+import './../../css/card.css';
+import './../../css/form.css';
+import './../../css/card-state.css';
+import './../../css/toggle.css';
+import './../../css/item-comment.css';
+import './../../css/page-video.css';
 
 import StateContext from "../../context/StateContext";
 import { useContext, useEffect, useState } from "react";
@@ -22,17 +21,19 @@ import Common from '../../Common';
 import VideoBlock from '../items/blocks/VideoBlock';
 import QueueBlock from '../items/blocks/QueueBlock';
 import CommentsBlock from '../items/blocks/CommentsBlock';
-import Redirect from '../Redirect'
+import Redirect from '../Redirect';
+import PagedResultNavigator from '../items/PagedResultNavigator';
 
 export default function VideoPage() {
     const { token, user, locale } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
-    const [search, setSearch] = useSearchParams();
+    const [search] = useSearchParams();
     const [needsRender, setNeedsRender] = useState(false);
     const [uploadVisible, setUploadVisible] = useState(false);
+    const [page, setPage] = useState(1);
     const location = useLocation();
 
-    useEffect(() => setNeedsRender(true), [location, uploadVisible]);
+    useEffect(() => setNeedsRender(true), [location, uploadVisible, page]);
 
     let alias = search.has('v') && search.get('v').length > 0 && search.get('v').length < 9 ? search.get('v') : null;
 
@@ -45,7 +46,7 @@ export default function VideoPage() {
                 <div className="page-video-wrapper card-wrapper">
                     <VideoBlock video={e} />
                     <QueueBlock video={e} />
-                    <CommentsBlock video={e} />
+                    <CommentsBlock key={e.getAlias()} video={e} />
                 </div>
             ),
             e => setView(<div className="card-wrapper"><ErrorCard error={e} /></div>)
@@ -58,11 +59,19 @@ export default function VideoPage() {
             setUploadVisible(false);
         }
 
+        function pagedNavigator(e) {
+            if (e.totalpages > 1) {
+                return <PagedResultNavigator page={page} setPage={setPage} total={e.totalpages} />
+            }
+        }
+
         function renderVideos(res) {
             setView(
                 <div className="main">
                     <BigRedButt caption={locale.getValue('video.add')} subStyle={'add-video-icon'} onClick={e => setUploadVisible(true)} />
+                    {pagedNavigator(res)}
                     <VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />
+                    {pagedNavigator(res)}
                     <ReactModal className="card-wrapper" isOpen={uploadVisible} style={Common.getModalInlineStyles()} ariaHideApp={false}>
                         <VideoUploadCard onClose={closeVideoUpload} />
                     </ReactModal>
@@ -72,7 +81,7 @@ export default function VideoPage() {
 
         if (needsRender) {
             setNeedsRender(false);
-            ApiService.getUserVideos(token, userId, 1, renderVideos);
+            ApiService.getUserVideos(token, userId, page, renderVideos);
         }
     } else if (!user && !alias) {
         return <Redirect />;

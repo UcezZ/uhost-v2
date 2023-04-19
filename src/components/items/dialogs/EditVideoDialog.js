@@ -31,15 +31,15 @@ export default function EditVideoDialog({ onClose, video }) {
         );
     }
 
-    function submit(e) {
-        e.preventDefault && e.preventDefault();
-
-        ApiService.editVideo(token, e.target, onClose, onError);
-    }
-
     function close(e) {
         setModalVisible(false);
         onClose && onClose();
+    }
+
+    function submit(e) {
+        e.preventDefault && e.preventDefault();
+
+        ApiService.editVideo(token, e.target, close, onError);
     }
 
     return view ?? (
@@ -54,7 +54,7 @@ export default function EditVideoDialog({ onClose, video }) {
                     </div>
                     <form onSubmit={submit}>
                         <input type="hidden" name="v" value={video.getAlias()} />
-                        <table className="card-contents">
+                        <table className="card-body">
                             <tbody>
                                 <tr>
                                     <td>{locale.getValue('common.caption')}</td>
@@ -64,7 +64,7 @@ export default function EditVideoDialog({ onClose, video }) {
                                 </tr>
                                 <tr>
                                     <td>{locale.getValue('video.ispublic')}</td>
-                                    <td class="toggle-wrapper">
+                                    <td className="toggle-wrapper">
                                         <input id="vp" name="isPublic" type="checkbox" defaultChecked={video.getIsPublic()} />
                                         <label for="vp">
                                             <span></span>

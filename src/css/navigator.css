@@ -1,0 +1,9 @@
+div.navi-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.navi-wrapper button {
+    flex: initial;
+    font-size: 14pt;
+}

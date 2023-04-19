@@ -19,7 +19,8 @@ export default class Playlist {
         this.name = data.name ?? '';
         this.videos = data.videos ? Enumerable
             .from(data.videos)
-            .select(e => new Video(e)) : [];
+            .select(e => new Video(e))
+            .toArray() : [];
     }
 
     /**
@@ -59,5 +60,11 @@ export default class Playlist {
      * @returns {Video[]}
      */
     getVideos() { return this.videos; }
+
+    /**
+     * Has any video
+     * @returns {Boolean}
+     */
+    hasVideos() { return this.videos.length > 0; }
     //#endregion
 }

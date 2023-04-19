@@ -30,7 +30,7 @@ export default function VideoBlock({ video }) {
             token,
             video.getAlias(),
             e => {
-                navigate('./');
+                navigate(-1);
             },
             e => setModal(<ErrorDialog error={e} />));
     }
@@ -71,11 +71,44 @@ export default function VideoBlock({ video }) {
             return buttons;
         }
     }
-    console.log(modal);
+
+    function saveVideoPosition(e) {
+        if (e.target.currentTime) {
+            localStorage.setItem(`video_pos_${video.getAlias()}`, Math.floor(e.target.currentTime));
+        }
+    }
+
+    function removeVideoPosition(e) {
+        localStorage.removeItem(`video_pos_${video.getAlias()}`);
+    }
+
+    function restoreVideo(e) {
+        let volume = Number(localStorage.getItem('video_vol'));
+
+        console.log(volume);
+        if (e.target && volume && volume <= 1) {
+            e.target.volume = volume;
+        }
+
+        let position = Number(localStorage.getItem(`video_pos_${video.getAlias()}`));
+
+        if (e.target && position && position < video.getDuration()) {
+            e.target.currentTime = position;
+        }
+
+        e.target.controls = true;
+    }
+
+    function saveVolume(e) {
+        if (e.target.volume) {
+            localStorage.setItem('video_vol', e.target.volume);
+        }
+    }
+
     return (
         <div key={video.getAlias()} className="player-wrapper content-wrapper">
             <div className="video-wrapper">
-                <video poster={video.getThumbUrl(token)} controls>
+                <video onLoadedData={restoreVideo} onProgress={saveVideoPosition} onPlay={saveVideoPosition} onPause={saveVideoPosition} onSeeked={saveVideoPosition} onVolumeChange={saveVolume} poster={video.getThumbUrl(token)} onEnded={removeVideoPosition} >
                     <source src={video.getVideoUrl(token)} type="video/mp4" />
                 </video>
             </div>
@@ -99,6 +132,6 @@ export default function VideoBlock({ video }) {
                 </div>
             </div>
             {modal}
-        </div>
+        </div >
     );
 }

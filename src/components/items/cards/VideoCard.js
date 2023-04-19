@@ -15,7 +15,7 @@ export default function VideoCard({ video, playlistId }) {
                         <span>{video.getHumanDuration()}</span>
                     </Link>
                 </div>
-                <div className="card-contents">
+                <div className="card-body">
                     <div className="video-summary">
                         <div className="user">{video.user.name}</div>
                         <div className="name">{video.getName()}</div>

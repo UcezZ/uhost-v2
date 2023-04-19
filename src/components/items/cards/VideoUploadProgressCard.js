@@ -9,7 +9,7 @@ export default function VideoUploadProgressCard({ progress }) {
     return (
         <div className="card">
             <div className="card-header">{locale.getValue('page.upload')}</div>
-            <div className="card-contents centerer-wrapper" style={{ minHeight: '160px' }}>
+            <div className="card-body centerer-wrapper" style={{ minHeight: '160px' }}>
                 <div className="centerer-wrapper row">
                     <div className="loading-wrapper">
                         <span></span>

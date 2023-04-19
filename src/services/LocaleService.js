@@ -12,14 +12,16 @@ export default class LocaleService {
             locale = locale.toLowerCase();
             if (data[locale]) {
                 return locale;
+            } else {
+                return 'en';
             }
         }
 
-        return this.gatherLocale(this.user ? this.user.getLocale() : LocaleService.gatherBrowserLocale());
+        return this.gatherLocale(this.user ? this.user.getLocale() : LocaleService.gatherBrowserLocale() ?? 'en');
     }
 
     static gatherBrowserLocale() {
-        return navigator.languages && navigator.languages.length ? navigator.languages[0].split('-')[0].toLowerCase() : (navigator.language.split('-')[0].toLowerCase() ?? 'en');
+        return navigator.languages && navigator.languages.length ? navigator.languages[0].split('-')[0].toLowerCase() : (navigator.language.split('-')[0].toLowerCase());
     }
 
     getValue(alias, locale = null) {

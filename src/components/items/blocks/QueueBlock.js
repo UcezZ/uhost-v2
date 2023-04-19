@@ -39,7 +39,7 @@ export default function QueueBlock({ video }) {
     return (
         <div className="queue-wrapper content-wrapper card">
             <div className="card-header">{locale.getValue('video.queue')}</div>
-            <div className="card-contents card-wrapper">{view}</div>
+            <div className="card-body card-wrapper">{view}</div>
         </div>
     );
 }

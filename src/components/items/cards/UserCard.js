@@ -5,7 +5,7 @@ import LocaleService from '../../../services/LocaleService';
 import { Link } from 'react-router-dom';
 import ChangePasswordDialog from '../dialogs/ChangePasswordDialog';
 
-export default function CardUser({ entity }) {
+export default function UserCard({ entity }) {
     const [shownUser, setShownUser] = useState(entity);
     const { locale, user } = useContext(StateContext);
 
@@ -28,7 +28,7 @@ export default function CardUser({ entity }) {
             <div className="card profile">
                 <div className="card-header">{shownUser.getName()}</div>
                 {editProfileButton()}
-                <table className="card-contents">
+                <table className="card-body">
                     <tbody>
                         <tr>
                             <td>{locale.getValue('common.id.full')}</td>

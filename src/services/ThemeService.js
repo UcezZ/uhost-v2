@@ -25,7 +25,7 @@ export default class ThemeService {
             .where(e => e.startsWith(themeToken))
             .toArray()
             .forEach(e => document.getElementsByTagName('html')[0].classList.remove(e));
-        this.theme = user && user.getTheme() && data.includes(user.getTheme()) ? user.getTheme() : data[0];
+        this.theme = user && user instanceof User && user.getTheme() && data.includes(user.getTheme()) ? user.getTheme() : data[0];
         document.getElementsByTagName('html')[0].classList.add(`${themeToken}${this.theme}`);
     }
 

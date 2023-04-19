@@ -15,7 +15,7 @@ export default function LoginPage() {
 
     function success(e) {
         setToken(e.token);
-        navigate('/');
+        navigate(-1);
     }
 
     function login(e) {
@@ -33,7 +33,7 @@ export default function LoginPage() {
                 <div className="card">
                     <div className="card-header">{locale.getValue('login.title')}</div>
                     <form className="hscroll" onSubmit={login}>
-                        <table className="card-contents">
+                        <table className="card-body">
                             <tbody>
                                 <tr>
                                     <td>{locale.getValue('auth.login')}</td>
