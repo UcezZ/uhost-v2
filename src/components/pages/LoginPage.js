@@ -5,8 +5,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StateContext from './../../context/StateContext';
 import ApiService from './../../services/ApiService';
-import Common from '../../Common';
-import ErrorDialog from '../items/dialogs/ErrorDialog';
+import ErrorDialog from '../dialogs/ErrorDialog';
 
 export default function LoginPage() {
     const { locale, setToken } = useContext(StateContext);

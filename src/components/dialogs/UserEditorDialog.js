@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react';
-import StateContext from '../../../context/StateContext';
-import editIcon from './../../../img/edit.svg';
+import StateContext from '../../context/StateContext';
+import editIcon from './../../img/edit.svg';
 import ReactModal from 'react-modal';
-import Common from '../../../Common';
-import LocaleService from '../../../services/LocaleService';
-import ThemeService from '../../../services/ThemeService';
-import ApiService from '../../../services/ApiService';
+import Common from '../../Common';
+import LocaleService from '../../services/LocaleService';
+import ThemeService from '../../services/ThemeService';
+import ApiService from '../../services/ApiService';
 import Enumerable from 'linq';
-import User from '../../../entities/User';
+import User from '../../entities/User';
 import ErrorDialog from './ErrorDialog';
 
 export default function UserEditorDialog({ entity, setEntity }) {

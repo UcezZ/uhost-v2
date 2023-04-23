@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import StateContext from "../../../context/StateContext";
+import StateContext from "../../context/StateContext";
 import ErrorCard from "./ErrorCard";
-import ApiService from "../../../services/ApiService";
+import ApiService from "../../services/ApiService";
 import LoadingContainer from "../containers/LoadingContainer";
 import Enumerable from "linq";
 import { Link } from "react-router-dom";
 import ErrorDialog from "../dialogs/ErrorDialog";
-import PagedResultNavigator from "../PagedResultNavigator";
+import PagedResultNavigator from "../items/PagedResultNavigator";
 
 export default function AdminSessionCard() {
     const { token, locale } = useContext(StateContext);
@@ -48,7 +48,7 @@ export default function AdminSessionCard() {
                                     <td>{s.ip}</td>
                                     <td><Link key={s.id} to={`/profile?u=${s.userid}`}>{s.user.login}</Link></td>
                                     <td>{s.expires}</td>
-                                    <td><button onClick={ev => terminate(s.token)}>{locale.getValue('session.terminate')}</button></td>
+                                    <td><button onClick={ev => terminate(s.id)}>{locale.getValue('session.terminate')}</button></td>
                                 </tr>
                             )
                             )

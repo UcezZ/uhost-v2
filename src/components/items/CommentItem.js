@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import StateContext from "../../context/StateContext";
-import ErrorDialog from "./dialogs/ErrorDialog";
+import ErrorDialog from "../dialogs/ErrorDialog";
 import ApiService from "../../services/ApiService";
 
 export default function CommentItem({ comment }) {
@@ -17,7 +17,7 @@ export default function CommentItem({ comment }) {
     }
 
     function removeButton() {
-        if (user && ((comment.getVideo() && comment.getVideo().getUserId() == user.getId()) || comment.getUserId() == user.getId() || user.isAdmin())) {
+        if (user && ((comment.getVideo() && comment.getVideo().getUserId() === user.getId()) || comment.getUserId() === user.getId() || user.isAdmin())) {
             return (<div onClick={remove} className="delete-wrapper">
                 <span></span>
                 <span></span>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import StateContext from "../../../context/StateContext";
+import StateContext from "../../context/StateContext";
 
 export default function VideoCard({ onClose }) {
     const { token, locale } = useContext(StateContext);

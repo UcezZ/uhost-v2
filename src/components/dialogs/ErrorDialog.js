@@ -1,8 +1,8 @@
 import ReactModal from 'react-modal';
-import Common from '../../../Common';
+import Common from '../../Common';
 import { useContext, useState } from 'react';
-import './../../../css/card-state.css';
-import StateContext from '../../../context/StateContext';
+import './../../css/card-state.css';
+import StateContext from '../../context/StateContext';
 import ErrorCard from '../cards/ErrorCard';
 
 /**

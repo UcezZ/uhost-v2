@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
-import StateContext from '../../../context/StateContext';
+import StateContext from '../../context/StateContext';
 import UserEditorDialog from './../dialogs/UserEditorDialog';
-import LocaleService from '../../../services/LocaleService';
+import LocaleService from '../../services/LocaleService';
 import { Link } from 'react-router-dom';
 import ChangePasswordDialog from '../dialogs/ChangePasswordDialog';
 

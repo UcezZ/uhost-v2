@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
-import StateContext from '../../../context/StateContext';
+import StateContext from '../../context/StateContext';
 import LoadingContainer from '../containers/LoadingContainer';
-import ApiService from '../../../services/ApiService';
+import ApiService from '../../services/ApiService';
 import ErrorCard from './ErrorCard';
-import PagedResultNavigator from '../PagedResultNavigator';
+import PagedResultNavigator from '../items/PagedResultNavigator';
 import Enumerable from 'linq';
-import User from '../../../entities/User';
+import User from '../../entities/User';
 import UserCard from './UserCard';
 
 export default function AdminUsersCard() {

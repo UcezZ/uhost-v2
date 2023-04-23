@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import StateContext from "../../context/StateContext";
 import ApiService from "../../services/ApiService";
-import ErrorDialog from "./dialogs/ErrorDialog";
-import YesNoDialog from "./dialogs/YesNoDialog";
+import ErrorDialog from "../dialogs/ErrorDialog";
+import YesNoDialog from "../dialogs/YesNoDialog";
 import DeleteIcon from "./../../img/delete.svg";
 
 export default function PlaylistEntryItem({ video, playlistId }) {
@@ -29,7 +29,7 @@ export default function PlaylistEntryItem({ video, playlistId }) {
     return (
         <div className="playlist-entry">
             <div className="icon">
-                <img src={video.getThumbUrl(token)} />
+                <img src={video.getThumbUrl(token)} alt="Thumbnail" />
             </div>
             <Link to={`/video?v=${video.getAlias()}&p=${playlistId}`} className="name">
                 <span>{video.getUser().name}</span>
@@ -38,7 +38,7 @@ export default function PlaylistEntryItem({ video, playlistId }) {
             <div className="duration">{video.getHumanDuration()}</div>
             <div className="button-wrapper">
                 <button onClick={e => setModal(<YesNoDialog caption={locale.getValue('log.event.plsentryremove')} message={locale.getValue('playlist.entry.remove.question')} onSubmit={removePlaylistEntry} onClose={e => setModal()} />)}>
-                    <img src={DeleteIcon} />
+                    <img src={DeleteIcon} alt="Delete" />
                     <span>{locale.getValue('common.delete')}</span>
                 </button>
             </div>

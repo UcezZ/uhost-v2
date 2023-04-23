@@ -4,11 +4,11 @@ import './../../css/floating-button.css';
 
 import { useContext, useEffect, useState } from 'react';
 import StateContext from './../../context/StateContext';
-import UserCard from '../items/cards/UserCard';
+import UserCard from '../cards/UserCard';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import ApiService from '../../services/ApiService';
-import LoadingContainer from '../items/containers/LoadingContainer';
-import ErrorCard from '../items/cards/ErrorCard';
+import LoadingContainer from '../containers/LoadingContainer';
+import ErrorCard from '../cards/ErrorCard';
 
 export default function ProfilePage() {
     const { token, user } = useContext(StateContext);

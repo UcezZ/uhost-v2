@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
-import StateContext from '../../../context/StateContext';
+import StateContext from '../../context/StateContext';
 import LoadingContainer from '../containers/LoadingContainer';
-import ApiService from '../../../services/ApiService';
+import ApiService from '../../services/ApiService';
 import ErrorCard from './ErrorCard';
 
 export default function AdminStatsCard() {

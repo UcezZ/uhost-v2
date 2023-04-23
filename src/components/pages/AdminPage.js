@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import StateContext from "../../context/StateContext";
-import AdminSessionCard from "../items/cards/AdminSessionCard";
-import AdminStatsCard from "../items/cards/AdminStatsCard";
-import AdminUsersCard from "../items/cards/AdminUsersCard";
-import LogCard from '../items/cards/LogCard';
+import AdminSessionCard from "../cards/AdminSessionCard";
+import AdminStatsCard from "../cards/AdminStatsCard";
+import AdminUsersCard from "../cards/AdminUsersCard";
+import LogCard from '../cards/LogCard';
 
 export default function AdminPage() {
     const { token } = useContext(StateContext);

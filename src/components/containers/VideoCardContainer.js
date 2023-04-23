@@ -1,5 +1,4 @@
 import Enumerable from "linq";
-import Video from "../../../entities/Video";
 import VideoCard from "../cards/VideoCard";
 
 export default function VideoCardContainer({ collection }) {

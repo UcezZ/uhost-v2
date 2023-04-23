@@ -5,13 +5,13 @@ import './../../css/page-video.css';
 
 import SearchBlock from '../items/SearchBlock';
 import React, { useContext, useEffect, useState } from 'react';
-import LoadingContainer from '../items/containers/LoadingContainer';
+import LoadingContainer from '../containers/LoadingContainer';
 import ApiService from '../../services/ApiService';
-import VideoCardContainer from '../items/containers/VideoCardContainer';
+import VideoCardContainer from '../containers/VideoCardContainer';
 import Enumerable from 'linq';
 import Video from '../../entities/Video';
 import StateContext from '../../context/StateContext';
-import ErrorCard from '../items/cards/ErrorCard';
+import ErrorCard from '../cards/ErrorCard';
 import PagedResultNavigator from '../items/PagedResultNavigator';
 
 export default function MainPage() {

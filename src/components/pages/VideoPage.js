@@ -7,20 +7,20 @@ import './../../css/page-video.css';
 
 import StateContext from "../../context/StateContext";
 import { useContext, useEffect, useState } from "react";
-import LoadingContainer from "../items/containers/LoadingContainer";
+import LoadingContainer from "../containers/LoadingContainer";
 import ApiService from "../../services/ApiService";
 import Enumerable from "linq";
-import VideoCardContainer from "../items/containers/VideoCardContainer";
+import VideoCardContainer from "../containers/VideoCardContainer";
 import Video from "../../entities/Video";
 import BigRedButt from '../items/BigRedButt';
 import { useSearchParams, useLocation } from 'react-router-dom';
-import ErrorCard from '../items/cards/ErrorCard';
-import VideoUploadCard from '../items/cards/VideoUploadCard';
+import ErrorCard from '../cards/ErrorCard';
+import VideoUploadCard from '../cards/VideoUploadCard';
 import ReactModal from 'react-modal';
 import Common from '../../Common';
-import VideoBlock from '../items/blocks/VideoBlock';
-import QueueBlock from '../items/blocks/QueueBlock';
-import CommentsBlock from '../items/blocks/CommentsBlock';
+import VideoBlock from '../blocks/VideoBlock';
+import QueueBlock from '../blocks/QueueBlock';
+import CommentsBlock from '../blocks/CommentsBlock';
 import Redirect from '../Redirect';
 import PagedResultNavigator from '../items/PagedResultNavigator';
 

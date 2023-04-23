@@ -1,9 +1,8 @@
 import { useContext, useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import StateContext from '../../../context/StateContext';
-import ApiService from '../../../services/ApiService';
+import StateContext from '../../context/StateContext';
+import ApiService from '../../services/ApiService';
 import LoadingContainer from '../containers/LoadingContainer';
-import Video from '../../../entities/Video';
 import Enumerable from 'linq';
 import VideoCard from '../cards/VideoCard';
 
@@ -11,7 +10,7 @@ export default function QueueBlock({ video }) {
     const { token, locale } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
     const [needsRender, setNeedsRender] = useState(false);
-    const [search, setSearch] = useSearchParams();
+    const [search] = useSearchParams();
     const location = useLocation();
 
     useEffect(() => setNeedsRender(true), [location]);

@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import StateContext from '../../../context/StateContext';
+import { useContext, useState } from 'react';
+import StateContext from '../../context/StateContext';
 import { Link, useNavigate } from 'react-router-dom';
-import DownloadIcon from './../../../img/download.svg';
-import PlaylistIcon from './../../../img/playlist.svg';
-import EditIcon from './../../../img/edit.svg';
-import DeleteIcon from './../../../img/delete.svg';
+import DownloadIcon from './../../img/download.svg';
+import PlaylistIcon from './../../img/playlist.svg';
+import EditIcon from './../../img/edit.svg';
+import DeleteIcon from './../../img/delete.svg';
 import AddVideoToPlaylistDialog from '../dialogs/AddVideoToPlaylistDialog';
 import EditVideoDialog from '../dialogs/EditVideoDialog';
-import Video from '../../../entities/Video';
+import Video from '../../entities/Video';
 import YesNoDialog from '../dialogs/YesNoDialog';
-import ApiService from '../../../services/ApiService';
+import ApiService from '../../services/ApiService';
 import ErrorDialog from '../dialogs/ErrorDialog';
 
 export default function VideoBlock({ video }) {
@@ -42,7 +42,7 @@ export default function VideoBlock({ video }) {
             buttons.push(
                 <div className="action-wrapper">
                     <button className="addtopls" onClick={e => setModal(<AddVideoToPlaylistDialog onClose={e => setModal()} video={video} />)}>
-                        <img src={PlaylistIcon} />
+                        <img src={PlaylistIcon} alt="Playlist" />
                         <span>{locale.getValue('playlist.addto')}</span>
                     </button>
                 </div >
@@ -52,7 +52,7 @@ export default function VideoBlock({ video }) {
                 buttons.push(
                     <div className="action-wrapper">
                         <button className="edit" onClick={e => setModal(<EditVideoDialog onClose={successEdit} video={video} />)}>
-                            <img src={EditIcon} />
+                            <img src={EditIcon} alt="Edit" />
                             <span>{locale.getValue('common.edit')}</span>
                         </button>
                     </div>
@@ -61,7 +61,7 @@ export default function VideoBlock({ video }) {
                 buttons.push(
                     <div className="action-wrapper">
                         <button className="delete" onClick={e => setModal(<YesNoDialog caption={locale.getValue('delete.confirm')} message={locale.getValue('video.delete.question')} onSubmit={deleteVideo} onClose={e => setModal()} />)}>
-                            <img src={DeleteIcon} />
+                            <img src={DeleteIcon} alt="Delete" />
                             <span>{locale.getValue('common.delete')}</span>
                         </button>
                     </div>
@@ -124,7 +124,7 @@ export default function VideoBlock({ video }) {
                 <div className="video-actions">
                     <div className="action-wrapper">
                         <a className="download" href={video.getDownloadUrl(token)}>
-                            <img src={DownloadIcon} />
+                            <img src={DownloadIcon} alt="Download" />
                             <span>{locale.getValue('common.download')}</span>
                         </a>
                     </div>

@@ -1,11 +1,11 @@
 import Enumerable from 'linq';
 import { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import StateContext from '../../../context/StateContext';
-import ApiService from '../../../services/ApiService';
+import StateContext from '../../context/StateContext';
+import ApiService from '../../services/ApiService';
 import LoadingContainer from '../containers/LoadingContainer';
 import ErrorDialog from '../dialogs/ErrorDialog';
-import CommentItem from '../CommentItem';
+import CommentItem from '../items/CommentItem';
 
 export default function CommentsBlock({ video }) {
     const { token, user, locale } = useContext(StateContext);
@@ -17,7 +17,7 @@ export default function CommentsBlock({ video }) {
 
     useEffect(() => {
         setNeedsRender(true);
-        //setTimeout(() => setTs(new Date().getTime()), 5000);
+        setTimeout(() => setTs(new Date().getTime()), 10000);
     }, [location, ts]);
 
     function noComments(e) {
@@ -47,7 +47,7 @@ export default function CommentsBlock({ video }) {
         Enumerable
             .from(form.elements)
             .where(e => e instanceof HTMLInputElement)
-            .where(e => e.name == 'text')
+            .where(e => e.name === 'text')
             .forEach(e => e.value = '');
     }
 

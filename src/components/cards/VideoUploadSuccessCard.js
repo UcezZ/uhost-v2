@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import StateContext from "../../../context/StateContext";
+import StateContext from "../../context/StateContext";
 
 export default function VideoUploadSuccessCard({ video, onClose }) {
     const { token, locale } = useContext(StateContext);
@@ -11,7 +11,7 @@ export default function VideoUploadSuccessCard({ video, onClose }) {
                 <div className="card-header">{locale.getValue('upload.success')}</div>
                 <div className="card-body">
                     <div className="video-preview">
-                        <img className="video-preview" src={video.getThumbUrl(token)} />
+                        <img className="video-preview" src={video.getThumbUrl(token)} alt="Thumbnail" />
                         <span>{video.getHumanDuration()}</span>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import StateContext from "../../../context/StateContext";
-import Video from "../../../entities/Video"
+import StateContext from "../../context/StateContext";
+import Video from "../../entities/Video"
 
 export default function VideoCard({ video, playlistId }) {
     const { token } = useContext(StateContext);
@@ -11,7 +11,7 @@ export default function VideoCard({ video, playlistId }) {
             <div className="card video">
                 <div className="card-header flex">
                     <Link className="video-preview" to={`/video?v=${video.getAlias() + (playlistId && playlistId > 0 ? `&p=${playlistId}` : '')}`}>
-                        <img className="video-preview" src={video.getThumbUrl(token)} />
+                        <img className="video-preview" src={video.getThumbUrl(token)} alt="Thumbnail" />
                         <span>{video.getHumanDuration()}</span>
                     </Link>
                 </div>

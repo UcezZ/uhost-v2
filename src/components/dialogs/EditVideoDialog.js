@@ -1,18 +1,16 @@
 import { useState, useContext } from 'react';
-import StateContext from '../../../context/StateContext';
+import StateContext from '../../context/StateContext';
 import ReactModal from 'react-modal';
-import Common from '../../../Common';
-import ApiService from '../../../services/ApiService';
+import Common from '../../Common';
+import ApiService from '../../services/ApiService';
 import Enumerable from 'linq';
-import SuccessDialog from './SuccessDialog';
 import ErrorDialog from './ErrorDialog';
 
-export default function AddVideoToPlaylistDialog({ onClose, video }) {
+export default function EditVideoDialog({ onClose, video }) {
     const { token, locale } = useContext(StateContext);
     const [modalVisible, setModalVisible] = useState(true);
     const [options, setOptions] = useState();
     const [overlayDialog, setOverlayDialog] = useState();
-    const [view, setView] = useState();
 
     if (!options) {
         ApiService.getPlaylists(
@@ -21,16 +19,8 @@ export default function AddVideoToPlaylistDialog({ onClose, video }) {
             e => setOptions(
                 Enumerable
                     .from(e)
-                    .select(p => <option value={p.getId()}>{p.getName()}</option>)
-            ),
-            console.log
-        );
-    }
-
-    function onSuccess(e) {
-        setView(
-            <SuccessDialog message={e.message} caption={e.caption} onSubmit={onClose} />
-        );
+                    .select(p => <option value={p.getId()}>{p.getName()}</option>)),
+            console.log);
     }
 
     function onError(e) {
@@ -39,22 +29,21 @@ export default function AddVideoToPlaylistDialog({ onClose, video }) {
         );
     }
 
-    function submit(e) {
-        e.preventDefault && e.preventDefault();
-
-        ApiService.addVideoToPlaylist(token, e.target, onSuccess, onError);
-    }
-
     function close(e) {
         setModalVisible(false);
         onClose && onClose();
     }
 
-    return view ?? (
+    function submit(e) {
+        e.preventDefault && e.preventDefault();
+        ApiService.editVideo(token, e.target, close, onError);
+    }
+
+    return (
         <div className="modal-wrapper">
             <ReactModal className="card-wrapper" isOpen={modalVisible} style={Common.getModalInlineStyles()} ariaHideApp={false}>
                 <div className="card">
-                    <div className="card-header">{locale.getValue('page.addtopls')}
+                    <div className="card-header">{locale.getValue('video.edit')}
                         <button onClick={close} className="floating-modal-caller close">
                             <span></span>
                             <span></span>
@@ -65,18 +54,24 @@ export default function AddVideoToPlaylistDialog({ onClose, video }) {
                         <table className="card-body">
                             <tbody>
                                 <tr>
-                                    <td>{locale.getValue('playlist.playlist')}</td>
+                                    <td>{locale.getValue('common.caption')}</td>
                                     <td>
-                                        <select name="p" required>
-                                            <option value="" selected><i>{locale.getValue('playlist.choose')}</i></option>
-                                            {options}
-                                        </select>
+                                        <input type="text" name="name" maxLength="255" defaultValue={video.getName()} required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{locale.getValue('video.ispublic')}</td>
+                                    <td className="toggle-wrapper">
+                                        <input id="vp" name="isPublic" type="checkbox" defaultChecked={video.getIsPublic()} />
+                                        <label for="vp">
+                                            <span></span>
+                                        </label>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div className="card-footer">
-                            <button type="submit">{locale.getValue('playlist.addto')}</button>
+                            <button type="submit">{locale.getValue('common.apply')}</button>
                         </div>
                     </form>
                     {overlayDialog}

@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
-import StateContext from '../../../context/StateContext';
+import StateContext from '../../context/StateContext';
 import ReactModal from 'react-modal';
-import Common from '../../../Common';
-import ApiService from '../../../services/ApiService';
+import Common from '../../Common';
+import ApiService from '../../services/ApiService';
 import ErrorDialog from './ErrorDialog';
 import SuccessDialog from './SuccessDialog';
 

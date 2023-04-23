@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import StateContext from '../../../context/StateContext';
-import './../../../css/loading-spinner.css';
+import StateContext from '../../context/StateContext';
+import './../../css/loading-spinner.css';
 
 export default function VideoUploadProgressCard({ progress }) {
     const { locale } = useContext(StateContext);

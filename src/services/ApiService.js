@@ -531,6 +531,31 @@ export default class ApiService {
     }
 
     /**
+     * Remove playlist
+     * @param {string} token Authentication token
+     * @param {Number} playlistId Playlist ID
+     * @param {function(*)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static removePlaylist(token, playlistId, callback, error) {
+        if (token && playlistId) {
+            commonPost(
+                'playlist/remove',
+                Common.convertArrayToFormData({ p: playlistId }),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            );
+        }
+    }
+
+    /**
      * Add video to playlist
      * @param {string} token Authentication token
      * @param {HTMLFormElement} form Form element
@@ -559,15 +584,15 @@ export default class ApiService {
      * Remove video from playlist
      * @param {string} token Authentication token
      * @param {Number} playlistId Playlist ID
-     * @param {Number} videoId Video ID
+     * @param {string} videoAlias Video alias
      * @param {function(*)} callback Callback function on success
      * @param {function(*)} error Callback function on error
      */
-    static removeVideoFromPlaylist(token, playlistId, videoId, callback, error) {
-        if (token && playlistId && videoId) {
+    static removeVideoFromPlaylist(token, playlistId, videoAlias, callback, error) {
+        if (token && playlistId && videoAlias) {
             commonPost(
-                'playlist/remove-video',
-                Common.convertArrayToFormData({ p: playlistId, v: videoId }),
+                'playlist/remove',
+                Common.convertArrayToFormData({ p: playlistId, v: videoAlias }),
                 { Authorization: `UcezZ ${token}` },
                 e => {
                     if (e.success && e.success === true) {
@@ -604,6 +629,31 @@ export default class ApiService {
                     }
                 },
                 error
+            );
+        }
+    }
+
+    /**
+     * Edit playlist
+     * @param {string} token Authentication token
+     * @param {HTMLFormElement} form Target token id
+     * @param {function(Playlist)} callback Callback function on success
+     * @param {function(*)} error Callback function on error
+     */
+    static editPlaylist(token, form, callback, error) {
+        if (token && form) {
+            commonPost(
+                'playlist/edit',
+                Common.convertHTMLFormToFormData(form),
+                { Authorization: `UcezZ ${token}` },
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(new Playlist(e.result));
+                    } else {
+                        error(e);
+                    }
+                },
+                error
             )
         }
     }
@@ -629,7 +679,7 @@ export default class ApiService {
                     }
                 },
                 error
-            )
+            );
         }
     }
 }

@@ -1,30 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import StateContext from "../../../context/StateContext";
+import StateContext from "../../context/StateContext";
 import ErrorCard from "./ErrorCard";
-import ApiService from "../../../services/ApiService";
+import ApiService from "../../services/ApiService";
 import LoadingContainer from "../containers/LoadingContainer";
 import Enumerable from "linq";
-import { Link } from "react-router-dom";
-import ErrorDialog from "../dialogs/ErrorDialog";
-import PagedResultNavigator from "../PagedResultNavigator";
-import LogItem from "../LogItem";
+import PagedResultNavigator from "../items/PagedResultNavigator";
+import LogItem from "../items/LogItem";
 
 export default function AdminSessionCard() {
     const { token, locale } = useContext(StateContext);
     const [ready, setReady] = useState(false);
     const [view, setView] = useState(<div className="card-body"><LoadingContainer /></div>);
-    const [modal, setModal] = useState();
     const [page, setPage] = useState(1);
     const [navi, setNavi] = useState();
-
-    function terminate(tk) {
-        ApiService.terminateSession(
-            token,
-            tk,
-            e => setReady(false),
-            e => setModal(<ErrorDialog error={e} onSubmit={e => setModal()} />)
-        );
-    }
 
     useEffect(() => setReady(false), [page]);
 
@@ -35,6 +23,7 @@ export default function AdminSessionCard() {
                     <td>{locale.getValue('common.id')}</td>
                     <td>{locale.getValue('admin.session.user')}</td>
                     <td>{locale.getValue('admin.session.action')}</td>
+                    <td>{locale.getValue('log.message')}</td>
                 </thead>
                 <tbody>
                     {
@@ -73,7 +62,6 @@ export default function AdminSessionCard() {
             <div className="card-header">{locale.getValue('admin.stats.logs')}</div>
             {view}
             {navi}
-            {modal}
         </div>
     );
 }

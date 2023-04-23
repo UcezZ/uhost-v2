@@ -1,13 +1,13 @@
 import Enumerable from "linq";
 import { useContext, useState } from "react";
-import StateContext from "../../../context/StateContext";
-import ApiService from "../../../services/ApiService";
+import StateContext from "../../context/StateContext";
+import ApiService from "../../services/ApiService";
 import ErrorCard from "./ErrorCard";
 import VideoUploadProgressCard from "./VideoUploadProgressCard";
 import VideoUploadSuccessCard from "./VideoUploadSuccessCard";
 
 export default function VideoUploadCard({ onClose }) {
-    const { token, user, locale } = useContext(StateContext);
+    const { token, locale } = useContext(StateContext);
     const [view, setView] = useState(
         <div className="card">
             <div className="card-header">{locale.getValue('page.upload')}
