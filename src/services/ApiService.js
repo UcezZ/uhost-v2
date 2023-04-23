@@ -109,6 +109,30 @@ export default class ApiService {
     }
 
     /**
+     * Register user
+     * @param {HTMLFormElement} form Register form
+     * @param {*} callback Callback function on success
+     * @param {*} error Callback function on error
+     */
+    static register(form, callback, error) {
+        if (form) {
+            commonPost(
+                'auth/register',
+                Common.convertHTMLFormToFormData(form),
+                {},
+                e => {
+                    if (e.success && e.success === true) {
+                        callback(e.result);
+                    } else {
+                        error(e);
+                    }
+                },
+                error
+            )
+        }
+    }
+
+    /**
      * User authorization
      * @param {HTMLFormElement} form Login form
      * @param {function(*)} callback Callback function on success
