@@ -40,7 +40,7 @@ export default function PlaylistPage() {
                     }
                 </div>
             ),
-            e => setView(<ErrorCard error={e} />)
+            e => setView(<div class="card-wrapper"><ErrorCard error={e} /></div>)
         );
     }
 

@@ -27,3 +27,4 @@ package-lock.json
 /build
 
 $bak*
+*.cmd

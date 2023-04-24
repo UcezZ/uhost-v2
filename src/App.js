@@ -42,7 +42,7 @@ export default function App() {
             if (token && !user) {
                 ApiService.authenticate(token, onAuthSuccess, onAuthFail);
             } else if (!token) {
-                onAuthFail();
+                //onAuthFail();
             }
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
