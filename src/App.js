@@ -41,10 +41,11 @@ export default function App() {
         () => {
             if (token && !user) {
                 ApiService.authenticate(token, onAuthSuccess, onAuthFail);
-            } else {
+            } else if (!token) {
                 onAuthFail();
             }
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [token]);
 
     //всё по юзеру
@@ -60,8 +61,7 @@ export default function App() {
                 token: token, setToken: setToken,
                 user: user, setUser: setUser,
                 locale: locale, setLocale: setLocale,
-                theme: theme, setTheme: setTheme,
-                appLoaded: appLoaded, setAppLoaded: setAppLoaded
+                theme: theme, setTheme: setTheme
             }}>
                 <BrowserRouter>
                     <Header />

@@ -12,7 +12,7 @@ import ErrorCard from '../cards/ErrorCard';
 
 export default function ProfilePage() {
     const { token, user } = useContext(StateContext);
-    const [search, setSearch] = useSearchParams();
+    const [search] = useSearchParams();
     const [view, setView] = useState(<LoadingContainer />);
     const [needsRender, setNeedsRender] = useState(false);
     const location = useLocation();

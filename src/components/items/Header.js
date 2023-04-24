@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import StateContext from '../../context/StateContext';
 import ApiService from '../../services/ApiService';

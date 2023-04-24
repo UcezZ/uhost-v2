@@ -12,10 +12,13 @@ import ApiService from '../../services/ApiService';
 import Enumerable from 'linq';
 import PlaylistCard from '../cards/PlaylistCard';
 import ErrorCard from '../cards/ErrorCard';
+import BigRedButt from '../items/BigRedButt';
+import PlaylistCreateDialog from '../dialogs/PlaylistCreateDialog';
 
 export default function PlaylistPage() {
-    const { token, user } = useContext(StateContext);
+    const { token, locale, user } = useContext(StateContext);
     const [view, setView] = useState(<LoadingContainer />);
+    const [modal, setModal] = useState();
     const [ready, setReady] = useState(false);
     const navigate = useNavigate();
 
@@ -41,5 +44,11 @@ export default function PlaylistPage() {
         );
     }
 
-    return <div className="main">{view}</div>;
+    return (
+        <div className="main">
+            <BigRedButt caption={locale.getValue('playlist.add')} subStyle={'add-playlist-icon'} onClick={e => setModal(<PlaylistCreateDialog onClose={ev => { setModal(); setReady(false); }} />)} />
+            {view}
+            {modal}
+        </div>
+    );
 }

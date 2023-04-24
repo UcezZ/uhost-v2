@@ -21,8 +21,17 @@ export default function MainPage() {
     const [navi, setNavi] = useState();
     const [page, setPage] = useState(1);
 
+    useEffect(() => {
+        if (query) {
+            ApiService.searchVideos(token, query, page, renderVideos, renderError);
+        } else {
+            ApiService.getRandomVideos(token, renderVideos, renderError);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, query, page]);
+
     function renderVideos(res) {
-        setNavi(pagedNavigator(res));
+        setNavi(<PagedResultNavigator page={page} setPage={setPage} total={res.totalpages} />);
         setView(
             <VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />
         );
@@ -36,21 +45,6 @@ export default function MainPage() {
             </div>
         );
     }
-
-    function pagedNavigator(e) {
-        if (e.totalpages > 1) {
-            return <PagedResultNavigator page={page} setPage={setPage} total={e.totalpages} />
-        }
-    }
-
-    useEffect(() => {
-        if (query) {
-            ApiService.searchVideos(token, query, page, renderVideos, renderError);
-        } else {
-            ApiService.getRandomVideos(token, renderVideos, renderError);
-        }
-    }, [token, query, page]);
-
     return (
         <div>
             <SearchBlock query={query} setQuery={setQuery} />
