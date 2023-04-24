@@ -63,7 +63,7 @@ export default function App() {
                 locale: locale, setLocale: setLocale,
                 theme: theme, setTheme: setTheme
             }}>
-                <BrowserRouter>
+                <BrowserRouter basename='projects/mirea/uhost/v2'>
                     <Header />
                     {
                         user ?

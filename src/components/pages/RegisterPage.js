@@ -32,11 +32,11 @@ export default function RegisterPage() {
                         <table className="card-body">
                             <tr>
                                 <td>{locale.getValue('user.name')}</td>
-                                <td><input name="name" minLength="2" maxLength="64" defaultValue="<?= $_POST['name'] ?? ''}" required /></td>
+                                <td><input name="name" minLength="2" maxLength="64" required /></td>
                             </tr>
                             <tr>
                                 <td>{locale.getValue('auth.login')}</td>
-                                <td><input name="login" minLength="5" maxLength="64" defaultValue="<?= $_POST['login'] ?? ''}" required /></td>
+                                <td><input name="login" minLength="5" maxLength="64" required /></td>
                             </tr>
                             <tr>
                                 <td>{locale.getValue('auth.password')}</td>

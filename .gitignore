@@ -24,4 +24,6 @@ yarn-error.log*
 src.7z
 package-lock.json
 
+/build
+
 $bak*
