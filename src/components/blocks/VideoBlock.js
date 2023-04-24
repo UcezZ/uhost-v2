@@ -108,7 +108,7 @@ export default function VideoBlock({ video }) {
     return (
         <div key={video.getAlias()} className="player-wrapper content-wrapper">
             <div className="video-wrapper">
-                <video onLoadedData={restoreVideo} onProgress={saveVideoPosition} onPlay={saveVideoPosition} onPause={saveVideoPosition} onSeeked={saveVideoPosition} onVolumeChange={saveVolume} poster={video.getThumbUrl(token)} onEnded={removeVideoPosition} >
+                <video onLoadedData={restoreVideo} onProgress={saveVideoPosition} onPlay={saveVideoPosition} onPause={saveVideoPosition} onSeeked={saveVideoPosition} onVolumeChange={saveVolume} poster={video.getThumbUrl(token)} onEnded={removeVideoPosition} controls>
                     <source src={video.getVideoUrl(token)} type="video/mp4" />
                 </video>
             </div>
