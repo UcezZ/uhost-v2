@@ -6,7 +6,7 @@ import Video from "../entities/Video";
 import Comment from "../entities/Comment";
 import Playlist from "../entities/Playlist";
 
-const ApiPrefix = 'https://ucezz.sytes.net/Projects/mirea/uhost/api/v1/';
+const ApiPrefix = '/Projects/mirea/uhost/api/v1/';
 const ApiSuffix = '.php';
 
 /**
