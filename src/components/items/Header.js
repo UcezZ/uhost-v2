@@ -5,7 +5,7 @@ import ApiService from '../../services/ApiService';
 import Enumerable from 'linq';
 
 export default function Header() {
-    const { locale, token, user, setToken } = useContext(StateContext);
+    const { locale, token, user, setToken, setUser } = useContext(StateContext);
     const location = useLocation();
     const burger = useRef();
 
@@ -16,8 +16,10 @@ export default function Header() {
     }
 
     function logout(e) {
-        ApiService.logout(token);
-        setToken();
+        ApiService.logout(token, e => {
+            setToken();
+            setUser();
+        });
     }
 
     function isPageNavigated(name) {
