@@ -10,7 +10,7 @@ const modalInlineStyles = {
 
 const tokenCookieKey = 'token';
 const tokenLifetime = 3600000;
-const serverRoot = 'https://ucezz.sytes.net';
+const commentsUpdateThreshold = 15000;
 
 export default class Common {
     /**
@@ -20,18 +20,6 @@ export default class Common {
      */
     static convertHTMLFormToFormData(form) {
         let formData = new FormData(form);
-        /*
-        Enumerable
-            .from(form.elements)
-            .where(e => e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement || e instanceof HTMLSelectElement)
-            .where(e => e.type !== 'checkbox')
-            .forEach(e => formData.append(e.name, e.value));
-
-        Enumerable
-            .from(form.elements)
-            .where(e => e instanceof HTMLInputElement && e.type === 'checkbox')
-            .forEach(e => formData.append(e.name, e.checked));
-        */
 
         return formData;
     }
@@ -73,7 +61,7 @@ export default class Common {
 
     static getTokenLifetime() { return tokenLifetime; }
 
-    static getServerRoot() { return serverRoot; }
+    static getCommentsUpdateThreshold() { return commentsUpdateThreshold; }
 
     /**
      * Turns on hidden confirmation trigger on control change

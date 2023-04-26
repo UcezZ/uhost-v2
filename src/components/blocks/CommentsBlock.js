@@ -1,6 +1,7 @@
 import Enumerable from 'linq';
 import { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Common from '../../Common';
 import StateContext from '../../context/StateContext';
 import ApiService from '../../services/ApiService';
 import LoadingContainer from '../containers/LoadingContainer';
@@ -17,7 +18,7 @@ export default function CommentsBlock({ video }) {
 
     useEffect(() => {
         setNeedsRender(true);
-        setTimeout(() => setTs(new Date().getTime()), 10000);
+        setTimeout(() => setTs(new Date().getTime()), Common.getCommentsUpdateThreshold());
     }, [location, ts]);
 
     function noComments(e) {

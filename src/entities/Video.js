@@ -1,4 +1,3 @@
-import Common from '../Common';
 import User from './User';
 
 export default class Video {
@@ -34,9 +33,9 @@ export default class Video {
         this.humantime = data.humantime ?? 'N/A';
         this.user = data.user ?? 'N/A';
         this.humanduration = data.humanduration ?? 'N/A';
-        this.thumbUrl = Common.getServerRoot() + data.thumbUrl ?? 'N/A';
-        this.videoUrl = Common.getServerRoot() + data.videoUrl ?? 'N/A';
-        this.downloadUrl = Common.getServerRoot() + data.downloadUrl ?? 'N/A';
+        this.thumbUrl = data.thumbUrl ?? 'N/A';
+        this.videoUrl = data.videoUrl ?? 'N/A';
+        this.downloadUrl = data.downloadUrl ?? 'N/A';
     }
 
     /**
@@ -128,20 +127,20 @@ export default class Video {
      * @param {string} token Authorization token
      * @returns 
      */
-    getThumbUrl(token) { return this.thumbUrl + (token ? `&tk=${token}` : ''); }
+    getThumbUrl(token) { return this.thumbUrl + (token && !this.getIsPublic() ? `&tk=${token}` : ''); }
 
     /**
      * Video stream URL
      * @param {string} token Authorization token
      * @returns 
      */
-    getVideoUrl(token) { return this.videoUrl + (token ? `&tk=${token}` : ''); }
+    getVideoUrl(token) { return this.videoUrl + (token && !this.getIsPublic() ? `&tk=${token}` : ''); }
 
     /**
      * Video download URL
      * @param {string} token Authorization token
      * @returns 
      */
-    getDownloadUrl(token) { return this.downloadUrl + (token ? `&tk=${token}` : ''); }
+    getDownloadUrl(token) { return this.downloadUrl + (token && !this.getIsPublic() ? `&tk=${token}` : ''); }
     //#endregion
 }
