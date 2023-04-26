@@ -224,6 +224,13 @@ div.card-wrapper div.card form table.card-body tr td textarea {
 
 @media (max-width: 480px) {
 
+    div.search-wrapper form.search input[type=text],
+    div.card-wrapper div.card form .card-body input:not([type="button"]):not([type="submit"]),
+    div.card-wrapper div.card form .card-body select,
+    div.card-wrapper div.card form .card-body textarea,
+    div.card-wrapper div.card form .card-footer input:not([type="button"]):not([type="submit"]),
+    div.card-wrapper div.card form .card-footer select,
+    div.card-wrapper div.card form .card-footer textarea,
     div.card-wrapper div.card form table.card-body input,
     div.card-wrapper div.card form table.card-body select,
     div.card-wrapper div.card form table.card-body textarea {
