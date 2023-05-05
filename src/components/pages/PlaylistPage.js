@@ -7,7 +7,7 @@ import './../../css/playlist.css';
 import { useContext, useState } from "react";
 import LoadingContainer from "../containers/LoadingContainer";
 import StateContext from '../../context/StateContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ApiService from '../../services/ApiService';
 import Enumerable from 'linq';
 import PlaylistCard from '../cards/PlaylistCard';
@@ -20,6 +20,7 @@ export default function PlaylistPage() {
     const [view, setView] = useState(<LoadingContainer />);
     const [modal, setModal] = useState();
     const [ready, setReady] = useState(false);
+    const [search,] = useSearchParams();
     const navigate = useNavigate();
 
     if (!user) {
@@ -28,9 +29,10 @@ export default function PlaylistPage() {
 
     if (!ready) {
         setReady(true);
+        let id = search.has('u') && Number(search.get('u')) > 0 ? Number(search.get('u')) : 0;
         ApiService.getPlaylists(
             token,
-            user.getId(),
+            id,
             e => setView(
                 <div className="card-wrapper playlist-wrapper">
                     {
