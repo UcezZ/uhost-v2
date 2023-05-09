@@ -19,8 +19,10 @@ export default function EditVideoDialog({ onClose, video }) {
             e => setOptions(
                 Enumerable
                     .from(e)
-                    .select(p => <option value={p.getId()}>{p.getName()}</option>)),
-            console.log);
+                    .select(p => <option value={p.getId()}>{p.getName()}</option>)
+            ),
+            console.log
+        );
     }
 
     function onError(e) {
@@ -31,6 +33,7 @@ export default function EditVideoDialog({ onClose, video }) {
 
     function close(e) {
         setModalVisible(false);
+        e && video.fillFrom(e);
         onClose && onClose();
     }
 

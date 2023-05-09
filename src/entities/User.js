@@ -31,20 +31,15 @@ export default class User {
 
     /**
      * Fill this entity from other entity
-     * @param {User} user 
+     * @param {User} entity 
      */
-    fillFrom(user) {
-        if (user instanceof User) {
-            this.id = user.id;
-            this.roleId = user.roleId;
-            this.role = user.role;
-            this.login = user.login;
-            this.name = user.name;
-            this.info = user.info;
-            this.locale = user.locale;
-            this.theme = user.theme;
-            this.videos = user.videos;
-            this.playlists = user.playlists;
+    fillFrom(entity) {
+        if (entity instanceof User) {
+            for (let key in entity) {
+                if (entity[key]) {
+                    this[key] = entity[key];
+                }
+            }
         }
     }
     //#region Getters

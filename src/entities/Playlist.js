@@ -25,14 +25,15 @@ export default class Playlist {
 
     /**
      * Fill this entity from other entity
-     * @param {Playlist} playlist 
+     * @param {Playlist} entity 
      */
-    fillFrom(playlist) {
-        if (playlist instanceof Playlist) {
-            this.id = playlist.id;
-            this.userId = playlist.id;
-            this.name = playlist.name;
-            this.videos = playlist.videos;
+    fillFrom(entity) {
+        if (entity instanceof Playlist) {
+            for (let key in entity) {
+                if (entity[key]) {
+                    this[key] = entity[key];
+                }
+            }
         }
     }
 

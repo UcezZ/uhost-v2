@@ -44,20 +44,11 @@ export default class Video {
      */
     fillFrom(entity) {
         if (entity && entity instanceof Video) {
-            this.id = entity.id;
-            this.userid = entity.userid;
-            this.user = entity.user;
-            this.duration = entity.duration;
-            this.name = entity.name;
-            this.alias = entity.alias;
-            this.isPublic = entity.isPublic;
-            this.time = entity.time;
-            this.humantime = entity.humantime;
-            this.user = entity.user;
-            this.humanduration = entity.humanduration;
-            this.thumbUrl = entity.thumbUrl;
-            this.videoUrl = entity.videoUrl;
-            this.downloadUrl = entity.downloadUrl;
+            for (let key in entity) {
+                if (entity[key]) {
+                    this[key] = entity[key];
+                }
+            }
         }
     }
 
