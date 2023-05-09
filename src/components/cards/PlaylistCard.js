@@ -55,7 +55,7 @@ export default function PlaylistCard({ playlist }) {
                         </button>
                     </div>
                     <div className="button-wrapper">
-                        <button onClick={e => setModal(<YesNoDialog caption={locale.getValue('log.event.plsentryremove')} message={locale.getValue('playlist.entry.remove.question')} onSubmit={removePlaylist} onClose={e => setModal()} />)}>
+                        <button onClick={e => setModal(<YesNoDialog caption={locale.getValue('log.event.playlistdelete')} message={locale.getValue('playlist.remove.question')} onSubmit={removePlaylist} onClose={e => setModal()} />)}>
                             <img src={DeleteIcon} alt="Delete" />
                             <span>{locale.getValue('common.delete')}</span>
                         </button>
