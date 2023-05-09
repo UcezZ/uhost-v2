@@ -43,10 +43,10 @@ export default function VideoPage() {
             token,
             alias,
             e => setView(
-                <div className="page-video-wrapper card-wrapper">
+                <div key={e.getAlias()} className="page-video-wrapper card-wrapper">
                     <VideoBlock video={e} />
                     <QueueBlock video={e} />
-                    <CommentsBlock key={e.getAlias()} video={e} />
+                    <CommentsBlock video={e} />
                 </div>
             ),
             e => setView(<div className="card-wrapper"><ErrorCard error={e} /></div>)
