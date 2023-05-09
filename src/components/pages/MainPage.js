@@ -32,9 +32,7 @@ export default function MainPage() {
 
     function renderVideos(res) {
         setNavi(<PagedResultNavigator page={page} setPage={setPage} total={res.totalpages} />);
-        setView(
-            <VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />
-        );
+        setView(<VideoCardContainer collection={Enumerable.from(res.data).select(e => new Video(e))} />);
     }
 
     function renderError(e) {
@@ -47,7 +45,7 @@ export default function MainPage() {
     }
     return (
         <div>
-            <SearchBlock query={query} setQuery={setQuery} />
+            <SearchBlock query={query} setQuery={setQuery} setPage={setPage} />
             <div className="main">
                 {navi}
                 {view}
