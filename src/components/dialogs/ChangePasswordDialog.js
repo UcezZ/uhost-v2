@@ -6,7 +6,7 @@ import ApiService from '../../services/ApiService';
 import ErrorDialog from './ErrorDialog';
 import SuccessDialog from './SuccessDialog';
 
-export default function ChangePasswordDialog({ entity }) {
+export default function ChangePasswordDialog() {
     const { token, locale } = useContext(StateContext);
     const [modalVisible, setModalVisible] = useState(false);
     const [overlayDialog, setOverlayDialog] = useState();
@@ -50,10 +50,6 @@ export default function ChangePasswordDialog({ entity }) {
                     <form onSubmit={changePassword}>
                         <table className="card-body">
                             <tbody>
-                                <tr>
-                                    <td>{locale.getValue('auth.login')}</td>
-                                    <td>{entity.getLogin()}</td>
-                                </tr>
                                 <tr>
                                     <td>{locale.getValue('auth.oldpassword')}</td>
                                     <td><input type="password" name="oldpassword" required /></td>

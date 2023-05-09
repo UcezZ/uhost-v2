@@ -11,7 +11,7 @@ export default function UserCard({ entity }) {
 
     function changePasswordButton() {
         if (user.getId() === entity.getId()) {
-            return <ChangePasswordDialog entity={entity} />;
+            return <ChangePasswordDialog />;
         }
     }
 
