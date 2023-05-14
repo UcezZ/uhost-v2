@@ -27,7 +27,7 @@ export default function Header() {
     }
 
     function headerNavSelected(name) {
-        if (isPageNavigated(name)) {
+        if (isPageNavigated(name) || name === '/' && isPageNavigated('/v2')) {
             return 'selected';
         }
     }
