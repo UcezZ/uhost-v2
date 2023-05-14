@@ -70,7 +70,7 @@ export default function LogItem({ data }) {
                     <span>{locale.getValue('admin.session.user')} </span>
                     <Link to={`/profile?id=${data.user?.id}`}>{data.user?.login}</Link>
                     <span> {locale.getValue('log.message.videouploaded')} </span>
-                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}`}>{data.video?.name}</Link> : null}
+                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}`}>{data.video?.name}</Link> : <i>(ID: {data.video?.id})</i>}
                 </span>
             );
             break;
@@ -81,7 +81,7 @@ export default function LogItem({ data }) {
                     <span>{locale.getValue('admin.session.user')} </span>
                     <Link to={`/profile?id=${data.user?.id}`}>{data.user?.login}</Link>
                     <span> {locale.getValue('log.message.videoedited')} </span>
-                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}`}>{data.video?.name}</Link> : null}
+                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}`}>{data.video?.name}</Link> : <i>(ID: {data.video?.id})</i>}
                 </span>
             );
             break;
@@ -113,9 +113,9 @@ export default function LogItem({ data }) {
                     <span>{locale.getValue('admin.session.user')} </span>
                     <Link to={`/profile?id=${data.user?.id}`}>{data.user?.login}</Link>
                     <span> {locale.getValue('log.message.postedcomment')} </span>
-                    {data.hascomment ? <i>"{data.comment?.text}"</i> : null}
+                    {data.hascomment ? <i>"{data.comment?.text}"</i> : <i>(ID: {data.comment?.id})</i>}
                     <span> {locale.getValue('log.message.commentforvideo')} </span>
-                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}#comment_${data.comment?.id}`}>{data.video?.name}</Link> : null}
+                    {data.hasvideo ? <Link to={`/video?v=${data.video?.alias}#comment_${data.comment?.id}`}>{data.video?.name}</Link> : <i>(ID: {data.video?.id})</i>}
                 </span>
             );
             break;
