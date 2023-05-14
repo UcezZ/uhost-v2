@@ -7,7 +7,7 @@ import Enumerable from "linq";
 import PagedResultNavigator from "../items/PagedResultNavigator";
 import LogItem from "../items/LogItem";
 
-export default function AdminSessionCard() {
+export default function AdminLogCard() {
     const { token, locale } = useContext(StateContext);
     const [ready, setReady] = useState(false);
     const [view, setView] = useState(<div className="card-body"><LoadingContainer /></div>);
@@ -20,7 +20,7 @@ export default function AdminSessionCard() {
         setView(
             <table className="card-body">
                 <thead>
-                    <td>{locale.getValue('common.id')}</td>
+                    <td>{locale.getValue('common.datetime')}</td>
                     <td>{locale.getValue('admin.session.user')}</td>
                     <td>{locale.getValue('admin.session.action')}</td>
                     <td>{locale.getValue('log.message')}</td>

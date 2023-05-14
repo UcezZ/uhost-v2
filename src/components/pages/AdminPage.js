@@ -1,7 +1,7 @@
 import AdminSessionCard from "../cards/AdminSessionCard";
 import AdminStatsCard from "../cards/AdminStatsCard";
 import AdminUsersCard from "../cards/AdminUsersCard";
-import LogCard from '../cards/LogCard';
+import AdminLogCard from '../cards/AdminLogCard';
 
 export default function AdminPage() {
 
@@ -14,7 +14,7 @@ export default function AdminPage() {
                 <AdminSessionCard />
             </div>
             <div className="card-wrapper">
-                <LogCard />
+                <AdminLogCard />
             </div>
             <div className="card-wrapper big">
                 <AdminUsersCard />
