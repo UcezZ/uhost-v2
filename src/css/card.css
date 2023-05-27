@@ -281,7 +281,6 @@ div.card-wrapper div.card.table.session table.card-body tbody tr td:nth-child(2)
 
 @media (max-width: 768px) {
     div.card-wrapper div.card.video {
-        max-width: fit-content;
         width: calc(80vw + 16px);
     }
 
